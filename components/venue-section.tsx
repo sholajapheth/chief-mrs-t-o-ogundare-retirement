@@ -43,7 +43,7 @@ export function VenueSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">Date & Time</h4>
-                      <p className="text-muted-foreground">Thursday, January 16, 2026</p>
+                      <p className="text-muted-foreground">Friday, January 9, 2026</p>
                       <p className="text-muted-foreground">10:00 AM - 4:00 PM</p>
                     </div>
                   </div>

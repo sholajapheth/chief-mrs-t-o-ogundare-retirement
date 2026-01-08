@@ -88,7 +88,7 @@ function CountdownTimer() {
   })
 
   useEffect(() => {
-    const eventDate = new Date("2026-01-16T10:00:00")
+    const eventDate = new Date("2026-01-09T10:00:00")
 
     const updateTimer = () => {
       const now = new Date()
@@ -127,8 +127,8 @@ export function ProgramTimeline() {
   const handleAddToCalendar = () => {
     const event = {
       title: "Dr. Oluwayemisi Bosede Ayinde's 60th Birthday & Retirement Celebration",
-      start: "2026-01-16T10:00:00",
-      end: "2026-01-16T16:00:00",
+      start: "2026-01-09T10:00:00",
+      end: "2026-01-09T16:00:00",
       description: "Celebrating 60 Years of Grace & 29 Years of Dedicated Service",
       location: "[Venue Name & Address]",
     }
