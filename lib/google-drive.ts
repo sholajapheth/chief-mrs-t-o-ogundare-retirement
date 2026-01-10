@@ -1,5 +1,3 @@
-// This client reads from a publicly shared Google Drive folder
-
 export interface GoogleDriveFile {
   id: string
   name: string
@@ -9,8 +7,10 @@ export interface GoogleDriveFile {
 }
 
 export const GOOGLE_DRIVE_FOLDER_ID = process.env.NEXT_PUBLIC_GOOGLE_DRIVE_FOLDER_ID || ""
+export const GOOGLE_DRIVE_API_KEY = process.env.GOOGLE_DRIVE_API_KEY || ""
 
 export function getGoogleDriveImageUrl(fileId: string): string {
+  // Direct access URL for publicly shared files
   return `https://drive.google.com/uc?export=view&id=${fileId}`
 }
 
@@ -20,26 +20,38 @@ export async function listGoogleDrivePhotos(): Promise<GoogleDriveFile[]> {
     return []
   }
 
+  if (!GOOGLE_DRIVE_API_KEY) {
+    console.warn("GOOGLE_DRIVE_API_KEY is not set")
+    return []
+  }
+
   try {
-    const response = await fetch(
-      `https://www.googleapis.com/drive/v3/files?q='${GOOGLE_DRIVE_FOLDER_ID}'+in+parents+and+trashed=false&fields=files(id,name,webViewLink,thumbnailLink,mimeType)&pageSize=100`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.GOOGLE_DRIVE_API_KEY || ""}`,
-        },
-      },
-    )
+    const folderId = GOOGLE_DRIVE_FOLDER_ID
+    const url = new URL("https://www.googleapis.com/drive/v3/files")
+
+    url.searchParams.append("q", `'${folderId}' in parents and trashed=false and mimeType contains 'image'`)
+    url.searchParams.append("fields", "files(id,name,mimeType,createdTime)")
+    url.searchParams.append("pageSize", "100")
+    url.searchParams.append("orderBy", "createdTime desc")
+    url.searchParams.append("key", GOOGLE_DRIVE_API_KEY)
+
+    const response = await fetch(url.toString())
 
     if (!response.ok) {
-      // If API fails, return empty array - photos can be manually added
-      console.warn("Failed to fetch Google Drive photos")
+      const errorData = await response.json()
+      console.error("[v0] Google Drive API error:", errorData.error)
       return []
     }
 
     const data = await response.json()
-    return data.files || []
+    return (data.files || []).map((file: any) => ({
+      id: file.id,
+      name: file.name,
+      webViewLink: `https://drive.google.com/file/d/${file.id}/view`,
+      mimeType: file.mimeType,
+    }))
   } catch (error) {
-    console.error("Error fetching Google Drive photos:", error)
+    console.error("[v0] Error fetching Google Drive photos:", error)
     return []
   }
 }
