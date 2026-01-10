@@ -4,13 +4,11 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import Image from "next/image"
 
 interface GoogleDrivePhoto {
   id: string
   name: string
   webViewLink: string
-  thumbnailLink?: string
   mimeType: string
 }
 
@@ -108,11 +106,10 @@ export function PhotoGallery() {
               className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all"
               onClick={() => openLightbox(index)}
             >
-              <Image
+              <img
                 src={getPhotoUrl(photo.id) || "/placeholder.svg"}
                 alt={photo.name}
-                fill
-                className="object-cover transition-transform duration-300 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -157,12 +154,11 @@ export function PhotoGallery() {
             </Button>
 
             <div className="max-w-4xl max-h-[80vh] mx-4">
-              <div className="relative aspect-[4/3] w-full">
-                <Image
+              <div className="relative w-full">
+                <img
                   src={getPhotoUrl(filteredPhotos[currentPhotoIndex].id) || "/placeholder.svg"}
                   alt={filteredPhotos[currentPhotoIndex].name}
-                  fill
-                  className="object-contain"
+                  className="max-w-full max-h-[70vh] mx-auto rounded-lg"
                 />
               </div>
               <div className="text-center mt-4">
