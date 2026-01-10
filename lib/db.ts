@@ -1,39 +1,4 @@
-import Database from "better-sqlite3"
-import { join } from "path"
-import { existsSync, mkdirSync } from "fs"
-
-// Ensure data directory exists
-const dataDir = join(process.cwd(), "data")
-if (!existsSync(dataDir)) {
-  mkdirSync(dataDir, { recursive: true })
-}
-
-const dbPath = join(dataDir, "wishes.db")
-
-// Initialize database connection (singleton pattern for Next.js)
-let db: Database.Database | null = null
-
-function getDb(): Database.Database {
-  if (!db) {
-    db = new Database(dbPath)
-    
-    // Initialize the database schema
-    db.exec(`
-      CREATE TABLE IF NOT EXISTS wishes (
-        id TEXT PRIMARY KEY,
-        name TEXT NOT NULL,
-        relationship TEXT NOT NULL,
-        message TEXT NOT NULL,
-        location TEXT,
-        timestamp TEXT NOT NULL,
-        hearts INTEGER DEFAULT 0
-      );
-      
-      CREATE INDEX IF NOT EXISTS idx_timestamp ON wishes(timestamp DESC);
-    `)
-  }
-  return db
-}
+import { neon } from "@neondatabase/serverless"
 
 export interface Wish {
   id: string
@@ -45,23 +10,90 @@ export interface Wish {
   hearts: number
 }
 
-export function getAllWishes(): Wish[] {
-  const database = getDb()
-  const stmt = database.prepare("SELECT * FROM wishes ORDER BY timestamp DESC")
-  return stmt.all() as Wish[]
+// Initialize Neon Postgres connection
+let sql: any = null
+let schemaInitialized = false
+
+function getSql() {
+  if (!sql) {
+    const connectionString = process.env.POSTGRES_URL || process.env.DATABASE_URL
+    if (!connectionString) {
+      console.warn("No Postgres connection string found. Using in-memory storage (data will not persist).")
+      return null
+    }
+    sql = neon(connectionString)
+  }
+  return sql
 }
 
-export function addWish(wish: Omit<Wish, "id" | "timestamp" | "hearts">): Wish {
-  const database = getDb()
+async function ensureSchema() {
+  if (schemaInitialized) return
+  
+  const db = getSql()
+  if (!db) return
+  
+  try {
+    await db`
+      CREATE TABLE IF NOT EXISTS wishes (
+        id TEXT PRIMARY KEY,
+        name TEXT NOT NULL,
+        relationship TEXT NOT NULL,
+        message TEXT NOT NULL,
+        location TEXT,
+        timestamp TEXT NOT NULL,
+        hearts INTEGER DEFAULT 0
+      )
+    `
+    
+    // Create index (PostgreSQL doesn't support IF NOT EXISTS for indexes, so we'll catch the error)
+    try {
+      await db`
+        CREATE INDEX idx_timestamp ON wishes(timestamp DESC)
+      `
+    } catch (error: any) {
+      // Index might already exist, which is fine
+      if (!error.message?.includes("already exists")) {
+        throw error
+      }
+    }
+    
+    schemaInitialized = true
+  } catch (error) {
+    console.error("Error initializing database schema:", error)
+  }
+}
+
+// In-memory fallback for local development without database
+let inMemoryWishes: Wish[] = []
+
+export async function getAllWishes(): Promise<Wish[]> {
+  const db = getSql()
+  
+  if (db) {
+    try {
+      await ensureSchema()
+      const result = await db`
+        SELECT * FROM wishes 
+        ORDER BY timestamp DESC
+      `
+      return result as Wish[]
+    } catch (error) {
+      console.error("Error reading from Postgres, falling back to in-memory:", error)
+      return [...inMemoryWishes].sort((a, b) => 
+        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+      )
+    }
+  }
+  
+  // In-memory fallback
+  return [...inMemoryWishes].sort((a, b) => 
+    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+  )
+}
+
+export async function addWish(wish: Omit<Wish, "id" | "timestamp" | "hearts">): Promise<Wish> {
   const id = Date.now().toString() + Math.random().toString(36).substr(2, 9)
   const now = new Date().toISOString()
-
-  const stmt = database.prepare(`
-    INSERT INTO wishes (id, name, relationship, message, location, timestamp, hearts)
-    VALUES (?, ?, ?, ?, ?, ?, 0)
-  `)
-
-  stmt.run(id, wish.name, wish.relationship, wish.message, wish.location || null, now)
 
   const newWish: Wish = {
     id,
@@ -70,23 +102,81 @@ export function addWish(wish: Omit<Wish, "id" | "timestamp" | "hearts">): Wish {
     hearts: 0,
   }
 
+  const db = getSql()
+  
+  if (db) {
+    try {
+      await ensureSchema()
+      await db`
+        INSERT INTO wishes (id, name, relationship, message, location, timestamp, hearts)
+        VALUES (${id}, ${wish.name}, ${wish.relationship}, ${wish.message}, ${wish.location || null}, ${now}, 0)
+      `
+    } catch (error) {
+      console.error("Error writing to Postgres, falling back to in-memory:", error)
+      inMemoryWishes.push(newWish)
+    }
+  } else {
+    // In-memory fallback
+    inMemoryWishes.push(newWish)
+  }
+
   return newWish
 }
 
-export function incrementWishHearts(id: string): Wish | null {
-  const database = getDb()
-  // SQLite doesn't support RETURNING in older versions, so we need to do it in two steps
-  const updateStmt = database.prepare("UPDATE wishes SET hearts = hearts + 1 WHERE id = ?")
-  updateStmt.run(id)
+export async function incrementWishHearts(id: string): Promise<Wish | null> {
+  const db = getSql()
   
-  const selectStmt = database.prepare("SELECT * FROM wishes WHERE id = ?")
-  const result = selectStmt.get(id) as Wish | undefined
-  return result || null
+  if (db) {
+    try {
+      await db`
+        UPDATE wishes 
+        SET hearts = hearts + 1 
+        WHERE id = ${id}
+      `
+      
+      const result = await db`
+        SELECT * FROM wishes 
+        WHERE id = ${id}
+      `
+      return (result[0] as Wish) || null
+    } catch (error) {
+      console.error("Error updating Postgres, falling back to in-memory:", error)
+      const wish = inMemoryWishes.find(w => w.id === id)
+      if (wish) {
+        wish.hearts += 1
+        return { ...wish }
+      }
+      return null
+    }
+  }
+  
+  // In-memory fallback
+  const wish = inMemoryWishes.find(w => w.id === id)
+  if (wish) {
+    wish.hearts += 1
+    return { ...wish }
+  }
+  return null
 }
 
-export function getWishById(id: string): Wish | null {
-  const database = getDb()
-  const stmt = database.prepare("SELECT * FROM wishes WHERE id = ?")
-  const result = stmt.get(id) as Wish | undefined
-  return result || null
+export async function getWishById(id: string): Promise<Wish | null> {
+  const db = getSql()
+  
+  if (db) {
+    try {
+      const result = await db`
+        SELECT * FROM wishes 
+        WHERE id = ${id}
+      `
+      return (result[0] as Wish) || null
+    } catch (error) {
+      console.error("Error reading from Postgres, falling back to in-memory:", error)
+      const wish = inMemoryWishes.find(w => w.id === id)
+      return wish ? { ...wish } : null
+    }
+  }
+  
+  // In-memory fallback
+  const wish = inMemoryWishes.find(w => w.id === id)
+  return wish ? { ...wish } : null
 }

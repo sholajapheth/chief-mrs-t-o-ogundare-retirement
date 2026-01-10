@@ -4,7 +4,7 @@ import { type NextRequest, NextResponse } from "next/server"
 export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
-    const wish = incrementWishHearts(id)
+    const wish = await incrementWishHearts(id)
 
     if (!wish) {
       return NextResponse.json({ error: "Wish not found" }, { status: 404 })

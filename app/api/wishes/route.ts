@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server"
 
 export async function GET() {
   try {
-    const wishes = getAllWishes()
+    const wishes = await getAllWishes()
     return NextResponse.json(wishes)
   } catch (error) {
     console.error("Error fetching wishes:", error)
@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 })
     }
 
-    const wish = addWish({
+    const wish = await addWish({
       name,
       relationship,
       message,
