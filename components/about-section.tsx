@@ -91,8 +91,8 @@ export function AboutSection() {
             <div className="relative mb-8">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/elegant-nigerian-woman-educator-in-academic-settin.jpg"
-                  alt="Dr. Oluwayemisi Bosede Ayinde"
+                  src="/dr-yemisi-academic-regalia.jpg"
+                  alt="Dr. Oluwayemisi Bosede Ayinde in academic regalia"
                   fill
                   className="object-cover"
                 />

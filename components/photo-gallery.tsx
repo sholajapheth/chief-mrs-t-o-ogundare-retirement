@@ -1,10 +1,18 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react"
+import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+
+interface GoogleDrivePhoto {
+  id: string
+  name: string
+  webViewLink: string
+  thumbnailLink?: string
+  mimeType: string
+}
 
 const categories = [
   { id: "all", label: "All Photos" },
@@ -14,87 +22,31 @@ const categories = [
   { id: "recent", label: "Recent Photos" },
 ]
 
-const photos = [
-  {
-    id: 1,
-    src: "/vintage-nigerian-family-photo-1970s-with-children.jpg",
-    category: "childhood",
-    caption: "Young Yemisi with family, Lagos 1970s",
-  },
-  {
-    id: 2,
-    src: "/nigerian-woman-graduation-ceremony-university-conv.jpg",
-    category: "career",
-    caption: "University of Ibadan Graduation, 1990",
-  },
-  {
-    id: 3,
-    src: "/nigerian-family-portrait-elegant-traditional-attir.jpg",
-    category: "family",
-    caption: "Family Portrait - The Ayinde Family",
-  },
-  {
-    id: 4,
-    src: "/nigerian-woman-teacher-classroom-students-interact.jpg",
-    category: "career",
-    caption: "Teaching at Iganmode Grammar School",
-  },
-  {
-    id: 5,
-    src: "/nigerian-woman-in-traditional-aso-oke-formal-event.jpg",
-    category: "recent",
-    caption: "Special Celebration, 2024",
-  },
-  {
-    id: 6,
-    src: "/placeholder.svg?height=600&width=800",
-    category: "family",
-    caption: "Wedding Anniversary Celebration",
-  },
-  {
-    id: 7,
-    src: "/placeholder.svg?height=600&width=800",
-    category: "career",
-    caption: "Award Recognition Ceremony",
-  },
-  {
-    id: 8,
-    src: "/placeholder.svg?height=800&width=600",
-    category: "career",
-    caption: "PhD Graduation, 2012",
-  },
-  {
-    id: 9,
-    src: "/placeholder.svg?height=600&width=800",
-    category: "recent",
-    caption: "Living Faith Church Fellowship",
-  },
-  {
-    id: 10,
-    src: "/placeholder.svg?height=600&width=800",
-    category: "family",
-    caption: "Grandchildren - Our Greatest Joy",
-  },
-  {
-    id: 11,
-    src: "/placeholder.svg?height=800&width=600",
-    category: "career",
-    caption: "With Students at Anglican Grammar School",
-  },
-  {
-    id: 12,
-    src: "/placeholder.svg?height=600&width=800",
-    category: "recent",
-    caption: "Birthday Celebration, 2025",
-  },
-]
-
 export function PhotoGallery() {
+  const [photos, setPhotos] = useState<GoogleDrivePhoto[]>([])
+  const [loading, setLoading] = useState(true)
   const [activeCategory, setActiveCategory] = useState("all")
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
 
-  const filteredPhotos = activeCategory === "all" ? photos : photos.filter((p) => p.category === activeCategory)
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      try {
+        const response = await fetch("/api/photos")
+        if (!response.ok) throw new Error("Failed to fetch photos")
+        const data = await response.json()
+        setPhotos(data)
+      } catch (error) {
+        console.error("[v0] Error loading photos:", error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPhotos()
+  }, [])
+
+  const filteredPhotos = photos
 
   const openLightbox = (index: number) => {
     setCurrentPhotoIndex(index)
@@ -111,6 +63,10 @@ export function PhotoGallery() {
     } else {
       setCurrentPhotoIndex((prev) => (prev === filteredPhotos.length - 1 ? 0 : prev + 1))
     }
+  }
+
+  const getPhotoUrl = (fileId: string) => {
+    return `https://drive.google.com/uc?export=view&id=${fileId}`
   }
 
   return (
@@ -153,14 +109,14 @@ export function PhotoGallery() {
               onClick={() => openLightbox(index)}
             >
               <Image
-                src={photo.src || "/placeholder.svg"}
-                alt={photo.caption}
+                src={getPhotoUrl(photo.id) || "/placeholder.svg"}
+                alt={photo.name}
                 fill
                 className="object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-white text-sm font-medium">{photo.caption}</p>
+                  <p className="text-white text-sm font-medium">{photo.name}</p>
                 </div>
                 <div className="absolute top-4 right-4">
                   <ZoomIn className="w-6 h-6 text-white" />
@@ -203,14 +159,14 @@ export function PhotoGallery() {
             <div className="max-w-4xl max-h-[80vh] mx-4">
               <div className="relative aspect-[4/3] w-full">
                 <Image
-                  src={filteredPhotos[currentPhotoIndex].src || "/placeholder.svg"}
-                  alt={filteredPhotos[currentPhotoIndex].caption}
+                  src={getPhotoUrl(filteredPhotos[currentPhotoIndex].id) || "/placeholder.svg"}
+                  alt={filteredPhotos[currentPhotoIndex].name}
                   fill
                   className="object-contain"
                 />
               </div>
               <div className="text-center mt-4">
-                <p className="text-white font-medium">{filteredPhotos[currentPhotoIndex].caption}</p>
+                <p className="text-white font-medium">{filteredPhotos[currentPhotoIndex].name}</p>
                 <p className="text-white/60 text-sm mt-1">
                   {currentPhotoIndex + 1} of {filteredPhotos.length}
                 </p>
@@ -218,6 +174,16 @@ export function PhotoGallery() {
             </div>
           </div>
         )}
+
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <Loader2 className="w-8 h-8 text-primary animate-spin" />
+          </div>
+        ) : photos.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground">No photos found. Please check your Google Drive folder.</p>
+          </div>
+        ) : null}
       </div>
     </section>
   )
