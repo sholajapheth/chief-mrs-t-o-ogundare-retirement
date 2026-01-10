@@ -59,6 +59,31 @@ const tributes = [
     full: "Our dear sister Yemisi has always been the pillar of our family. From childhood, she exhibited remarkable qualities of leadership, determination, and compassion. Watching her grow from that brilliant girl at Timi Agbale Grammar School to a distinguished Principal fills our hearts with immense pride. Happy 60th birthday, our golden girl!",
     image: "/nigerian-woman-traditional-attire-portrait.jpg",
   },
+  {
+    id: 7,
+    author: "Bolaji Douglas",
+    relationship: "Veteran Journalist",
+    featured: true,
+    excerpt: "There are professions that shape systems, and there are callings that shape lives. Teaching belongs firmly to the latter...",
+    full: "There are professions that shape systems, and there are callings that shape lives. Teaching belongs firmly to the latter. Across generations and societies, teachers have remained the quiet architects of progress, moulding minds and nurturing futures.\n\nToday, we celebrate one of such exceptional educators — Dr. Bosede Aduke Ayinde, a distinguished mother, mentor, and administrator, as she formally retires from active service upon the attainment of the statutory age of 60 years.\n\nDr. Ayinde's journey in education is marked by unwavering dedication, passion, and an enduring commitment to excellence. Over the years, she served within the Ogun State Teaching Service Commission, leaving behind a legacy defined not merely by years of service, but by lives touched, minds shaped, and values instilled.\n\nFondly described as a teacher of teachers and a mentor of mentors, Dr. Ayinde's influence transcended the classroom. She was known not only for academic rigour, but also for her motherly guidance, moral leadership, and uncommon ability to inspire confidence and purpose in students and colleagues alike.\n\nAs a highly respected school principal and educationist, her leadership was characterised by integrity, discipline, and a deep love for learning. These qualities earned her the admiration of peers and the gratitude of countless students who have gone on to excel in diverse fields across the world.\n\nHer excellence did not go unnoticed. Among several recognitions, she received the Distinguished Alumni Award from Timi Agbale Grammar School, Ede, alongside other honours that attest to her impact and professional standing.\n\nBeyond her professional accomplishments, Dr. Ayinde balanced her calling with grace — as a devoted mother and grandmother whose influence extended seamlessly from school corridors to the home. Her life remains a powerful testimony that service, compassion, and leadership can coexist beautifully.\n\nAs she takes a well-deserved bow from active classroom service, we are confident that her wealth of experience, wisdom, and mentorship will continue to enrich lives beyond the four walls of the school.\n\nWe celebrate Dr. Bosede Aduke Ayinde for starting well, serving with distinction, and retiring honourably. May this new chapter be filled with peace, fulfilment, joy, and precious moments with family.\n\nIndeed, though retired, her legacy in education endures.",
+    image: "/nigerian-male-educator-professional-portrait.jpg",
+  },
+  {
+    id: 8,
+    author: "Pastor Olusoji Abiodun & Dcns. Olubunmi 'Soji-Abiodun",
+    relationship: "Church Leaders",
+    excerpt: "Congratulations to you dear Dr. Oluwayemisi Ayinde on your retirement today. We are sure you are not tired...",
+    full: "Congratulations to you dear Dr. Oluwayemisi Ayinde on your retirement today. We are sure you are not tired because God has just opened new doors for you. Your strength and health shall not fail. You are welcome to a new chapter of greatness!",
+    image: "/nigerian-woman-church-member-portrait.jpg",
+  },
+  {
+    id: 9,
+    author: "Adebayo Oluwaseun Bukola",
+    relationship: "Friend",
+    excerpt: "A pillar of strength, a guiding light, Led with grace, shaped futures bright...",
+    full: "A pillar of strength, a guiding light,\nLed with grace, shaped futures bright.\nDedicated years, hearts inspired,\nA legacy lives on, love and fire.\n\nA trailblazer, a pathfinder true,\nLeading with heart, shaping futures anew.\nWith wisdom, kindness, and a gentle hand,\nYou guided dreams, and helped them stand.\n\nIn halls of learning, your spirit shone bright,\nInspiring minds, igniting the light.\nYears of dedication, love, and care,\nA legacy of excellence, beyond compare.\n\nMay your retirement be filled with peace and delight,\nYour impact lives on, a beacon in the night.\nOluwayemisi Bosede Ayinde, a true gem,\nA principal, a leader, a heart of them.",
+    image: "/nigerian-woman-teacher-classroom-students-interact.jpg",
+  },
 ]
 
 function TributeCard({ tribute }: { tribute: (typeof tributes)[0] }) {

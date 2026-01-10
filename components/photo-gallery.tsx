@@ -4,11 +4,14 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ImageWithFallback } from "@/components/image-with-fallback"
 
 interface GoogleDrivePhoto {
   id: string
   name: string
   webViewLink: string
+  thumbnailLink?: string
+  webContentLink?: string
   mimeType: string
 }
 
@@ -63,8 +66,38 @@ export function PhotoGallery() {
     }
   }
 
-  const getPhotoUrl = (fileId: string) => {
-    return `https://drive.google.com/uc?export=view&id=${fileId}`
+  const getPhotoUrl = (photo: GoogleDrivePhoto, isFullSize: boolean = false): string => {
+    const isHeic = photo.mimeType?.toLowerCase().includes('heic') || photo.mimeType?.toLowerCase().includes('heif')
+    const isJpeg = photo.mimeType?.toLowerCase().includes('jpeg') || photo.mimeType?.toLowerCase().includes('jpg')
+    const size = isFullSize ? "1920" : "800"
+    
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'photo-gallery.tsx:69',message:'getPhotoUrl called',data:{photoId:photo.id,photoName:photo.name,mimeType:photo.mimeType,isHeic,isJpeg,hasThumbnailLink:!!photo.thumbnailLink,hasWebContentLink:!!photo.webContentLink,isFullSize},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
+    
+    // Use API route for ALL images (not just HEIC) to ensure proper authentication
+    // This fixes the issue where thumbnailLink URLs fail due to authentication requirements
+    const url = `/api/photos/${photo.id}?size=${size}`
+    // #region agent log
+    fetch('http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'photo-gallery.tsx:76',message:'Using API route for image',data:{url,photoId:photo.id},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'A'})}).catch(()=>{});
+    // #endregion
+    return url
+  }
+
+  const getFallbackUrls = (photo: GoogleDrivePhoto, isFullSize: boolean = false): string[] => {
+    const size = isFullSize ? "1920" : "800"
+    const fallbacks: string[] = []
+    
+    // Try Google Drive thumbnail API
+    fallbacks.push(`https://drive.google.com/thumbnail?id=${photo.id}&sz=w${size}-h${size}`)
+    
+    // Try direct view URL
+    fallbacks.push(`https://drive.google.com/uc?export=view&id=${photo.id}`)
+    
+    // Try alternative view URL
+    fallbacks.push(`https://drive.google.com/uc?id=${photo.id}`)
+    
+    return fallbacks
   }
 
   return (
@@ -106,10 +139,11 @@ export function PhotoGallery() {
               className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all"
               onClick={() => openLightbox(index)}
             >
-              <img
-                src={getPhotoUrl(photo.id) || "/placeholder.svg"}
+              <ImageWithFallback
+                src={getPhotoUrl(photo, false)}
                 alt={photo.name}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                fallbackUrls={getFallbackUrls(photo, false)}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -155,10 +189,11 @@ export function PhotoGallery() {
 
             <div className="max-w-4xl max-h-[80vh] mx-4">
               <div className="relative w-full">
-                <img
-                  src={getPhotoUrl(filteredPhotos[currentPhotoIndex].id) || "/placeholder.svg"}
+                <ImageWithFallback
+                  src={getPhotoUrl(filteredPhotos[currentPhotoIndex], true)}
                   alt={filteredPhotos[currentPhotoIndex].name}
                   className="max-w-full max-h-[70vh] mx-auto rounded-lg"
+                  fallbackUrls={getFallbackUrls(filteredPhotos[currentPhotoIndex], true)}
                 />
               </div>
               <div className="text-center mt-4">

@@ -1,22 +1,27 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { ChevronDown, Heart, Calendar } from "lucide-react"
-import Image from "next/image"
+import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ChevronDown, Heart, Calendar } from "lucide-react";
+import Image from "next/image";
 
 export function HeroSection() {
-  const [daysLeft, setDaysLeft] = useState(0)
+  const [daysLeft, setDaysLeft] = useState(0);
 
   useEffect(() => {
-    const eventDate = new Date("2026-01-16")
-    const today = new Date()
-    const diff = Math.ceil((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
-    setDaysLeft(diff > 0 ? diff : 0)
-  }, [])
+    const eventDate = new Date("2026-01-16");
+    const today = new Date();
+    const diff = Math.ceil(
+      (eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24)
+    );
+    setDaysLeft(diff > 0 ? diff : 0);
+  }, []);
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 md:pt-0"
+    >
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -30,9 +35,15 @@ export function HeroSection() {
       </div>
 
       {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 text-primary/30 text-6xl animate-pulse">✦</div>
-      <div className="absolute bottom-40 right-10 text-primary/30 text-4xl animate-pulse delay-300">✦</div>
-      <div className="absolute top-1/3 right-20 text-primary/20 text-3xl animate-pulse delay-500">✦</div>
+      <div className="absolute top-20 left-10 text-primary/30 text-6xl animate-pulse">
+        ✦
+      </div>
+      <div className="absolute bottom-40 right-10 text-primary/30 text-4xl animate-pulse delay-300">
+        ✦
+      </div>
+      <div className="absolute top-1/3 right-20 text-primary/20 text-3xl animate-pulse delay-500">
+        ✦
+      </div>
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 text-center">
@@ -40,7 +51,9 @@ export function HeroSection() {
           {/* Event Date Badge */}
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-2 mb-8 animate-fadeInUp">
             <Calendar className="w-4 h-4 text-primary" />
-            <span className="text-white/90 text-sm font-medium">Friday, January 16, 2026</span>
+            <span className="text-white/90 text-sm font-medium">
+              Friday, January 16, 2026
+            </span>
             {daysLeft > 0 && (
               <span className="bg-primary text-primary-foreground text-xs font-bold px-2 py-0.5 rounded-full">
                 {daysLeft} days to go
@@ -55,7 +68,12 @@ export function HeroSection() {
           >
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-primary/50 to-primary/30 blur-lg opacity-60" />
             <div className="relative w-full h-full rounded-full border-4 border-primary shadow-2xl overflow-hidden">
-              <Image src="/dr-yemisi-portrait.jpg" alt="Dr. Oluwayemisi Bosede Ayinde" fill className="object-cover" />
+              <Image
+                src="/dr-yemisi-portrait.jpg"
+                alt="Dr. Oluwayemisi Bosede Ayinde"
+                fill
+                className="object-cover"
+              />
             </div>
             <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground text-lg font-bold w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
               60
@@ -79,7 +97,10 @@ export function HeroSection() {
           </p>
 
           {/* Scripture Quote */}
-          <div className="max-w-2xl mx-auto mb-10 animate-fadeInUp" style={{ animationDelay: "0.4s" }}>
+          <div
+            className="max-w-2xl mx-auto mb-10 animate-fadeInUp"
+            style={{ animationDelay: "0.4s" }}
+          >
             <blockquote className="text-white/80 text-lg md:text-xl italic font-serif">
               &ldquo;To God be the Glory. Great things He has done.&rdquo;
             </blockquote>
@@ -114,10 +135,13 @@ export function HeroSection() {
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <a href="#about" className="text-white/60 hover:text-white transition-colors">
+        <a
+          href="#about"
+          className="text-white/60 hover:text-white transition-colors"
+        >
           <ChevronDown className="w-8 h-8" />
         </a>
       </div>
     </section>
-  )
+  );
 }

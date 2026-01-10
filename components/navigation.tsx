@@ -3,16 +3,17 @@
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About Her", href: "#about" },
-  { label: "Congratulatory Messages", href: "#tributes" },
-  { label: "Wishes Wall", href: "#wishes" },
-  { label: "Gallery", href: "#gallery" },
-  { label: "Program", href: "#program" },
-  { label: "Venue", href: "#venue" },
+  { label: "Home", href: "/#home" },
+  { label: "About Her", href: "/#about" },
+  { label: "Congratulatory Messages", href: "/#tributes" },
+  { label: "Wishes Wall", href: "/#wishes" },
+  { label: "Gallery", href: "/gallery" },
+  { label: "Program", href: "/#program" },
+  { label: "Venue", href: "/#venue" },
 ]
 
 export function Navigation() {
@@ -35,7 +36,7 @@ export function Navigation() {
       )}
     >
       <nav className="container mx-auto px-4 flex items-center justify-between">
-        <a href="#home" className="flex items-center gap-2">
+        <Link href="/#home" className="flex items-center gap-2">
           <span className="text-primary text-2xl">✦</span>
           <span
             className={cn(
@@ -45,13 +46,13 @@ export function Navigation() {
           >
             Dr. Yemisi at 60
           </span>
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <ul className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => (
             <li key={item.href}>
-              <a
+              <Link
                 href={item.href}
                 className={cn(
                   "text-sm font-medium transition-colors hover:text-primary",
@@ -59,7 +60,7 @@ export function Navigation() {
                 )}
               >
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -81,13 +82,13 @@ export function Navigation() {
           <ul className="container mx-auto px-4 py-4 space-y-3">
             {navItems.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
                   className="block text-foreground hover:text-primary transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

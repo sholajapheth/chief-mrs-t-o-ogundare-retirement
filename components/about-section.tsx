@@ -1,9 +1,17 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronRight, GraduationCap, Briefcase, Award, Users, Heart, Cross } from "lucide-react"
-import { cn } from "@/lib/utils"
-import Image from "next/image"
+import { useState } from "react";
+import {
+  ChevronRight,
+  GraduationCap,
+  Briefcase,
+  Award,
+  Users,
+  Heart,
+  Cross,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const timelineData = [
   {
@@ -55,7 +63,7 @@ const timelineData = [
       "Appointed Principal of NUD Grammar School, Solu-Ifo (October 2025). Retiring from Ogun State Teaching Service Commission after 29 years of dedicated service.",
     icon: Award,
   },
-]
+];
 
 const affiliations = [
   "ANCOPSS (All Nigeria Confederation of Principals)",
@@ -65,22 +73,25 @@ const affiliations = [
   "NSAP (Nigerian Society of Animal Production)",
   "Member, Deacons Assembly - Living Faith Church (Winners Chapel)",
   "Chairperson, Zonal Fellowship Council, Zone 3",
-]
+];
 
 export function AboutSection() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section id="about" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase">Her Journey</span>
+          <span className="text-primary text-sm font-semibold tracking-widest uppercase">
+            Her Journey
+          </span>
           <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">
             About Dr. Yemisi Ayinde
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A life dedicated to shaping minds, serving with excellence, and glorifying God in all things.
+            A life dedicated to shaping minds, serving with excellence, and
+            glorifying God in all things.
           </p>
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
         </div>
@@ -89,12 +100,15 @@ export function AboutSection() {
           {/* Biography & Photo */}
           <div>
             <div className="relative mb-8">
-              <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+              <div
+                className="aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl"
+                style={{ marginTop: "-1em" }}
+              >
                 <Image
                   src="/dr-yemisi-academic-regalia.jpg"
                   alt="Dr. Oluwayemisi Bosede Ayinde in academic regalia"
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-6 py-3 rounded-lg shadow-lg">
@@ -109,27 +123,36 @@ export function AboutSection() {
                 <h3 className="font-serif text-xl font-bold">Faith & Family</h3>
               </div>
               <p className="text-muted-foreground leading-relaxed mb-4">
-                Dr. Ayinde is a devoted member of the Deacons Assembly at Living Faith Church (Winners Chapel) and
-                serves as Chairperson of the Zonal Fellowship Council, Zone 3. She is blessed to be married to Pastor
-                Shola Ayinde, and together they are blessed with children and grandchildren.
+                Dr. Ayinde is a devoted member of the Deacons Assembly at Living
+                Faith Church (Winners Chapel) and serves as Chairperson of the
+                Zonal Fellowship Council, Zone 3. She is blessed to be married
+                to Pastor Shola Ayinde, and together they are blessed with
+                children and grandchildren.
               </p>
               <blockquote className="border-l-4 border-primary pl-4 italic text-foreground">
-                &ldquo;The righteous flourish like the palm tree and grow like a cedar in Lebanon.&rdquo;
-                <span className="block text-sm text-muted-foreground mt-1">— Psalm 92:12</span>
+                &ldquo;The righteous flourish like the palm tree and grow like a
+                cedar in Lebanon.&rdquo;
+                <span className="block text-sm text-muted-foreground mt-1">
+                  — Psalm 92:12
+                </span>
               </blockquote>
             </div>
           </div>
 
           {/* Interactive Timeline */}
           <div>
-            <h3 className="font-serif text-2xl font-bold text-foreground mb-6">Career Journey</h3>
+            <h3 className="font-serif text-2xl font-bold text-foreground mb-6">
+              Career Journey
+            </h3>
             <div className="space-y-4">
               {timelineData.map((item, index) => (
                 <div
                   key={index}
                   className={cn(
                     "relative pl-8 pb-6 border-l-2 cursor-pointer transition-all",
-                    index === activeIndex ? "border-primary" : "border-border hover:border-primary/50",
+                    index === activeIndex
+                      ? "border-primary"
+                      : "border-border hover:border-primary/50"
                   )}
                   onClick={() => setActiveIndex(index)}
                 >
@@ -139,18 +162,29 @@ export function AboutSection() {
                       "absolute left-0 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center transition-all",
                       index === activeIndex
                         ? "bg-primary text-primary-foreground scale-110"
-                        : "bg-muted text-muted-foreground",
+                        : "bg-muted text-muted-foreground"
                     )}
                   >
                     <item.icon className="w-4 h-4" />
                   </div>
 
                   {/* Content */}
-                  <div className={cn("ml-4 transition-all", index === activeIndex ? "opacity-100" : "opacity-70")}>
-                    <span className="text-primary font-semibold text-sm">{item.year}</span>
-                    <h4 className="font-serif text-lg font-bold text-foreground mt-1">{item.title}</h4>
+                  <div
+                    className={cn(
+                      "ml-4 transition-all",
+                      index === activeIndex ? "opacity-100" : "opacity-70"
+                    )}
+                  >
+                    <span className="text-primary font-semibold text-sm">
+                      {item.year}
+                    </span>
+                    <h4 className="font-serif text-lg font-bold text-foreground mt-1">
+                      {item.title}
+                    </h4>
                     {index === activeIndex && (
-                      <p className="text-muted-foreground mt-2 animate-fadeInUp">{item.description}</p>
+                      <p className="text-muted-foreground mt-2 animate-fadeInUp">
+                        {item.description}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -165,7 +199,10 @@ export function AboutSection() {
               </h3>
               <ul className="space-y-2">
                 {affiliations.map((item, index) => (
-                  <li key={index} className="flex items-start gap-2 text-muted-foreground">
+                  <li
+                    key={index}
+                    className="flex items-start gap-2 text-muted-foreground"
+                  >
                     <ChevronRight className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -176,5 +213,5 @@ export function AboutSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -3,7 +3,7 @@ import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
 import { TributesSection } from "@/components/tributes-section"
 import { WishesWall } from "@/components/wishes-wall"
-import { PhotoGallery } from "@/components/photo-gallery"
+import { PhotoPreview } from "@/components/photo-preview"
 import { ProgramTimeline } from "@/components/program-timeline"
 import { VenueSection } from "@/components/venue-section"
 import { Footer } from "@/components/footer"
@@ -18,7 +18,7 @@ export default function Home() {
       <AboutSection />
       <TributesSection />
       <WishesWall />
-      <PhotoGallery />
+      <PhotoPreview />
       <ProgramTimeline />
       <VenueSection />
       <Footer />

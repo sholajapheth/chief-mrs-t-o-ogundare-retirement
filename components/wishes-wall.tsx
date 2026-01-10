@@ -23,7 +23,7 @@ interface Wish {
   hearts: number
 }
 
-const relationshipOptions = ["Family", "Colleague", "Friend", "Church Member", "Student", "Other"]
+const relationshipOptions = ["Family", "Colleague", "Friend", "Children's Friend", "Church Member", "Student", "Other"]
 
 export function WishesWall() {
   const [wishes, setWishes] = useState<Wish[]>([])
@@ -125,14 +125,24 @@ export function WishesWall() {
   }
 
   const handleHeart = async (id: string) => {
+    // Optimistic update - update UI immediately
+    setWishes(wishes.map((w) => (w.id === id ? { ...w, hearts: w.hearts + 1 } : w)))
+    
+    // Persist to database
     try {
       const res = await fetch(`/api/wishes/${id}/heart`, { method: "POST" })
       if (res.ok) {
         const updated = await res.json()
+        // Sync with server response to ensure accuracy
         setWishes(wishes.map((w) => (w.id === id ? { ...w, hearts: updated.hearts } : w)))
+      } else {
+        // Revert on error
+        setWishes(wishes.map((w) => (w.id === id ? { ...w, hearts: Math.max(0, w.hearts - 1) } : w)))
       }
     } catch (error) {
       console.error("Error liking wish:", error)
+      // Revert on error
+      setWishes(wishes.map((w) => (w.id === id ? { ...w, hearts: Math.max(0, w.hearts - 1) } : w)))
     }
   }
 
