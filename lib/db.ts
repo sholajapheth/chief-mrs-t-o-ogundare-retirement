@@ -128,6 +128,7 @@ export async function incrementWishHearts(id: string): Promise<Wish | null> {
   
   if (db) {
     try {
+      await ensureSchema()
       await db`
         UPDATE wishes 
         SET hearts = hearts + 1 
@@ -164,6 +165,7 @@ export async function getWishById(id: string): Promise<Wish | null> {
   
   if (db) {
     try {
+      await ensureSchema()
       const result = await db`
         SELECT * FROM wishes 
         WHERE id = ${id}
