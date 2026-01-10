@@ -22,11 +22,11 @@ export function VenueSection() {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Map / Venue Image */}
           <div className="relative aspect-video lg:aspect-square rounded-2xl overflow-hidden shadow-xl">
-            <Image src="/placeholder.svg?height=600&width=800" alt="Event Venue" fill className="object-cover" />
+            <Image src="/nigerian-school-building.jpg" alt="Event Venue" fill className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 text-white">
-              <h3 className="font-serif text-2xl font-bold mb-2">[Venue Name]</h3>
-              <p className="text-white/80">[Venue Address, City, State]</p>
+              <h3 className="font-serif text-2xl font-bold mb-2">Nawair-Ud-Deen Grammar School</h3>
+              <p className="text-white/80">Solu-Ifo, Nigeria</p>
             </div>
           </div>
 
@@ -43,8 +43,8 @@ export function VenueSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">Date & Time</h4>
-                      <p className="text-muted-foreground">Friday, January 9, 2026</p>
-                      <p className="text-muted-foreground">10:00 AM - 4:00 PM</p>
+                      <p className="text-muted-foreground">Friday, January 16, 2026</p>
+                      <p className="text-muted-foreground">12:00 PM - 4:00 PM</p>
                     </div>
                   </div>
 
@@ -54,8 +54,8 @@ export function VenueSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">Venue</h4>
-                      <p className="text-muted-foreground">[Venue Name]</p>
-                      <p className="text-muted-foreground">[Full Address]</p>
+                      <p className="text-muted-foreground">Nawair-Ud-Deen Grammar School Senior</p>
+                      <p className="text-muted-foreground">Solu-Ifo, Nigeria</p>
                       <Button variant="link" className="text-primary p-0 h-auto mt-1">
                         Get Directions →
                       </Button>
@@ -92,19 +92,20 @@ export function VenueSection() {
                 <h3 className="font-serif text-xl font-bold text-foreground mb-4">For Inquiries</h3>
                 <div className="space-y-3">
                   <a
-                    href="tel:+234"
+                    href="tel:+2348168005925"
                     className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Phone className="w-4 h-4" />
-                    <span>[Phone Number]</span>
+                    <span>+234 816 800 5925</span>
                   </a>
                   <a
-                    href="mailto:"
+                    href="mailto:gbemiova@gmail.com"
                     className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors"
                   >
                     <Mail className="w-4 h-4" />
-                    <span>[Email Address]</span>
+                    <span>gbemiova@gmail.com</span>
                   </a>
+                  <p className="text-muted-foreground text-sm pt-3 border-t border-border">Contact: Gbemi</p>
                 </div>
               </CardContent>
             </Card>

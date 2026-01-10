@@ -2,16 +2,14 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Heart, Send, Search, PartyPopper, ImageIcon, Video, MessageSquare, Loader2 } from "lucide-react"
-import { cn } from "@/lib/utils"
-import Image from "next/image"
+import { Heart, Send, Search, PartyPopper, MessageSquare, Loader2 } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 
@@ -23,82 +21,49 @@ interface Wish {
   location?: string
   timestamp: Date
   hearts: number
-  hasImage?: boolean
-  imageUrl?: string
 }
-
-const sampleWishes: Wish[] = [
-  {
-    id: "1",
-    name: "Engr. David Okonkwo",
-    relationship: "Colleague",
-    message:
-      "Happy 60th birthday, Ma! Your dedication to education has inspired generations. May God continue to bless you abundantly!",
-    location: "Lagos, Nigeria",
-    timestamp: new Date("2026-01-10"),
-    hearts: 24,
-  },
-  {
-    id: "2",
-    name: "Dr. Sarah Johnson",
-    relationship: "Friend",
-    message:
-      "Celebrating an extraordinary woman on this milestone! Your grace, wisdom, and kindness have touched so many lives. Here's to many more years of blessing!",
-    location: "London, UK",
-    timestamp: new Date("2026-01-11"),
-    hearts: 18,
-    hasImage: true,
-    imageUrl: "/birthday-flowers-arrangement.jpg",
-  },
-  {
-    id: "3",
-    name: "Adebisi Family",
-    relationship: "Family",
-    message:
-      "Aunty Yemisi, we are so proud of all you have accomplished. Your life is a testimony of God's faithfulness. Happy birthday and happy retirement! 🎉",
-    location: "Ibadan, Nigeria",
-    timestamp: new Date("2026-01-12"),
-    hearts: 32,
-  },
-  {
-    id: "4",
-    name: "Class of 2005, Iganmode Grammar School",
-    relationship: "Student",
-    message:
-      "To the best Biology teacher we ever had! You made learning fun and believed in each of us. Thank you for everything, Ma!",
-    location: "Various Locations",
-    timestamp: new Date("2026-01-13"),
-    hearts: 45,
-  },
-]
 
 const relationshipOptions = ["Family", "Colleague", "Friend", "Church Member", "Student", "Other"]
 
-const filterOptions = [
-  { value: "all", label: "All Wishes", icon: MessageSquare },
-  { value: "photos", label: "With Photos", icon: ImageIcon },
-  { value: "videos", label: "With Videos", icon: Video },
-]
-
 export function WishesWall() {
-  const [wishes, setWishes] = useState<Wish[]>(sampleWishes)
-  const [filter, setFilter] = useState("all")
+  const [wishes, setWishes] = useState<Wish[]>([])
   const [searchQuery, setSearchQuery] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
   const { toast } = useToast()
 
   // Form state
   const [formData, setFormData] = useState({
     name: "",
     relationship: "",
-    email: "",
     location: "",
     message: "",
   })
 
+  useEffect(() => {
+    const fetchWishes = async () => {
+      try {
+        const res = await fetch("/api/wishes")
+        if (res.ok) {
+          const data = await res.json()
+          setWishes(
+            data.map((w: any) => ({
+              ...w,
+              timestamp: new Date(w.timestamp),
+            })),
+          )
+        }
+      } catch (error) {
+        console.error("Failed to load wishes:", error)
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchWishes()
+  }, [])
+
   const filteredWishes = wishes.filter((wish) => {
-    if (filter === "photos" && !wish.hasImage) return false
     if (
       searchQuery &&
       !wish.name.toLowerCase().includes(searchQuery.toLowerCase()) &&
@@ -121,34 +86,54 @@ export function WishesWall() {
 
     setIsSubmitting(true)
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const res = await fetch("/api/wishes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
 
-    const newWish: Wish = {
-      id: Date.now().toString(),
-      name: formData.name,
-      relationship: formData.relationship,
-      message: formData.message,
-      location: formData.location,
-      timestamp: new Date(),
-      hearts: 0,
+      if (res.ok) {
+        const newWish = await res.json()
+        setWishes([{ ...newWish, timestamp: new Date(newWish.timestamp) }, ...wishes])
+        setFormData({ name: "", relationship: "", location: "", message: "" })
+        setShowConfetti(true)
+
+        toast({
+          title: "Wish Sent! 🎉",
+          description: "Thank you for your beautiful message for Dr. Ayinde!",
+        })
+
+        setTimeout(() => setShowConfetti(false), 3000)
+      } else {
+        toast({
+          title: "Error",
+          description: "Failed to save your wish. Please try again.",
+          variant: "destructive",
+        })
+      }
+    } catch (error) {
+      console.error("Error submitting wish:", error)
+      toast({
+        title: "Error",
+        description: "An error occurred. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
     }
-
-    setWishes([newWish, ...wishes])
-    setFormData({ name: "", relationship: "", email: "", location: "", message: "" })
-    setIsSubmitting(false)
-    setShowConfetti(true)
-
-    toast({
-      title: "Wish Sent! 🎉",
-      description: "Thank you for your beautiful message for Dr. Ayinde!",
-    })
-
-    setTimeout(() => setShowConfetti(false), 3000)
   }
 
-  const handleHeart = (id: string) => {
-    setWishes(wishes.map((wish) => (wish.id === id ? { ...wish, hearts: wish.hearts + 1 } : wish)))
+  const handleHeart = async (id: string) => {
+    try {
+      const res = await fetch(`/api/wishes/${id}/heart`, { method: "POST" })
+      if (res.ok) {
+        const updated = await res.json()
+        setWishes(wishes.map((w) => (w.id === id ? { ...w, hearts: updated.hearts } : w)))
+      }
+    } catch (error) {
+      console.error("Error liking wish:", error)
+    }
   }
 
   return (
@@ -225,18 +210,6 @@ export function WishesWall() {
                   </div>
 
                   <div>
-                    <Label htmlFor="email">Email (Optional)</Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="your@email.com"
-                      className="mt-1"
-                    />
-                  </div>
-
-                  <div>
                     <Label htmlFor="location">Location (Optional)</Label>
                     <Input
                       id="location"
@@ -284,9 +257,9 @@ export function WishesWall() {
 
           {/* Wishes Display */}
           <div className="lg:col-span-2">
-            {/* Filters */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-6">
-              <div className="relative flex-1">
+            {/* Search */}
+            <div className="mb-6">
+              <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   placeholder="Search wishes..."
@@ -295,79 +268,66 @@ export function WishesWall() {
                   className="pl-10"
                 />
               </div>
-              <div className="flex gap-2">
-                {filterOptions.map((option) => (
-                  <Button
-                    key={option.value}
-                    variant={filter === option.value ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => setFilter(option.value)}
-                    className={cn(filter === option.value && "bg-primary text-primary-foreground")}
-                  >
-                    <option.icon className="w-4 h-4 mr-1" />
-                    {option.label}
-                  </Button>
-                ))}
-              </div>
             </div>
 
             {/* Total Counter */}
             <p className="text-muted-foreground mb-4">{filteredWishes.length} wishes shared</p>
 
             {/* Wishes Grid */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              {filteredWishes.map((wish, index) => (
-                <Card
-                  key={wish.id}
-                  className="overflow-hidden hover:shadow-lg transition-all animate-fadeInUp"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CardContent className="p-4">
-                    {wish.hasImage && wish.imageUrl && (
-                      <div className="relative aspect-video rounded-lg overflow-hidden mb-4">
-                        <Image
-                          src={wish.imageUrl || "/placeholder.svg"}
-                          alt="Wish attachment"
-                          fill
-                          className="object-cover"
-                        />
+            {isLoading ? (
+              <div className="text-center py-8">
+                <Loader2 className="w-8 h-8 animate-spin text-primary mx-auto" />
+              </div>
+            ) : filteredWishes.length === 0 ? (
+              <Card>
+                <CardContent className="p-8 text-center">
+                  <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+                  <p className="text-muted-foreground">No wishes yet. Be the first to share!</p>
+                </CardContent>
+              </Card>
+            ) : (
+              <div className="grid sm:grid-cols-2 gap-4">
+                {filteredWishes.map((wish, index) => (
+                  <Card
+                    key={wish.id}
+                    className="overflow-hidden hover:shadow-lg transition-all animate-fadeInUp"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <CardContent className="p-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h4 className="font-semibold text-foreground">{wish.name}</h4>
+                          <span className="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-full">
+                            {wish.relationship}
+                          </span>
+                        </div>
+                        {wish.location && <span className="text-xs text-muted-foreground">{wish.location}</span>}
                       </div>
-                    )}
 
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h4 className="font-semibold text-foreground">{wish.name}</h4>
-                        <span className="inline-block bg-primary/10 text-primary text-xs font-medium px-2 py-0.5 rounded-full">
-                          {wish.relationship}
+                      <p className="text-muted-foreground text-sm leading-relaxed mb-4">{wish.message}</p>
+
+                      <div className="flex items-center justify-between pt-3 border-t border-border">
+                        <span className="text-xs text-muted-foreground">
+                          {wish.timestamp.toLocaleDateString("en-US", {
+                            month: "short",
+                            day: "numeric",
+                          })}
                         </span>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-primary hover:text-primary/80"
+                          onClick={() => handleHeart(wish.id)}
+                        >
+                          <Heart className="w-4 h-4 mr-1" />
+                          {wish.hearts}
+                        </Button>
                       </div>
-                      {wish.location && <span className="text-xs text-muted-foreground">{wish.location}</span>}
-                    </div>
-
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-4">{wish.message}</p>
-
-                    <div className="flex items-center justify-between pt-3 border-t border-border">
-                      <span className="text-xs text-muted-foreground">
-                        {wish.timestamp.toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </span>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-primary hover:text-primary/80"
-                        onClick={() => handleHeart(wish.id)}
-                      >
-                        <Heart className="w-4 h-4 mr-1" />
-                        {wish.hearts}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

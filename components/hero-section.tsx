@@ -9,7 +9,7 @@ export function HeroSection() {
   const [daysLeft, setDaysLeft] = useState(0)
 
   useEffect(() => {
-    const eventDate = new Date("2026-01-09")
+    const eventDate = new Date("2026-01-16")
     const today = new Date()
     const diff = Math.ceil((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24))
     setDaysLeft(diff > 0 ? diff : 0)
@@ -40,7 +40,7 @@ export function HeroSection() {
           {/* Event Date Badge */}
           <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm border border-primary/30 rounded-full px-6 py-2 mb-8 animate-fadeInUp">
             <Calendar className="w-4 h-4 text-primary" />
-            <span className="text-white/90 text-sm font-medium">Friday, January 9, 2026</span>
+            <span className="text-white/90 text-sm font-medium">Friday, January 16, 2026</span>
             {daysLeft > 0 && (
               <span className="bg-primary text-primary-foreground text-xs font-bold px-2 py-0.5 rounded-full">
                 {daysLeft} days to go
@@ -55,12 +55,7 @@ export function HeroSection() {
           >
             <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary via-primary/50 to-primary/30 blur-lg opacity-60" />
             <div className="relative w-full h-full rounded-full border-4 border-primary shadow-2xl overflow-hidden">
-              <Image
-                src="/elegant-professional-portrait-of-distinguished-nig.jpg"
-                alt="Dr. Oluwayemisi Bosede Ayinde"
-                fill
-                className="object-cover"
-              />
+              <Image src="/dr-yemisi-portrait.jpg" alt="Dr. Oluwayemisi Bosede Ayinde" fill className="object-cover" />
             </div>
             <div className="absolute -bottom-2 -right-2 bg-primary text-primary-foreground text-lg font-bold w-14 h-14 rounded-full flex items-center justify-center shadow-lg">
               60

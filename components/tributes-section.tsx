@@ -128,7 +128,9 @@ export function TributesSection() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">Words of Love</span>
-          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">Heartfelt Tributes</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">
+            Congratulatory Messages
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Messages of love, gratitude, and appreciation from family, colleagues, and friends.
           </p>

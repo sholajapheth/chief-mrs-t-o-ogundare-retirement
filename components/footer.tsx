@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 const quickLinks = [
   { label: "Home", href: "#home" },
   { label: "About Her", href: "#about" },
-  { label: "Tributes", href: "#tributes" },
+  { label: "Congratulatory Messages", href: "#tributes" },
   { label: "Wishes Wall", href: "#wishes" },
   { label: "Gallery", href: "#gallery" },
   { label: "Program", href: "#program" },
@@ -31,6 +31,12 @@ export function Footer() {
             <p className="text-secondary-foreground/70 italic text-sm">
               &ldquo;To God be the Glory. Great things He has done.&rdquo;
             </p>
+            <div className="mt-6 pt-6 border-t border-secondary-foreground/10 space-y-2">
+              <p className="text-secondary-foreground/70 text-sm font-semibold">Enquiries:</p>
+              <p className="text-secondary-foreground/70 text-sm">Contact: Gbemi</p>
+              <p className="text-secondary-foreground/70 text-sm">Phone: +234 816 800 5925</p>
+              <p className="text-secondary-foreground/70 text-sm break-all">Email: gbemiova@gmail.com</p>
+            </div>
           </div>
 
           {/* Quick Links */}
