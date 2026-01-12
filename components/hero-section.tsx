@@ -86,14 +86,23 @@ export function HeroSection() {
             style={{ animationDelay: "0.2s" }}
           >
             Dr. Oluwayemisi Bosede Ayinde
+            <span className="block text-3xl md:text-4xl lg:text-5xl mt-2 text-white/90">
+              (Nee Boyejo)
+            </span>
           </h1>
 
           {/* Subtitle */}
           <p
-            className="text-xl md:text-2xl text-primary font-serif italic mb-6 animate-fadeInUp"
+            className="text-xl md:text-2xl text-primary font-serif italic mb-2 animate-fadeInUp"
             style={{ animationDelay: "0.3s" }}
           >
-            Celebrating 60 Years of Grace & 29 Years of Dedicated Service
+            Principal, NAWAIR-UD-DEEN Grammar School Senior Solu-Ifo
+          </p>
+          <p
+            className="text-lg md:text-xl text-white/90 font-serif mb-6 animate-fadeInUp"
+            style={{ animationDelay: "0.3s" }}
+          >
+            Celebrating 60 Years of Grace & Almost 30 Years of Dedicated Service
           </p>
 
           {/* Scripture Quote */}

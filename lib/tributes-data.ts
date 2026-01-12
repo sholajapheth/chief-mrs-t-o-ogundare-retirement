@@ -1,0 +1,203 @@
+export interface Tribute {
+  id: number
+  author: string
+  relationship: string
+  featured?: boolean
+  excerpt: string
+  full: string
+}
+
+export const allTributes: Tribute[] = [
+  {
+    id: 1,
+    author: "Pastor Shola Ayinde",
+    relationship: "Husband",
+    featured: true,
+    excerpt:
+      "To God be the Glory. Great things He has done. Congratulations on your 60th birthday and successful retirement...",
+    full: "To God be the Glory. Great things He has done. Congratulations on your 60th birthday and successful retirement from the Ogun State Teaching Service Commission, reaching the peak of your career. This is the Lord's doing, and it is marvelous in our eyes. I welcome you to the beginning of beginnings for you. Surely your latter years shall be more glorious than the former. I am deeply appreciative to God Almighty, who made you my helpmeet. It has been years of pleasures, peace, progress, and advancement together. I am proud of you as a wife, mother to great fruits, hardworking, and a virtuous woman. Congratulations once again Omo Genty. Aya Ayinde.",
+  },
+  {
+    id: 2,
+    author: "Oluwafemi & Opeyemi",
+    relationship: "Children",
+    featured: true,
+    excerpt: "Dear Mum, My own personal superwoman. Thank you for always going above and beyond for each and every one of us...",
+    full: "Dear Mum,\n\nMy own personal superwoman. Thank you for always going above and beyond for each and every one of us. Through your life, you have instilled in me a possibility mindset, a strong conviction that once I set my mind to something, it is achievable with faith in God, diligence, and consistency.\n\nYou have shown us, not just in words but in actions, what strength, sacrifice, and quiet excellence look like. Your unwavering commitment to family, work, and purpose has shaped who we are today, and for that, I am eternally grateful.\n\nAs you mark this glorious milestone, celebrating both your 60th birthday and an honourable retirement, I pray that this season marks a transition into higher impact, deeper fulfillment, and greater results in your life, according to Proverbs 4:18 and Psalm 92:14. May your path shine brighter and brighter, and may you continue to flourish, bearing fruit in every season.\n\nWishing you many more years filled with good health, joy, peace, and the rewards of all your labour.\n\nI celebrate you today and always.\n\nWith all my love ❤️\n\nYour dearest Oluwafemi & Opeyemi.",
+  },
+  {
+    id: 3,
+    author: "Pastor Olusoji Abiodun & Dcns. Olubunmi 'Soji-Abiodun",
+    relationship: "Church Leaders",
+    excerpt: "Congratulations on your retirement, and a very happy birthday to you, Dr. Mrs. Sixty years of God's faithfulness!...",
+    full: "Congratulations on your retirement, and a very happy birthday to you, Dr. Mrs.\n\nSixty years of God's faithfulness! Ẹ tún bọ̀ máa rí iṣẹ́ ìyanu Olúwa in this next chapter.\n\nCheers!",
+  },
+  {
+    id: 4,
+    author: "Omoba and Mrs Adewunmi",
+    relationship: "Friends",
+    excerpt: "CONGRATULATIONS!!! We rejoice with you, our sister Dr. Mrs. Oluyemisi Ayinde, as you step on the 6th floor today...",
+    full: "CONGRATULATIONS!!!\n\nWe rejoice with you, our sister Dr. Mrs. Oluyemisi Ayinde, as you step on the 6th floor today.\n\nOur prayer for you is that God will strengthen and bless you to celebrate more fruitful years in good health and sound mind in the name of Jesus, Amen.\n\nAs you are retiring from the civil service today, we pray that the Almighty God will renew your strength to refire in prosperity in all aspects of life in Jesus Name, Amen.\n\nLots of love from:\n\nOmoba and Mrs Adewunmi",
+  },
+  {
+    id: 5,
+    author: "Pastor Rotimi Boyejo",
+    relationship: "Family",
+    excerpt: "Congratulations dear Sis,! \"This is the Lord's doing, it is marvellous in our sight! It can only be God🙏🏽...",
+    full: "Congratulations dear Sis,!\n\n\"This is the Lord's doing, it is marvellous in our sight! It can only be God🙏🏽.\n\nWe thank God for His Faithfulness, dear Aburo. He will continue to perfect everything that concerns you in Jesus Mighty Name.\n\nFrom: Pastor Rotimi Boyejo",
+  },
+  {
+    id: 6,
+    author: "Barrister Olajumoke Boyejo",
+    relationship: "Family",
+    excerpt: "Congratulations on your 60th birthday and retirement! The God of all flesh has indeed been faithful...",
+    full: "Congratulations on your 60th birthday and retirement!\n\nThe God of all flesh has indeed been faithful. I celebrate the grace of God in your life. I thank God for where he has brought you today. I give Jehovah the praise for crowning your hard work with honour. Your hard work and love for God is not in doubt. This is just the beginning of new things for you. You are a Sister far above rubies. I love you.\n\nFrom: Barrister Olajumoke Boyejo",
+  },
+  {
+    id: 7,
+    author: "Dr Folashade Enahoro",
+    relationship: "Sister",
+    excerpt: "HEARTY DOUBLE CONGRATULATIONS to our darling kid sister, Dr. Mrs Olayemisi Aynde. To God be all thanks...",
+    full: "HEARTY DOUBLE CONGRATULATIONS to our darling kid sister, Dr. Mrs Olayemisi Aynde. To God be all thanks, high praise, and adoration for His mercy and faithfulness. Retirement is not Tiredness. The Almighty God of all fresh renew your strength for greater service in His vineyard. As your days are so shall be your strength. You will eat the fruit of your labour in good health, long life, and prosperity in Jesus marvelous name. The Lord has turned your Labour into divine Favour henceforth. Enjoy your new age in pleasure, leaping, thanking and praising The Lord always.\n\nThe Father Almighty will take preeminence in all the preparations, celebrations and other activities in Jesus name. Shout Hallelujah!!!.🙏🏻🙏🏻🙏🏻🙌🙌🙌💃💃💃❤️❤️❤️ Lots of love to you and family.\n\nFrom\n\nDr Folashade Enahoro.\n\nSister",
+  },
+  {
+    id: 8,
+    author: "Mrs Titilayo Akinyinka",
+    relationship: "Friend",
+    excerpt: "Happy Diamond Jubilee & Retirement to my Dearest friend (ORE MI WUNDIA)!! Sixty years young, and you shine brighter than ever!...",
+    full: "Happy Diamond Jubilee & Retirement to my Dearest friend (ORE MI WUNDIA)!!\n\nSixty years young, and you shine brighter than ever! A testament to a life rich with grace, wisdom, and endless love. You are more than a friend, you're family- a sister from another mother! I thank the Most High God for making us meet in a unique way. Despite all the storms, the Lord made us strong. You are a teacher, a great mother, and an anchor through life's waves. I am eternally grateful for our journey. Hope this milestone year brings you beautiful moments you've gifted the world.\n\nI celebrate you today also for your incredible transition into retirement. Your positive attitude and dedication have made a true impact on those around you, and now you have all the time in the world to enjoy the things you love most.\n\nI am excited to see what FUN you get up to! All the best my darling friend.\n\nI pray this scripture finds full expression in your life: Ps 71:17-18, Eph 2:4-5, Jer:29:11, 1 Pet:2:9.\n\nWelcome to the beginning of 'Open Highway'! You shall enjoy all your labour over your children. Congratulations!!\n\nFrom: Mrs Titilayo Akinyinka",
+  },
+  {
+    id: 9,
+    author: "Pastor Adenike Orimoloye",
+    relationship: "Friend",
+    excerpt: "Dear Bose: Congratulations on reaching two incredible milestones - your well-deserved retirement from teaching service and your 60th birthday!...",
+    full: "Dear Bose:\n\nCongratulations on reaching two incredible milestones - your well-deserved retirement from teaching service and your 60th birthday!\n\nThe grace of God, your dedication, integrity, and passion throughout your career brought you this far! I know you have left an indelible mark on everyone you've worked with and the schools you served.\n\nI still remember our University of Ibadan days - we were unsure of the future, but we trusted implicitly in the One who holds the future, and see how far He has brought you!\n\nAs you step into this new chapter, may it be filled with joy, relaxation, and adventures. Bose, I celebrate your tenacity, wisdom, and all the beautiful experiences that have shaped you.\n\nHere's to more laughter, cherished moments, and the freedom to do all the things you love. You've earned every bit of it!\n\nWith loads of love,\n\nPastor Adenike Orimoloye\n\nOntario, Canada",
+  },
+  {
+    id: 10,
+    author: "Mrs Yakubu Bose",
+    relationship: "Principal, Ebenezer African Church Grammar School",
+    excerpt: "Today, we are celebrating not just a trip around the sun but the wonderful milestone of you stepping into a new chapter of freedom and fun...",
+    full: "Today, we are celebrating not just a trip around the sun but the wonderful milestone of you stepping into a new chapter of freedom and fun.\n\nYour dedication, kindness, and unstoppable energy have left a lasting mark on everyone lucky enough to know you. Your laugh over matters, offering a listening ear, or simply being the best sister and friend anyone could ask for.\n\nMay your birthday be the perfect reminder of how cherished you are, may your retirement be filled with joy, relaxation, and all the little things that make life sweet.\n\nHere's to many birthdays, endless adventures, & a retirement that is vibrant and wonderful as you are!\n\nCheers to you, my dear friend Dr.( Mrs) Bosede Oluwayemisi Ayinde.\n\nFrom: Mrs Yakubu Bose (Principal)\n\nEbenezer African Church Grammar School, Inalende, Ibadan, Oyo State.",
+  },
+  {
+    id: 11,
+    author: "Lawal KA Mrs",
+    relationship: "Vice Principal, NUD Grammar School",
+    excerpt: "To my dear principal and mentor, It is with immense gratitude to God Almighty, who spared your life to see this day...",
+    full: "To my dear principal and mentor,\n\nIt is with immense gratitude to God Almighty, who spared your life to see this day, and deep respect that I wish you a happy retirement and 60th birthday celebration as you close out this chapter of dedicated service in our school, NUD Grammar School, SOLU IFO. Although I have worked with you for a few months, your impact has been profound and lasting.\n\nYour compassion, generosity, and unwavering love for both staff and students have created a warm and supportive environment where everyone can strive. You can't hide your feelings; your honesty and transparency have taught me the value of authentic leadership, and I have felt truly seen and appreciated under your care.\n\nI especially want to thank you for giving me the opportunity to serve as vice principal. While some of my mates have told stories of principals who stifle growth, you have done the opposite.\n\nYou are one of the reasons I am still in Ifo. You opened my eyes to the intricacies of school administration, financial management, and academic leadership. Your mentorship has prepared me to step confidently into future roles without fear, and for that, I am eternally grateful.\n\nYour Godly character, loving spirit, openness of heart, and commitment to excellence have left an indelible mark on our school community.\n\nThough we will miss your daily presence, we are inspired by the legacy you leave behind, a legacy of your kindness, fairness, and visionary leadership.\n\nMay this new season bring you abundant joy, peace, and fulfillment. May God continue to bless you richly and make you relevant as you enjoy the fruits of your labor in Jesus name.\n\nWith heartfelt thanks and best wishes.\n\nLawal KA Mrs\n\nVice principal.",
+  },
+  {
+    id: 12,
+    author: "NAWAIR-UD-DEEN GRAMMAR SCHOOL JNR SOLU",
+    relationship: "School Community",
+    excerpt: "I felicitate and rejoice with Dr.Mrs Yemisi Ayinde on the celebrations of her statutory retirement from active service...",
+    full: "I felicitate and rejoice with Dr.Mrs Yemisi Ayinde on the celebrations of her statutory retirement from active service of Ogun State Teaching Service Commission & 60th birthday anniversary!\n\nFrom all of us at NAWAIR-UD-DEEN GRAMMAR SCHOOL JNR SOLU - kindly accept our warmest congratulations!",
+  },
+  {
+    id: 13,
+    author: "Chief Mrs Temitope Ogundare",
+    relationship: "Principal, Agbado DCHS",
+    excerpt: "Congratulations on your retirement my friend-turned-sister! I really enjoyed our time together in ANCOPSS...",
+    full: "Congratulations on your retirement my friend-turned-sister!\n\nI really enjoyed our time together in ANCOPSS — felt like we'd known each other forever!\n\nSame vibes, smiles, joy… those moments were EVERYTHING.\n\nCompanionship doesn't end here — looking forward to staying connected.\n\nMay God bless this new chapter with good health, joy, purpose & endless blessings🙏.\n\n🎉 HAPPY 60th BIRTHDAY! May age bring wisdom and multiply happiness!\n\nFrom: Chief Mrs Temitope Ogundare\n\nPrincipal, Agbado DCHS, Snr, Oke-Aro.",
+  },
+  {
+    id: 14,
+    author: "Mrs Adeola A. Okanlawon",
+    relationship: "Community High School, Iroko-Ota",
+    excerpt: "Congratulations to my wonderful boss and sister on your retirement from active service! I celebrate your incredible service...",
+    full: "Congratulations to my wonderful boss and sister on your retirement from active service!\n\nI celebrate your incredible service and dedication as you retire!\n\nYour leadership, vision, & passion have shaped countless lives & left an enduring legacy. Wishing you joy, relaxation & fulfillment in this new chapter!\n\nMay Almighty God grant you many more glorious years ahead in good health & sound mind. You will never retire unto sickness nor death by God's grace.🙏\n\nFrom: Mrs Adeola A. Okanlawon\n\nCommunity High School,( Senior) IROKO OTA",
+  },
+  {
+    id: 15,
+    author: "Mr Akindugbagbe Oluwaseun Daniel",
+    relationship: "Colleague",
+    excerpt: "Heartfelt congratulations on the joyous occasion of your Statutory Celebration & your 60th Birthday Anniversary!...",
+    full: "Heartfelt congratulations on the joyous occasion of your Statutory Celebration & your 60th Birthday Anniversary! This remarkable milestone is a testament to God's grace, faithfulness, the impactful years of service, dedication& leadership you have rendered to humanity.\n\nAt 60 Ma - you stand as a symbol of wisdom, experience, & fulfilled purpose. Your life's journey so far has been inspiring. Your contributions during this statutory period have left indelible marks that will continue to speak for generations!\n\nWe celebrate not only your age, but also your achievements, integrity, resilience, and the positive influence you have had on people and institutions around you.\n\nMay this new chapter usher in renewed strength, sound health, deeper fulfillment, and greater accomplishments.\n\nCongratulations once again on this double celebration. May your days ahead be filled with peace, joy, and abundant blessings.\n\nHappy 60th Birthday & Happy Statutory Celebration!\n\nFrom: Mr Akindugbagbe Oluwaseun Daniel",
+  },
+  {
+    id: 16,
+    author: "Mrs Omolara Osewa",
+    relationship: "Immediate Past Chairperson, Ifo ANCOPSS",
+    excerpt: "I celebrate God's faithfulness in your life, Dr. Mrs. Yemisi Ayinde, the Principal of NUD SOLU Senior, Ifo...",
+    full: "I celebrate God's faithfulness in your life, Dr. Mrs. Yemisi Ayinde, the Principal of NUD SOLU Senior, Ifo, on your 60th birthday today, and your retirement from the Teaching Service Commission of Ogun State.\n\nCongratulations ma.\n\nFrom:\n\nMrs Omolara Osewa, Immediate Past Chairperson, Ifo ANCOPSS",
+  },
+  {
+    id: 17,
+    author: "Odediya Solomon",
+    relationship: "Colleague",
+    excerpt: "In between the gap of your existence as an Ifo ANCOPSS member, Exceptional Leadership at School and Unwavering Commitment...",
+    full: "In between the gap of your existence as an Ifo ANCOPSS member, Exceptional Leadership at School and Unwavering Commitment on every responsibility bestowed by the Confederation are the wings your Eagle flies. A woman of many good friends, I gladly associate with you on the Giant Strides. Enjoy this well-deserved New Era in Proud Health and Multiple Assets of Life.\n\nFrom: Odediya Solomon",
+  },
+  {
+    id: 18,
+    author: "Prince Aina Bola. O",
+    relationship: "TSC Zonal Secretary, Ota 1",
+    excerpt: "Dr. Mrs. Ayinde Oluwayemisi, I celebrate and honor you on your well-deserved retirement. Your years of exemplary leadership...",
+    full: "Dr. Mrs. Ayinde Oluwayemisi, I celebrate and honor you on your well-deserved retirement.\n\nYour years of exemplary leadership, dedication, and unwavering commitment to academic excellence have left an indelible mark on the various institutions, the students and on everyone privileged to work with you.\n\nYou led with wisdom, integrity, and compassion, inspiring both staff and students to strive for their best.\n\nYour legacy of service, discipline, and mentorship will continue to guide the learners and Staff that passed through you for years to come.\n\nAs you begin this new chapter, I wish you good health, peace, fulfillment, and the joy that comes with a life of meaningful impact.\n\nThank you for your remarkable service and lasting contributions to the teaching profession.\n\nPrince Aina Bola. O\n\nTSC Zonal Secretary,\n\nOta 1.",
+  },
+  {
+    id: 19,
+    author: "Zannus Sunday Folorunso",
+    relationship: "Principal, Itoki Community High School",
+    excerpt: "The Principal, Staff and Students of ITOKI COMMUNITY HIGH SCHOOL (JUNIOR) ITOKI heartily congratulate Dr. Mrs Oluwayemisi Bosede Ayinde...",
+    full: "The Principal, Staff and Students of ITOKI COMMUNITY HIGH SCHOOL (JUNIOR) ITOKI heartily congratulate Dr. Mrs Oluwayemisi Bosede Ayinde, Principal N U D Grammar School (Snr), SOLU - IFO on her retirement from Ogun State Teaching Service and 60th birthday today, 16th January, 2026.\n\nGoodness and mercy shall follow you all the days of your life.\n\nZannus Sunday Folorunso.\n\nPrincipal, Itoki Community High School (Jnr) Itoki",
+  },
+  {
+    id: 20,
+    author: "Mr Balogun Samuel",
+    relationship: "Principal CHS Okungbolu",
+    excerpt: "\"Dear Dr. Mrs. Ayinde, Bosede Oluwayemisi As you embark on this new chapter, I celebrate an incredible career...",
+    full: "\"Dear Dr. Mrs. Ayinde, Bosede Oluwayemisi\n\nAs you embark on this new chapter, I celebrate an incredible career dedicated to shaping young minds. Your leadership as a colleague and principal has left an indelible mark. Wishing you joy, relaxation, and fulfilment in retirement! 🎊\"\n\nMr Balogun Samuel\n\nPrincipal CHS OKUNGBOLU",
+  },
+  {
+    id: 21,
+    author: "Mrs Sogbesan I.O",
+    relationship: "Principal, Adenrele High School Junior Ifo",
+    excerpt: "Congratulations to you, my amiable sister and friend, on your Diamond Jubilee and retirement from the Ogun State Teaching Services Commission...",
+    full: "Congratulations to you, my amiable sister and friend, on your Diamond Jubilee and retirement from the Ogun State Teaching Services Commission as a Principal. I thank God for your life, and I pray that as you start this journey of retirement from today, God Almighty shall make it a season of ease for you, IJMN.\n\nMrs Sogbesan I.O, Principal, Adenrele High School Junior Ifo.",
+  },
+  {
+    id: 22,
+    author: "ADELANI I. Adesanya",
+    relationship: "Principal, Adenrele High School Senior Ifo",
+    excerpt: "Today, 16th January, 2026, I am celebrating with you ma (Dr Mrs Oluwayemisi Bosede AYINDE), on your statutory retirement...",
+    full: "Today, 16th January, 2026, I am celebrating with you ma (Dr Mrs Oluwayemisi Bosede AYINDE), on your statutory retirement and pendown from active service of Ogun State Teaching Service Commission. No doubt, your years in the service have been successful.\n\nAs you proceed on retirement, may you spend the rest of your years in good health, prosperity, and everlasting joy. In IFO ANCOPSS, your contribution will forever be remembered. Congratulations ma.\n\nADELANI I. Adesanya\n\nPrincipal Adenrele High School SENIOR IFO",
+  },
+  {
+    id: 23,
+    author: "Etim Mary Toyin",
+    relationship: "Colleague",
+    excerpt: "CONGRATULATORY MESSAGE I, Etim Mary Toyin, hereby felicitate with Dr. Mrs. Oluwayemisi Ayinde on your meritorious retirement...",
+    full: "CONGRATULATORY MESSAGE\n\nI, Etim Mary Toyin, hereby felicitate with Dr. Mrs. Oluwayemisi Ayinde on your meritorious retirement. I thank God for making our path to cross.\n\nWe only worked together briefly for only one year which was very impactful. You are a woman of good report, the lover of God and humanity. Your method of softening the hearts of stubborn students is amazingly beautiful\n\nA very caring colleague.\n\nI pray that you shall not retire unto sickness and penury. Divine strength from above shall be your portion in Jesus name",
+  },
+  {
+    id: 24,
+    author: "Mrs Eniola Arwmu",
+    relationship: "Colleague",
+    excerpt: "Our Dr. Mrs., congratulations as you retire, it will be of good health and peace of mind, more progress for you 💖🙏 a jolly good fellow...",
+    full: "Our Dr. Mrs., congratulations as you retire, it will be of good health and peace of mind, more progress for you 💖🙏 a jolly good fellow.\n\nFrom Mrs Eniola Arwmu",
+  },
+  {
+    id: 25,
+    author: "Mrs Desayo Akinlade",
+    relationship: "Colleague",
+    excerpt: "Dear Dr. Oluwayemisi Ayinde! Congratulations on a standout career in the teaching service! What a glorious and rewarding service to humanity...",
+    full: "Dear Dr. Oluwayemisi Ayinde!\n\nCongratulations on a standout career in the teaching service! What a glorious and rewarding service to humanity, may the good Lord reward your labour of love. Your leadership has certainly left a lasting mark on the many lives touched during the course of your career. Thank you for your dedication.\n\nWishing you the best for your retirement! May your freedom take you places and be filled with everything you love. May this new chapter bring you all the happiness you deserve. Wishing you a retirement filled with good health, happiness, and cherished memories.\n\nBlessings\n\nMrs Desayo Akinlade",
+  },
+  {
+    id: 26,
+    author: "Mrs Esther Ashade",
+    relationship: "Friend",
+    excerpt: "We thank God for sparing your life to see and celebrate your 60th. You started with some people, but they are no more...",
+    full: "We thank God for sparing your life to see and celebrate your 60th. You started with some people, but they are no more. I thank God for your life, I pray more grace to eat the fruits of your labour in sound health, joy, and peace of mind in Jesus name. God in His infinite mercy will spare our lives beyond that day in Jesus Mighty name.\n\nMrs Esther Ashade.\n\nAshade Stores, Oja Ota.",
+  },
+  {
+    id: 27,
+    author: "HASSAN, MUFUTAU. (MR)",
+    relationship: "School Portal Admin, NUD Grammar School Senior Solu-Ifo",
+    excerpt: "Hearty congratulations on the successful completion of your statutory service and the joyful celebration of your 60th birthday...",
+    full: "Hearty congratulations on the successful completion of your statutory service and the joyful celebration of your 60th birthday. Today, I celebrate not just the end of a distinguished career, but a lifetime of impact, leadership, and selfless dedication to education.\n\nYour tenure as a principal was defined by wisdom, discipline, and a deep commitment to nurturing both academic excellence and strong character. The lives you have shaped, the standards you upheld, and the values you instilled will remain your enduring legacy.\n\nAs you step into this new season at 60, may it bring renewed strength, sound health, peace, and abundant joy. May your days ahead be as fulfilling as the service you have rendered. I celebrate you with deep respect and gratitude, and we wish you a happy 60th birthday and a truly rewarding retirement. 🎉🎂\n\nHASSAN, MUFUTAU. (MR)\n\nSchool Portal Admin. (SPA).\n\nNawair-Ud-Deen Grammar School Senior Solu-Ifo",
+  },
+]

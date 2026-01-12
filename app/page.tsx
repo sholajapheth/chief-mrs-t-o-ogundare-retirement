@@ -1,8 +1,8 @@
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
-import { TributesSection } from "@/components/tributes-section"
-import { WishesWall } from "@/components/wishes-wall"
+import { TributesPreview } from "@/components/tributes-preview"
+import { WishesPreview } from "@/components/wishes-preview"
 import { PhotoPreview } from "@/components/photo-preview"
 import { ProgramTimeline } from "@/components/program-timeline"
 import { VenueSection } from "@/components/venue-section"
@@ -16,8 +16,8 @@ export default function Home() {
       <HeroSection />
       <StatsCounter />
       <AboutSection />
-      <TributesSection />
-      <WishesWall />
+      <TributesPreview />
+      <WishesPreview />
       <PhotoPreview />
       <ProgramTimeline />
       <VenueSection />

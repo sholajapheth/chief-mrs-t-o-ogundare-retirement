@@ -9,8 +9,8 @@ import { cn } from "@/lib/utils"
 const navItems = [
   { label: "Home", href: "/#home" },
   { label: "About Her", href: "/#about" },
-  { label: "Congratulatory Messages", href: "/#tributes" },
-  { label: "Wishes Wall", href: "/#wishes" },
+  { label: "Congratulatory Messages", href: "/messages" },
+  { label: "Wishes Wall", href: "/wishes" },
   { label: "Gallery", href: "/gallery" },
   { label: "Program", href: "/#program" },
   { label: "Venue", href: "/#venue" },

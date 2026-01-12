@@ -60,7 +60,7 @@ const timelineData = [
     year: "2025-2026",
     title: "Principal & Retirement",
     description:
-      "Appointed Principal of NUD Grammar School, Solu-Ifo (October 2025). Retiring from Ogun State Teaching Service Commission after 29 years of dedicated service.",
+      "Appointed Principal of NUD Grammar School, Solu-Ifo (October 2025). Retiring from Ogun State Teaching Service Commission after almost 30 years of dedicated service.",
     icon: Award,
   },
 ];
@@ -86,9 +86,12 @@ export function AboutSection() {
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">
             Her Journey
           </span>
-          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">
-            About Dr. Yemisi Ayinde
+          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-2">
+            About Dr. Oluwayemisi Ayinde
           </h2>
+          <p className="text-lg text-primary font-serif mb-4">
+            (Nee Boyejo) • Principal, NAWAIR-UD-DEEN Grammar School Senior Solu-Ifo
+          </p>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A life dedicated to shaping minds, serving with excellence, and
             glorifying God in all things.
@@ -112,8 +115,8 @@ export function AboutSection() {
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-6 py-3 rounded-lg shadow-lg">
-                <p className="font-serif text-lg font-bold">29 Years</p>
-                <p className="text-sm">of Excellence</p>
+                <p className="font-serif text-lg font-bold">Almost 30 Years</p>
+                <p className="text-sm">of Dedicated Service</p>
               </div>
             </div>
 

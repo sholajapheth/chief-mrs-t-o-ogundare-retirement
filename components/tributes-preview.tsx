@@ -3,13 +3,12 @@
 import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Quote, ChevronDown, ChevronUp, Star } from "lucide-react"
+import { Quote, ChevronDown, ChevronUp, Star, ArrowRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 import { allTributes } from "@/lib/tributes-data"
 
-const tributes = allTributes
-
-function TributeCard({ tribute }: { tribute: (typeof tributes)[0] }) {
+function TributeCard({ tribute }: { tribute: (typeof allTributes)[0] }) {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
@@ -64,7 +63,13 @@ function TributeCard({ tribute }: { tribute: (typeof tributes)[0] }) {
   )
 }
 
-export function TributesSection() {
+export function TributesPreview() {
+  // Show top 8 messages (featured first, then others)
+  const topTributes = [
+    ...allTributes.filter((t) => t.featured),
+    ...allTributes.filter((t) => !t.featured),
+  ].slice(0, 8)
+
   return (
     <section id="tributes" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
@@ -80,13 +85,23 @@ export function TributesSection() {
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
         </div>
 
-        {/* Hierarchical Grid - All Messages */}
-        <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-          {tributes.map((tribute) => (
+        {/* Hierarchical Grid - Top 8 Messages */}
+        <div className="columns-1 md:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 mb-8">
+          {topTributes.map((tribute) => (
             <div key={tribute.id} className="break-inside-avoid mb-6">
               <TributeCard tribute={tribute} />
             </div>
           ))}
+        </div>
+
+        {/* View More Button */}
+        <div className="text-center">
+          <Link href="/messages">
+            <Button size="lg" variant="outline" className="group">
+              View All Messages
+              <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
         </div>
 
         {/* Scripture */}
