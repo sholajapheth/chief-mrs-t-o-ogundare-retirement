@@ -90,7 +90,8 @@ export function AboutSection() {
             About Dr. Oluwayemisi Ayinde
           </h2>
           <p className="text-lg text-primary font-serif mb-4">
-            (Nee Boyejo) • Principal, NAWAIR-UD-DEEN Grammar School Senior Solu-Ifo
+            (Nee Boyejo) • Principal, NAWAIR-UD-DEEN Grammar School Senior
+            Solu-Ifo
           </p>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A life dedicated to shaping minds, serving with excellence, and
