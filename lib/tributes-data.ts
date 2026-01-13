@@ -36,6 +36,15 @@ export const allTributes: Tribute[] = [
     full: "Congratulations on your retirement and a very happy birthday to you, Dr. Mrs.\n\nSixty years of God's faithfulness! Ẹ tún bọ̀ máa rí iṣẹ́ ìyanu Olúwa in this next chapter.\n\nCheers!\n\n- son",
   },
   {
+    id: 32,
+    author: "Daughter",
+    relationship: "Family",
+    featured: true,
+    excerpt:
+      "Happy birthday to the most selfless person I know. To know you is to be blessed beyond measures and I am glad I do not have to wish we were friends...",
+    full: "Happy birthday to the most selfless person I know. To know you is to be blessed beyond measures and I am glad I do not have to wish we were friends, I'm super grateful to God that you are my mum.\n\nYou have been my greatest support system, showing me in countless ways what it truly means to be loved. Your love has carried me through every season of my life, and for that, I am forever thankful.\n\nToday we celebrate the beautiful woman you are, a loving mother, a guiding light, and a source of strength to all who know you. As you begin this new chapter, may your days be filled with peace, good health, joy, and the rest you so richly deserve.\n\nI pray that the grace of God will never cease in your life, and that His favour will continue to surround you always.\n\nWith all my love,\n\nYour Daughter ❤️❤️❤️❤️❤️",
+  },
+  {
     id: 3,
     author: "Pastor Olusoji Abiodun & Dcns. Olubunmi 'Soji-Abiodun",
     relationship: "Church Leaders",
