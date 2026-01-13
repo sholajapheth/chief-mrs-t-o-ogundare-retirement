@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { ImageWithFallback } from "@/components/image-with-fallback"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { ImageWithFallback } from "@/components/image-with-fallback";
 
 interface GoogleDrivePhoto {
-  id: string
-  name: string
-  webViewLink: string
-  thumbnailLink?: string
-  webContentLink?: string
-  mimeType: string
+  id: string;
+  name: string;
+  webViewLink: string;
+  thumbnailLink?: string;
+  webContentLink?: string;
+  mimeType: string;
 }
 
 const categories = [
@@ -21,92 +21,145 @@ const categories = [
   { id: "career", label: "Career Journey" },
   { id: "family", label: "Family Moments" },
   { id: "recent", label: "Recent Photos" },
-]
+];
 
 export function PhotoGallery() {
-  const [photos, setPhotos] = useState<GoogleDrivePhoto[]>([])
-  const [loading, setLoading] = useState(true)
-  const [activeCategory, setActiveCategory] = useState("all")
-  const [lightboxOpen, setLightboxOpen] = useState(false)
-  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0)
+  const [photos, setPhotos] = useState<GoogleDrivePhoto[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState("all");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await fetch("/api/photos")
-        if (!response.ok) throw new Error("Failed to fetch photos")
-        const data = await response.json()
-        setPhotos(data)
+        const response = await fetch("/api/photos");
+        if (!response.ok) throw new Error("Failed to fetch photos");
+        const data = await response.json();
+        setPhotos(data);
       } catch (error) {
-        console.error("[v0] Error loading photos:", error)
+        console.error("[v0] Error loading photos:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchPhotos()
-  }, [])
+    fetchPhotos();
+  }, []);
 
-  const filteredPhotos = photos
+  const filteredPhotos = photos;
 
   const openLightbox = (index: number) => {
-    setCurrentPhotoIndex(index)
-    setLightboxOpen(true)
-  }
+    setCurrentPhotoIndex(index);
+    setLightboxOpen(true);
+  };
 
   const closeLightbox = () => {
-    setLightboxOpen(false)
-  }
+    setLightboxOpen(false);
+  };
 
   const navigateLightbox = (direction: "prev" | "next") => {
     if (direction === "prev") {
-      setCurrentPhotoIndex((prev) => (prev === 0 ? filteredPhotos.length - 1 : prev - 1))
+      setCurrentPhotoIndex((prev) =>
+        prev === 0 ? filteredPhotos.length - 1 : prev - 1
+      );
     } else {
-      setCurrentPhotoIndex((prev) => (prev === filteredPhotos.length - 1 ? 0 : prev + 1))
+      setCurrentPhotoIndex((prev) =>
+        prev === filteredPhotos.length - 1 ? 0 : prev + 1
+      );
     }
-  }
+  };
 
-  const getPhotoUrl = (photo: GoogleDrivePhoto, isFullSize: boolean = false): string => {
-    const isHeic = photo.mimeType?.toLowerCase().includes('heic') || photo.mimeType?.toLowerCase().includes('heif')
-    const isJpeg = photo.mimeType?.toLowerCase().includes('jpeg') || photo.mimeType?.toLowerCase().includes('jpg')
-    const size = isFullSize ? "1920" : "800"
-    
+  const getPhotoUrl = (
+    photo: GoogleDrivePhoto,
+    isFullSize: boolean = false
+  ): string => {
+    const isHeic =
+      photo.mimeType?.toLowerCase().includes("heic") ||
+      photo.mimeType?.toLowerCase().includes("heif");
+    const isJpeg =
+      photo.mimeType?.toLowerCase().includes("jpeg") ||
+      photo.mimeType?.toLowerCase().includes("jpg");
+    const size = isFullSize ? "1920" : "800";
+
     // #region agent log
-    fetch('http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'photo-gallery.tsx:69',message:'getPhotoUrl called',data:{photoId:photo.id,photoName:photo.name,mimeType:photo.mimeType,isHeic,isJpeg,hasThumbnailLink:!!photo.thumbnailLink,hasWebContentLink:!!photo.webContentLink,isFullSize},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'A'})}).catch(()=>{});
+    fetch("http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "photo-gallery.tsx:69",
+        message: "getPhotoUrl called",
+        data: {
+          photoId: photo.id,
+          photoName: photo.name,
+          mimeType: photo.mimeType,
+          isHeic,
+          isJpeg,
+          hasThumbnailLink: !!photo.thumbnailLink,
+          hasWebContentLink: !!photo.webContentLink,
+          isFullSize,
+        },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "post-fix",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
     // #endregion
-    
+
     // Use API route for ALL images (not just HEIC) to ensure proper authentication
     // This fixes the issue where thumbnailLink URLs fail due to authentication requirements
-    const url = `/api/photos/${photo.id}?size=${size}`
+    const url = `/api/photos/${photo.id}?size=${size}`;
     // #region agent log
-    fetch('http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'photo-gallery.tsx:76',message:'Using API route for image',data:{url,photoId:photo.id},timestamp:Date.now(),sessionId:'debug-session',runId:'post-fix',hypothesisId:'A'})}).catch(()=>{});
+    fetch("http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        location: "photo-gallery.tsx:76",
+        message: "Using API route for image",
+        data: { url, photoId: photo.id },
+        timestamp: Date.now(),
+        sessionId: "debug-session",
+        runId: "post-fix",
+        hypothesisId: "A",
+      }),
+    }).catch(() => {});
     // #endregion
-    return url
-  }
+    return url;
+  };
 
-  const getFallbackUrls = (photo: GoogleDrivePhoto, isFullSize: boolean = false): string[] => {
-    const size = isFullSize ? "1920" : "800"
-    const fallbacks: string[] = []
-    
+  const getFallbackUrls = (
+    photo: GoogleDrivePhoto,
+    isFullSize: boolean = false
+  ): string[] => {
+    const size = isFullSize ? "1920" : "800";
+    const fallbacks: string[] = [];
+
     // Try Google Drive thumbnail API
-    fallbacks.push(`https://drive.google.com/thumbnail?id=${photo.id}&sz=w${size}-h${size}`)
-    
+    fallbacks.push(
+      `https://drive.google.com/thumbnail?id=${photo.id}&sz=w${size}-h${size}`
+    );
+
     // Try direct view URL
-    fallbacks.push(`https://drive.google.com/uc?export=view&id=${photo.id}`)
-    
+    fallbacks.push(`https://drive.google.com/uc?export=view&id=${photo.id}`);
+
     // Try alternative view URL
-    fallbacks.push(`https://drive.google.com/uc?id=${photo.id}`)
-    
-    return fallbacks
-  }
+    fallbacks.push(`https://drive.google.com/uc?id=${photo.id}`);
+
+    return fallbacks;
+  };
 
   return (
     <section id="gallery" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase">Memories</span>
-          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">Photo Gallery</h2>
+          <span className="text-primary text-sm font-semibold tracking-widest uppercase">
+            Memories
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">
+            Photo Gallery
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             A visual journey through 60 years of life, love, and legacy.
           </p>
@@ -114,7 +167,7 @@ export function PhotoGallery() {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        {/* <div className="flex flex-wrap justify-center gap-2 mb-10">
           {categories.map((category) => (
             <Button
               key={category.id}
@@ -123,13 +176,14 @@ export function PhotoGallery() {
               onClick={() => setActiveCategory(category.id)}
               className={cn(
                 "rounded-full px-6",
-                activeCategory === category.id && "bg-primary text-primary-foreground",
+                activeCategory === category.id &&
+                  "bg-primary text-primary-foreground"
               )}
             >
               {category.label}
             </Button>
           ))}
-        </div>
+        </div> */}
 
         {/* Photo Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -147,7 +201,7 @@ export function PhotoGallery() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-white text-sm font-medium">{photo.name}</p>
+                  {/* <p className="text-white text-sm font-medium">{photo.name}</p> */}
                 </div>
                 <div className="absolute top-4 right-4">
                   <ZoomIn className="w-6 h-6 text-white" />
@@ -193,11 +247,16 @@ export function PhotoGallery() {
                   src={getPhotoUrl(filteredPhotos[currentPhotoIndex], true)}
                   alt={filteredPhotos[currentPhotoIndex].name}
                   className="max-w-full max-h-[70vh] mx-auto rounded-lg"
-                  fallbackUrls={getFallbackUrls(filteredPhotos[currentPhotoIndex], true)}
+                  fallbackUrls={getFallbackUrls(
+                    filteredPhotos[currentPhotoIndex],
+                    true
+                  )}
                 />
               </div>
               <div className="text-center mt-4">
-                <p className="text-white font-medium">{filteredPhotos[currentPhotoIndex].name}</p>
+                {/* <p className="text-white font-medium">
+                  {filteredPhotos[currentPhotoIndex].name}
+                </p> */}
                 <p className="text-white/60 text-sm mt-1">
                   {currentPhotoIndex + 1} of {filteredPhotos.length}
                 </p>
@@ -212,10 +271,12 @@ export function PhotoGallery() {
           </div>
         ) : photos.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-muted-foreground">No photos found. Please check your Google Drive folder.</p>
+            <p className="text-muted-foreground">
+              No photos found. Please check your Google Drive folder.
+            </p>
           </div>
         ) : null}
       </div>
     </section>
-  )
+  );
 }
