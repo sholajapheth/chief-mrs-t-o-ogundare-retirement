@@ -32,6 +32,7 @@ const programItems = [
     time: "12:40 PM",
     title: "4. Opening Prayer, Praise & Worship/Hymn",
     description: "Invocation and blessings for the celebration.",
+    hymn: "To God be the glory, great things He hath done",
     duration: "10 mins",
     icon: BookOpen,
   },
@@ -163,8 +164,9 @@ const programItems = [
   },
   {
     time: "4:20 PM",
-    title: "23. Closing Prayer",
+    title: "23. Closing Prayer & Hymn",
     description: "Final blessings and prayers.",
+    hymn: "Guide me, O my great Redeemer",
     duration: "5 mins",
     icon: BookOpen,
   },
@@ -295,6 +297,12 @@ export function ProgramTimeline() {
                   </div>
                   <h3 className="font-serif text-lg font-bold text-foreground mb-1">{item.title}</h3>
                   <p className="text-muted-foreground text-sm">{item.description}</p>
+                  {(item as any).hymn && (
+                    <p className="text-primary text-sm font-medium mt-2 flex items-center gap-2">
+                      <Music className="w-4 h-4" />
+                      {(item as any).hymn}
+                    </p>
+                  )}
                 </CardContent>
               </Card>
             </div>

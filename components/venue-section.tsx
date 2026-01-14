@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { MapPin, Clock, Shirt, Car, Phone, Mail } from "lucide-react"
-import Image from "next/image"
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { MapPin, Clock, Shirt, Car, Phone, Mail } from "lucide-react";
+import Image from "next/image";
 
 export function VenueSection() {
   return (
@@ -11,8 +11,12 @@ export function VenueSection() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase">Location</span>
-          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">Event Venue</h2>
+          <span className="text-primary text-sm font-semibold tracking-widest uppercase">
+            Location
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">
+            Event Venue
+          </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             We look forward to celebrating with you at this beautiful venue.
           </p>
@@ -22,10 +26,17 @@ export function VenueSection() {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Map / Venue Image */}
           <div className="relative aspect-video lg:aspect-square rounded-2xl overflow-hidden shadow-xl">
-            <Image src="/nigerian-school-building.jpg" alt="Event Venue" fill className="object-cover" />
+            <Image
+              src="/nigerian-school-building.jpg"
+              alt="Event Venue"
+              fill
+              className="object-cover"
+            />
             <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 text-white">
-              <h3 className="font-serif text-2xl font-bold mb-2">Nawair-Ud-Deen Grammar School</h3>
+              <h3 className="font-serif text-2xl font-bold mb-2">
+                Nawair-Ud-Deen Grammar School
+              </h3>
               <p className="text-white/80">Solu-Ifo, Nigeria</p>
             </div>
           </div>
@@ -34,7 +45,9 @@ export function VenueSection() {
           <div className="space-y-6">
             <Card className="border-primary/20">
               <CardContent className="p-6">
-                <h3 className="font-serif text-xl font-bold text-foreground mb-6">Event Details</h3>
+                <h3 className="font-serif text-xl font-bold text-foreground mb-6">
+                  Event Details
+                </h3>
 
                 <div className="space-y-4">
                   <div className="flex items-start gap-4">
@@ -42,9 +55,15 @@ export function VenueSection() {
                       <Clock className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground">Date & Time</h4>
-                      <p className="text-muted-foreground">Friday, January 16, 2026</p>
-                      <p className="text-muted-foreground">12:00 PM - 4:00 PM</p>
+                      <h4 className="font-semibold text-foreground">
+                        Date & Time
+                      </h4>
+                      <p className="text-muted-foreground">
+                        Friday, January 16, 2026
+                      </p>
+                      <p className="text-muted-foreground">
+                        12:00 PM - 4:00 PM
+                      </p>
                     </div>
                   </div>
 
@@ -54,9 +73,14 @@ export function VenueSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">Venue</h4>
-                      <p className="text-muted-foreground">Nawair-Ud-Deen Grammar School Senior</p>
+                      <p className="text-muted-foreground">
+                        Nawair-Ud-Deen Grammar School Senior
+                      </p>
                       <p className="text-muted-foreground">Solu-Ifo, Nigeria</p>
-                      <Button variant="link" className="text-primary p-0 h-auto mt-1">
+                      <Button
+                        variant="link"
+                        className="text-primary p-0 h-auto mt-1"
+                      >
                         Get Directions →
                       </Button>
                     </div>
@@ -67,9 +91,12 @@ export function VenueSection() {
                       <Shirt className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-foreground">Dress Code</h4>
-                      <p className="text-muted-foreground">Formal / Semi-Formal Attire</p>
-                      <p className="text-muted-foreground text-sm">Traditional attire welcomed</p>
+                      <h4 className="font-semibold text-foreground">
+                        Dress Code
+                      </h4>
+                      <p className="text-muted-foreground">
+                        Fuscial Pink & Purple
+                      </p>
                     </div>
                   </div>
 
@@ -79,7 +106,9 @@ export function VenueSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-foreground">Parking</h4>
-                      <p className="text-muted-foreground">Ample parking space available at the venue</p>
+                      <p className="text-muted-foreground">
+                        Ample parking space available at the venue
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -89,7 +118,9 @@ export function VenueSection() {
             {/* Contact Card */}
             <Card>
               <CardContent className="p-6">
-                <h3 className="font-serif text-xl font-bold text-foreground mb-4">For Inquiries</h3>
+                <h3 className="font-serif text-xl font-bold text-foreground mb-4">
+                  For Inquiries
+                </h3>
                 <div className="space-y-3">
                   <a
                     href="tel:+2348168005925"
@@ -105,7 +136,9 @@ export function VenueSection() {
                     <Mail className="w-4 h-4" />
                     <span>gbemiova@gmail.com</span>
                   </a>
-                  <p className="text-muted-foreground text-sm pt-3 border-t border-border">Contact: Gbemi</p>
+                  <p className="text-muted-foreground text-sm pt-3 border-t border-border">
+                    Contact: Gbemi
+                  </p>
                 </div>
               </CardContent>
             </Card>
@@ -113,13 +146,16 @@ export function VenueSection() {
             {/* Scripture */}
             <div className="bg-secondary/10 rounded-xl p-6 border border-secondary/20">
               <p className="font-serif text-lg italic text-foreground text-center">
-                &ldquo;They will still bear fruit in old age, they will stay fresh and green.&rdquo;
+                &ldquo;They will still bear fruit in old age, they will stay
+                fresh and green.&rdquo;
               </p>
-              <span className="text-muted-foreground text-sm text-center block mt-2">— Psalm 92:14</span>
+              <span className="text-muted-foreground text-sm text-center block mt-2">
+                — Psalm 92:14
+              </span>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

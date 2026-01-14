@@ -133,8 +133,21 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Thank You Message */}
+        <div className="mt-12 pt-8 border-t border-secondary-foreground/10">
+          <div className="bg-primary/10 rounded-lg p-6 text-center max-w-3xl mx-auto">
+            <p className="text-secondary-foreground leading-relaxed">
+              With grateful hearts, the families of{" "}
+              <span className="font-bold">Pst. Shola</span> and{" "}
+              <span className="font-bold">Dr. Oluwayemisi Ayinde</span> thank
+              the Almighty God and everyone who contributed to making this
+              celebration a memorable one.
+            </p>
+          </div>
+        </div>
+
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-secondary-foreground/10 text-center">
+        <div className="mt-8 pt-8 border-t border-secondary-foreground/10 text-center">
           <p className="text-secondary-foreground/60 text-sm flex items-center justify-center gap-1">
             Website created with{" "}
             <Heart className="w-4 h-4 text-primary fill-primary" /> for Dr.
