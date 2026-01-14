@@ -133,6 +133,16 @@ export function AboutSection() {
                 to Pastor Shola Ayinde, and together they are blessed with
                 children and grandchildren.
               </p>
+
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                In 2002, by the special grace of God, Dr. Oluwayemisi Ayinde
+                established Covenant Rewards Academy — a citadel of academic
+                excellence where great minds and destinies are nurtured to
+                become captains of industry both at home and in the diaspora.
+                Her biological children were among the pioneering students to
+                the glory of God.
+              </p>
+
               <blockquote className="border-l-4 border-primary pl-4 italic text-foreground">
                 &ldquo;The righteous flourish like the palm tree and grow like a
                 cedar in Lebanon.&rdquo;
