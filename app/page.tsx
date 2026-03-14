@@ -1,28 +1,35 @@
-import { Navigation } from "@/components/navigation"
-import { HeroSection } from "@/components/hero-section"
-import { AboutSection } from "@/components/about-section"
-import { CitationSection } from "@/components/citation-section"
-import { TributesPreview } from "@/components/tributes-preview"
-import { WishesPreview } from "@/components/wishes-preview"
-import { PhotoPreview } from "@/components/photo-preview"
-import { ProgramTimeline } from "@/components/program-timeline"
-import { VenueSection } from "@/components/venue-section"
-import { Footer } from "@/components/footer"
-import { StatsCounter } from "@/components/stats-counter"
+import Navbar from "@/components/sections/Navbar"
+import Hero from "@/components/sections/Hero"
+import BioCitation from "@/components/sections/BioCitation"
+import CareerTimeline from "@/components/sections/CareerTimeline"
+import SchoolsServed from "@/components/sections/SchoolsServed"
+import Achievements from "@/components/sections/Achievements"
+import Tributes from "@/components/sections/Tributes"
+import Gallery from "@/components/sections/Gallery"
+import Wishes from "@/components/sections/Wishes"
+import { Footer } from "@/components/sections/Footer"
+import { AdireDivider } from "@/components/ui/AdireDivider"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
-      <Navigation />
-      <HeroSection />
-      <StatsCounter />
-      <AboutSection />
-      <CitationSection />
-      <TributesPreview />
-      <WishesPreview />
-      <PhotoPreview />
-      <ProgramTimeline />
-      <VenueSection />
+    <main className="min-h-screen" style={{ backgroundColor: "#FAF6EF" }}>
+      <Navbar />
+      <Hero />
+      <AdireDivider />
+      <BioCitation />
+      <AdireDivider />
+      <CareerTimeline />
+      <AdireDivider />
+      <SchoolsServed />
+      <AdireDivider />
+      <Achievements />
+      <AdireDivider />
+      <Tributes />
+      <AdireDivider />
+      <Gallery preview />
+      <AdireDivider />
+      <Wishes preview />
+      <AdireDivider />
       <Footer />
     </main>
   )
