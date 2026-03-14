@@ -38,11 +38,33 @@ export function Footer() {
         />
 
         <div
-          className="mt-12 text-center text-linen/60 text-[0.8rem]"
-          style={{ fontFamily: "var(--font-body), Georgia, serif" }}
+          className="mt-12 text-center text-[0.8rem]"
+          style={{ fontFamily: "var(--font-body), Georgia, serif", color: "rgba(237, 217, 190, 0.6)" }}
         >
           <p>Agbado District Comprehensive High School, Senior, Oke Aro · Ogun State, Nigeria</p>
           <p className="mt-1">A celebration by family, students, and colleagues who love her.</p>
+        </div>
+
+        <div
+          className="mt-8 pt-6 text-center text-[0.75rem]"
+          style={{
+            borderTop: "1px solid rgba(237, 217, 190, 0.1)",
+            fontFamily: "var(--font-body), Georgia, serif",
+            color: "rgba(237, 217, 190, 0.4)",
+          }}
+        >
+          <p>
+            Designed &amp; built by{" "}
+            <a
+              href="https://sholajapheth.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="no-underline transition-colors hover:text-linen"
+              style={{ color: "#D4A017" }}
+            >
+              Shola Japheth
+            </a>
+          </p>
         </div>
       </div>
 

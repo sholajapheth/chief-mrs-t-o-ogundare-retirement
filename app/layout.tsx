@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description:
     "Ìmọ̀ ní Ipò Ọlá — In Celebration of 35 Years of Meritorious Service. Honouring Chief (Mrs) Temitope Oluwakemi Ogundare, Principal of Agbado District Comprehensive High School, Senior, Oke Aro.",
   keywords: ["retirement celebration", "Chief Mrs Ogundare", "FIWAGBOYE", "Agbado DCHS", "education", "Ogun State", "Nigeria"],
+  authors: [{ name: "Shola Japheth", url: "https://sholajapheth.com" }],
+  creator: "Shola Japheth",
   openGraph: {
     title: "Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE | Retirement Celebration",
     description: "Ìmọ̀ ní Ipò Ọlá — 35 Years of Meritorious Service in Education",
@@ -18,6 +20,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE | Retirement Celebration",
     description: "Ìmọ̀ ní Ipò Ọlá — 35 Years of Meritorious Service in Education",
+    creator: "@sholajapheth",
   },
 }
 

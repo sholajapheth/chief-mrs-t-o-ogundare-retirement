@@ -5,11 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChieftaincyCrown } from "@/components/ui/ChieftaincyCrown";
 
 const NAV_LINKS = [
-  { label: "Home", href: "#home" },
-  { label: "Her Story", href: "#bio" },
-  { label: "The Journey", href: "#timeline" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Gallery", href: "#gallery" },
+  { label: "Home", href: "/#home" },
+  { label: "Her Story", href: "/#bio" },
+  { label: "The Journey", href: "/#timeline" },
+  { label: "Achievements", href: "/#achievements" },
+  { label: "Gallery", href: "/#gallery" },
 ] as const;
 
 export default function Navbar() {
@@ -44,7 +44,7 @@ export default function Navbar() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
         {/* Left — Brand */}
         <a
-          href="#home"
+          href="/#home"
           className="flex items-center gap-2 text-[var(--color-linen)] no-underline"
         >
           <ChieftaincyCrown size={24} className="shrink-0" />
@@ -69,7 +69,7 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#wishes"
+            href="/#wishes"
             className="rounded-full bg-[var(--color-crimson)] px-5 py-1.5 text-sm font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024] no-underline"
             style={{ fontFamily: "var(--font-display), Georgia, serif" }}
           >
@@ -129,7 +129,7 @@ export default function Navbar() {
                 </motion.a>
               ))}
               <a
-                href="#wishes"
+                href="/#wishes"
                 onClick={() => setMenuOpen(false)}
                 className="mt-2 rounded-full bg-[var(--color-crimson)] px-5 py-2.5 text-center text-sm font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024] no-underline"
                 style={{ fontFamily: "var(--font-display), Georgia, serif" }}
