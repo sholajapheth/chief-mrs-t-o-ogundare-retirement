@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 
 const quickLinks = [
   { label: "Home", href: "#home" },
-  { label: "About Her", href: "#about" },
+  { label: "About", href: "#about" },
+  { label: "Citation", href: "#citation" },
   { label: "Congratulatory Messages", href: "#tributes" },
-  { label: "Wishes Wall", href: "#wishes" },
+  { label: "Messages Wall", href: "#wishes" },
   { label: "Gallery", href: "#gallery" },
   { label: "Program", href: "#program" },
   { label: "Venue", href: "#venue" },
@@ -14,7 +15,7 @@ const quickLinks = [
 export function Footer() {
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
   const shareText =
-    "Join us in celebrating Dr. Oluwayemisi Bosede Ayinde's 60th Birthday & Retirement!";
+    "Join us in celebrating Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE — 35 Years of Meritorious Service!";
 
   return (
     <footer className="bg-secondary text-secondary-foreground py-16">
@@ -25,15 +26,14 @@ export function Footer() {
             <div className="flex items-center gap-2 mb-4">
               <span className="text-primary text-2xl">✦</span>
               <span className="font-serif text-xl font-bold">
-                Dr. Yemisi at 60
+                Chief Mrs Ogundare
               </span>
             </div>
             <p className="text-secondary-foreground/70 leading-relaxed mb-4">
-              Celebrating a life of purpose, dedication to education, and
-              unwavering faith in God.
+              In celebration of 35 years of meritorious service in education — a legacy that will continue to inspire generations.
             </p>
             <p className="text-secondary-foreground/70 italic text-sm">
-              &ldquo;To God be the Glory. Great things He has done.&rdquo;
+              &ldquo;A woman of great and large heart, an icon of educational excellence.&rdquo;
             </p>
             <div className="mt-6 pt-6 border-t border-secondary-foreground/10 space-y-2">
               <p className="text-secondary-foreground/70 text-sm font-semibold">
@@ -137,11 +137,10 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-secondary-foreground/10">
           <div className="bg-primary/10 rounded-lg p-6 text-center max-w-3xl mx-auto">
             <p className="text-secondary-foreground leading-relaxed">
-              With grateful hearts, the families of{" "}
-              <span className="font-bold">Pst. Shola</span> and{" "}
-              <span className="font-bold">Dr. Oluwayemisi Ayinde</span> thank
+              With grateful hearts, the family of{" "}
+              <span className="font-bold">Chief (Mrs) Temitope Oluwakemi Ogundare</span> thank
               the Almighty God and everyone who contributed to making this
-              celebration a memorable one.
+              retirement celebration a memorable one.
             </p>
           </div>
         </div>
@@ -150,8 +149,7 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t border-secondary-foreground/10 text-center">
           <p className="text-secondary-foreground/60 text-sm flex items-center justify-center gap-1">
             Website created with{" "}
-            <Heart className="w-4 h-4 text-primary fill-primary" /> for Dr.
-            Yemisi&apos;s celebration
+            <Heart className="w-4 h-4 text-primary fill-primary" /> for Chief Mrs Ogundare&apos;s retirement celebration
           </p>
           <p className="text-secondary-foreground/40 text-xs mt-2">
             © 2026 All Rights Reserved

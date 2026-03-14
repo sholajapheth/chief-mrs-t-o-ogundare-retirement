@@ -63,9 +63,9 @@ export function WishesPreview() {
         {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">Share Your Love</span>
-          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">Digital Wishes Wall</h2>
+          <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">Messages Wall</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Leave a heartfelt message for Dr. Ayinde on this special occasion.
+            Leave a heartfelt message for Chief (Mrs) Ogundare on this special occasion.
           </p>
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
         </div>
@@ -78,7 +78,7 @@ export function WishesPreview() {
           <Card>
             <CardContent className="p-8 text-center">
               <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-              <p className="text-muted-foreground">No wishes yet. Be the first to share!</p>
+              <p className="text-muted-foreground">No messages yet. Be the first to share!</p>
             </CardContent>
           </Card>
         ) : (
@@ -126,7 +126,7 @@ export function WishesPreview() {
             <div className="text-center">
               <Link href="/wishes">
                 <Button size="lg" variant="outline" className="group">
-                  View All Wishes
+                  View All Messages
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>

@@ -1,28 +1,32 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Playfair_Display } from "next/font/google"
+import { Merriweather, Public_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" })
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-merriweather",
+})
+const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-public-sans" })
 
 export const metadata: Metadata = {
-  title: "Dr. Oluwayemisi Bosede Ayinde | 60th Birthday & Retirement Celebration",
+  title: "Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE | Retirement Celebration",
   description:
-    "Celebrating 60 Years of Grace & 29 Years of Dedicated Service in Education. Join us in honoring Dr. Oluwayemisi Bosede Ayinde on this momentous occasion.",
-  keywords: ["60th birthday", "retirement celebration", "Dr. Ayinde", "education", "Nigeria"],
+    "In Celebration of 35 Years of Meritorious Service. Honouring Chief (Mrs) Temitope Oluwakemi Ogundare, Principal of Agbado District Comprehensive High School, Senior, Oke Aro.",
+  keywords: ["retirement celebration", "Chief Mrs Ogundare", "FIWAGBOYE", "Agbado DCHS", "education", "Ogun State", "Nigeria"],
   openGraph: {
-    title: "Dr. Oluwayemisi Bosede Ayinde | 60th Birthday & Retirement Celebration",
-    description: "Celebrating 60 Years of Grace & 29 Years of Dedicated Service",
+    title: "Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE | Retirement Celebration",
+    description: "35 Years of Meritorious Service in Education",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dr. Oluwayemisi Bosede Ayinde | 60th Birthday & Retirement Celebration",
-    description: "Celebrating 60 Years of Grace & 29 Years of Dedicated Service",
+    title: "Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE | Retirement Celebration",
+    description: "35 Years of Meritorious Service in Education",
   },
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -31,8 +35,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
-      <body className={`font-sans antialiased`}>
+    <html lang="en" className={`${merriweather.variable} ${publicSans.variable}`}>
+      <body className="font-sans antialiased">
         {children}
         <Analytics />
       </body>

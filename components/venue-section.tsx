@@ -28,16 +28,16 @@ export function VenueSection() {
           <div className="relative aspect-video lg:aspect-square rounded-2xl overflow-hidden shadow-xl">
             <Image
               src="/nigerian-school-building.jpg"
-              alt="Event Venue"
+              alt="Event Venue — Agbado District Comprehensive High School, Oke Aro"
               fill
               className="object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-secondary/80 to-transparent" />
             <div className="absolute bottom-6 left-6 right-6 text-white">
               <h3 className="font-serif text-2xl font-bold mb-2">
-                Nawair-Ud-Deen Grammar School
+                Agbado District Comprehensive High School, Senior
               </h3>
-              <p className="text-white/80">Solu-Ifo, Nigeria</p>
+              <p className="text-white/80">Oke Aro, Nigeria</p>
             </div>
           </div>
 
@@ -59,10 +59,10 @@ export function VenueSection() {
                         Date & Time
                       </h4>
                       <p className="text-muted-foreground">
-                        Friday, January 16, 2026
+                        Saturday, May 30, 2026
                       </p>
                       <p className="text-muted-foreground">
-                        12:00 PM - 4:00 PM
+                        12:00 PM – 5:00 PM
                       </p>
                     </div>
                   </div>
@@ -74,9 +74,9 @@ export function VenueSection() {
                     <div>
                       <h4 className="font-semibold text-foreground">Venue</h4>
                       <p className="text-muted-foreground">
-                        Nawair-Ud-Deen Grammar School Senior
+                        Agbado District Comprehensive High School, Senior
                       </p>
-                      <p className="text-muted-foreground">Solu-Ifo, Nigeria</p>
+                      <p className="text-muted-foreground">Oke Aro, Nigeria</p>
                       <Button
                         variant="link"
                         className="text-primary p-0 h-auto mt-1"
@@ -95,7 +95,7 @@ export function VenueSection() {
                         Dress Code
                       </h4>
                       <p className="text-muted-foreground">
-                        Fuscial Pink & Purple
+                        Formal / Traditional
                       </p>
                     </div>
                   </div>

@@ -125,7 +125,7 @@ export function WishesWall() {
 
         toast({
           title: "Wish Sent! 🎉",
-          description: "Thank you for your beautiful message for Dr. Ayinde!",
+          description: "Thank you for your beautiful message for Chief (Mrs) Ogundare!",
         });
 
         setTimeout(() => setShowConfetti(false), 3000);
@@ -200,11 +200,11 @@ export function WishesWall() {
                 left: `${Math.random() * 100}%`,
                 top: `100%`,
                 backgroundColor: [
-                  "#D4AF37",
-                  "#4B0082",
-                  "#8B4513",
-                  "#FF6B6B",
-                  "#4ECDC4",
+                  "#c73c2f",
+                  "#8b4d2a",
+                  "#d3bca9",
+                  "#3f5f1f",
+                  "#6f310f",
                 ][Math.floor(Math.random() * 5)],
                 animationDelay: `${Math.random() * 0.5}s`,
                 transform: `rotate(${Math.random() * 360}deg)`,
@@ -221,10 +221,10 @@ export function WishesWall() {
             Share Your Love
           </span>
           <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">
-            Digital Wishes Wall
+            Messages Wall
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Leave a heartfelt message for Dr. Ayinde on this special occasion.
+            Leave a heartfelt message for Chief (Mrs) Ogundare on this special occasion.
           </p>
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
         </div>
@@ -237,7 +237,7 @@ export function WishesWall() {
                 <div className="flex items-center gap-2 mb-6">
                   <PartyPopper className="w-6 h-6 text-primary" />
                   <h3 className="font-serif text-xl font-bold">
-                    Leave Your Wishes
+                    Leave Your Message
                   </h3>
                 </div>
 
@@ -319,7 +319,7 @@ export function WishesWall() {
                     ) : (
                       <>
                         <Send className="mr-2 h-4 w-4" />
-                        Send Your Wishes
+                        Send Your Message
                       </>
                     )}
                   </Button>
@@ -335,7 +335,7 @@ export function WishesWall() {
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
-                  placeholder="Search wishes..."
+                  placeholder="Search messages..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10"
@@ -345,7 +345,7 @@ export function WishesWall() {
 
             {/* Total Counter */}
             <p className="text-muted-foreground mb-4">
-              {filteredWishes.length} wishes shared
+              {filteredWishes.length} messages shared
             </p>
 
             {/* Wishes Grid */}
@@ -358,7 +358,7 @@ export function WishesWall() {
                 <CardContent className="p-8 text-center">
                   <MessageSquare className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
                   <p className="text-muted-foreground">
-                    No wishes yet. Be the first to share!
+                    No messages yet. Be the first to share!
                   </p>
                 </CardContent>
               </Card>

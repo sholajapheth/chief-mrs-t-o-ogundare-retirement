@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/navigation"
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
+import { CitationSection } from "@/components/citation-section"
 import { TributesPreview } from "@/components/tributes-preview"
 import { WishesPreview } from "@/components/wishes-preview"
 import { PhotoPreview } from "@/components/photo-preview"
@@ -16,6 +17,7 @@ export default function Home() {
       <HeroSection />
       <StatsCounter />
       <AboutSection />
+      <CitationSection />
       <TributesPreview />
       <WishesPreview />
       <PhotoPreview />

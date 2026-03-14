@@ -4,9 +4,9 @@ import { useEffect, useState, useRef } from "react";
 import { Award, BookOpen, Heart, Users } from "lucide-react";
 
 const staticStats = [
-  { icon: Award, value: 60, label: "Years of Life", suffix: "" },
-  { icon: BookOpen, value: 29, label: "Years of Service", suffix: "" },
-  { icon: Users, value: 5000, label: "Students Impacted", suffix: "+" },
+  { icon: Award, value: 35, label: "Years of Service", suffix: "" },
+  { icon: BookOpen, value: 7, label: "Schools Served", suffix: "" },
+  { icon: Users, value: 1000, label: "Students Impacted", suffix: "+" },
 ];
 
 function AnimatedNumber({ value, suffix }: { value: number; suffix: string }) {
@@ -102,26 +102,27 @@ export function StatsCounter() {
 
   const stats = [
     ...staticStats,
-    { icon: Heart, value: wishesCount, label: "Wishes Received", suffix: "" },
+    { icon: Heart, value: wishesCount, label: "Messages Received", suffix: "" },
   ];
 
   return (
-    <section className="py-16 bg-muted/50 border-y border-border">
+    <section className="bg-linear-to-r from-secondary to-accent py-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
-          <h2 className="font-serif text-2xl md:text-3xl text-foreground font-bold">
-            60 Years of Blessings
-          </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mt-4" />
+        <div className="mb-10 text-center text-white">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">Legacy by the numbers</p>
+          <h2 className="mt-2 font-serif text-3xl font-bold md:text-4xl">A Life of Impact and Service</h2>
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
-                <stat.icon className="w-8 h-8 text-primary" />
+            <div
+              key={index}
+              className="rounded-2xl border border-white/20 bg-white/10 p-6 text-white shadow-xl backdrop-blur-sm"
+            >
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-primary/20">
+                <stat.icon className="h-6 w-6 text-primary" />
               </div>
               <AnimatedNumber value={stat.value} suffix={stat.suffix} />
-              <p className="text-muted-foreground mt-2">{stat.label}</p>
+              <p className="mt-2 text-sm font-medium text-white/80">{stat.label}</p>
             </div>
           ))}
         </div>

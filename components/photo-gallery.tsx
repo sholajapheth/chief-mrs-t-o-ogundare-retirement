@@ -82,49 +82,9 @@ export function PhotoGallery() {
       photo.mimeType?.toLowerCase().includes("jpg");
     const size = isFullSize ? "1920" : "800";
 
-    // #region agent log
-    fetch("http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        location: "photo-gallery.tsx:69",
-        message: "getPhotoUrl called",
-        data: {
-          photoId: photo.id,
-          photoName: photo.name,
-          mimeType: photo.mimeType,
-          isHeic,
-          isJpeg,
-          hasThumbnailLink: !!photo.thumbnailLink,
-          hasWebContentLink: !!photo.webContentLink,
-          isFullSize,
-        },
-        timestamp: Date.now(),
-        sessionId: "debug-session",
-        runId: "post-fix",
-        hypothesisId: "A",
-      }),
-    }).catch(() => {});
-    // #endregion
-
     // Use API route for ALL images (not just HEIC) to ensure proper authentication
     // This fixes the issue where thumbnailLink URLs fail due to authentication requirements
     const url = `/api/photos/${photo.id}?size=${size}`;
-    // #region agent log
-    fetch("http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        location: "photo-gallery.tsx:76",
-        message: "Using API route for image",
-        data: { url, photoId: photo.id },
-        timestamp: Date.now(),
-        sessionId: "debug-session",
-        runId: "post-fix",
-        hypothesisId: "A",
-      }),
-    }).catch(() => {});
-    // #endregion
     return url;
   };
 
@@ -199,7 +159,7 @@ export function PhotoGallery() {
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                 fallbackUrls={getFallbackUrls(photo, false)}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   {/* <p className="text-white text-sm font-medium">{photo.name}</p> */}
                 </div>

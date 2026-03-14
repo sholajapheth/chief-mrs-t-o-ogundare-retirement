@@ -8,9 +8,10 @@ import { cn } from "@/lib/utils"
 
 const navItems = [
   { label: "Home", href: "/#home" },
-  { label: "About Her", href: "/#about" },
+  { label: "About", href: "/#about" },
+  { label: "Citation", href: "/#citation" },
   { label: "Congratulatory Messages", href: "/messages" },
-  { label: "Wishes Wall", href: "/wishes" },
+  { label: "Messages Wall", href: "/wishes" },
   { label: "Gallery", href: "/gallery" },
   { label: "Program", href: "/#program" },
   { label: "Venue", href: "/#venue" },
@@ -44,7 +45,7 @@ export function Navigation() {
               isScrolled ? "text-foreground" : "text-white",
             )}
           >
-            Dr. Yemisi at 60
+            Chief Mrs Ogundare
           </span>
         </Link>
 

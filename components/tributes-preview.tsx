@@ -75,7 +75,7 @@ export function TributesPreview() {
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-primary text-sm font-semibold tracking-widest uppercase">Words of Love</span>
+          <span className="text-primary text-sm font-semibold tracking-widest uppercase">Messages of Honour</span>
           <h2 className="font-serif text-4xl md:text-5xl text-foreground font-bold mt-2 mb-4">
             Congratulatory Messages
           </h2>

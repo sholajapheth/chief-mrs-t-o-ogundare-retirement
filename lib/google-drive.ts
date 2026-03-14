@@ -7,9 +7,27 @@ export interface GoogleDriveFile {
   mimeType: string
 }
 
-// Remove leading slash if present
-const rawFolderId = process.env.NEXT_PUBLIC_GOOGLE_DRIVE_FOLDER_ID || ""
-export const GOOGLE_DRIVE_FOLDER_ID = rawFolderId.startsWith("/") ? rawFolderId.slice(1) : rawFolderId
+function normalizeFolderId(input: string): string {
+  const trimmed = input.trim().replace(/^["']|["']$/g, "")
+  if (!trimmed) return ""
+
+  const folderPathMatch = trimmed.match(/\/folders\/([a-zA-Z0-9_-]+)/)
+  if (folderPathMatch?.[1]) return folderPathMatch[1]
+
+  const idParamMatch = trimmed.match(/[?&]id=([a-zA-Z0-9_-]+)/)
+  if (idParamMatch?.[1]) return idParamMatch[1]
+
+  const tokenMatch = trimmed.match(/[a-zA-Z0-9_-]{20,}/)
+  if (tokenMatch?.[0]) return tokenMatch[0]
+
+  return trimmed
+}
+
+const rawFolderId =
+  process.env.NEXT_PUBLIC_GOOGLE_DRIVE_FOLDER_ID ||
+  process.env.GOOGLE_DRIVE_FOLDER_ID ||
+  ""
+export const GOOGLE_DRIVE_FOLDER_ID = normalizeFolderId(rawFolderId)
 export const GOOGLE_DRIVE_API_KEY = process.env.GOOGLE_DRIVE_API_KEY || ""
 
 export function getGoogleDriveImageUrl(
@@ -86,19 +104,14 @@ export async function listGoogleDrivePhotos(): Promise<GoogleDriveFile[]> {
     }
 
     const data = await response.json()
-    return (data.files || []).map((file: any) => {
-      // #region agent log
-      fetch('http://127.0.0.1:7247/ingest/9c7e7409-d0f2-4206-bdde-4028020ae789',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'google-drive.ts:89',message:'Google Drive file data',data:{id:file.id,name:file.name,mimeType:file.mimeType,hasThumbnailLink:!!file.thumbnailLink,hasWebContentLink:!!file.webContentLink},timestamp:Date.now(),sessionId:'debug-session',runId:'run1',hypothesisId:'A'})}).catch(()=>{});
-      // #endregion
-      return {
+    return (data.files || []).map((file: any) => ({
         id: file.id,
         name: file.name,
         webViewLink: `https://drive.google.com/file/d/${file.id}/view`,
         thumbnailLink: file.thumbnailLink,
         webContentLink: file.webContentLink,
         mimeType: file.mimeType,
-      }
-    })
+      }))
   } catch (error) {
     console.error("[v0] Error fetching Google Drive photos:", error)
     return []

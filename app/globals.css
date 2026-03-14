@@ -4,45 +4,45 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Dr. Ayinde Celebration Theme - Elegant Gold & Cream */
-  --background: #fffef7;
-  --foreground: #2c3e50;
-  --card: #ffffff;
-  --card-foreground: #2c3e50;
-  --popover: #ffffff;
-  --popover-foreground: #2c3e50;
-  --primary: #d4af37;
-  --primary-foreground: #1a1a1a;
-  --secondary: #4b0082;
+  /* Portrait Palette Theme – Terracotta, Cocoa, Beige, Olive */
+  --background: #f4ece3;
+  --foreground: #4a2917;
+  --card: #fffaf4;
+  --card-foreground: #4a2917;
+  --popover: #fffaf4;
+  --popover-foreground: #4a2917;
+  --primary: #c73c2f;
+  --primary-foreground: #ffffff;
+  --secondary: #8b4d2a;
   --secondary-foreground: #ffffff;
-  --muted: #f5f3ee;
-  --muted-foreground: #5d6d7e;
-  --accent: #8b4513;
+  --muted: #d3bca9;
+  --muted-foreground: #7a5a43;
+  --accent: #3f5f1f;
   --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: #e8e4dc;
-  --input: #e8e4dc;
-  --ring: #d4af37;
-  --chart-1: #d4af37;
-  --chart-2: #4b0082;
-  --chart-3: #8b4513;
-  --chart-4: #2c3e50;
-  --chart-5: #5d6d7e;
+  --border: #c6ac95;
+  --input: #c6ac95;
+  --ring: #f23832;
+  --chart-1: #c73c2f;
+  --chart-2: #8b4d2a;
+  --chart-3: #3f5f1f;
+  --chart-4: #bd916b;
+  --chart-5: #6f310f;
   --radius: 0.75rem;
-  --sidebar: #fffef7;
-  --sidebar-foreground: #2c3e50;
-  --sidebar-primary: #d4af37;
-  --sidebar-primary-foreground: #1a1a1a;
-  --sidebar-accent: #f5f3ee;
-  --sidebar-accent-foreground: #2c3e50;
-  --sidebar-border: #e8e4dc;
-  --sidebar-ring: #d4af37;
+  --sidebar: #f4ece3;
+  --sidebar-foreground: #4a2917;
+  --sidebar-primary: #c73c2f;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #d3bca9;
+  --sidebar-accent-foreground: #4a2917;
+  --sidebar-border: #c6ac95;
+  --sidebar-ring: #f23832;
 }
 
 @theme inline {
-  --font-sans: "Inter", "Inter Fallback", system-ui, sans-serif;
-  --font-serif: "Playfair Display", "Georgia", serif;
+  --font-sans: var(--font-public-sans), system-ui, sans-serif;
+  --font-serif: var(--font-merriweather), "Georgia", serif;
   --font-mono: "Geist Mono", "Geist Mono Fallback";
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -128,7 +128,7 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+  background: linear-gradient(90deg, transparent, var(--primary) 20%, transparent);
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
@@ -140,7 +140,7 @@ html {
 
 /* Gold gradient text */
 .text-gold-gradient {
-  background: linear-gradient(135deg, #d4af37 0%, #f4cf47 50%, #d4af37 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, #f4cf47 50%, var(--primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -148,9 +148,9 @@ html {
 
 /* Decorative gold border */
 .gold-border-top {
-  border-top: 3px solid #d4af37;
+  border-top: 3px solid var(--primary);
 }
 
 .gold-border-bottom {
-  border-bottom: 3px solid #d4af37;
+  border-bottom: 3px solid var(--primary);
 }

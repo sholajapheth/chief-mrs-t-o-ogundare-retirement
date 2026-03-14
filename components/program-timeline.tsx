@@ -24,7 +24,7 @@ const programItems = [
   {
     time: "12:30 PM",
     title: "3. Arrival of Celebrant, Family and Friends",
-    description: "Grand entrance of Dr. Ayinde with her family.",
+    description: "Grand entrance of Chief (Mrs) Ogundare with her family.",
     duration: "10 mins",
     icon: MessageSquare,
   },
@@ -95,7 +95,7 @@ const programItems = [
   {
     time: "2:25 PM",
     title: "13. About the Celebrant",
-    description: "Biography and life journey of Dr. Ayinde.",
+    description: "Biography and life journey of Chief (Mrs) Ogundare.",
     duration: "15 mins",
     icon: BookOpen,
   },
@@ -108,7 +108,7 @@ const programItems = [
   },
   {
     time: "2:50 PM",
-    title: "15. Recitation of University of Ibadan Anthem",
+    title: "15. Recitation of Alma Mater Anthem",
     description: "Alma mater anthem performance.",
     duration: "5 mins",
     icon: Music,
@@ -158,7 +158,7 @@ const programItems = [
   {
     time: "4:10 PM",
     title: "22. Celebrant's Response & Vote of Thanks",
-    description: "Words of gratitude from Dr. Ayinde.",
+    description: "Words of gratitude from Chief (Mrs) Ogundare.",
     duration: "10 mins",
     icon: Mic,
   },
@@ -188,7 +188,7 @@ function CountdownTimer() {
   })
 
   useEffect(() => {
-    const eventDate = new Date("2026-01-16T12:00:00")
+    const eventDate = new Date("2026-05-30T12:00:00")
 
     const updateTimer = () => {
       const now = new Date()
@@ -226,11 +226,11 @@ function CountdownTimer() {
 export function ProgramTimeline() {
   const handleAddToCalendar = () => {
     const event = {
-      title: "Dr. Oluwayemisi Bosede Ayinde's 60th Birthday & Retirement Celebration",
-      start: "2026-01-16T12:00:00",
-      end: "2026-01-16T17:30:00",
-      description: "Celebrating 60 Years of Grace & 29 Years of Dedicated Service at Nawair-Ud-Deen Grammar School",
-      location: "NAWAIR-UD-DEEN GRAMMAR SCHOOL SENIOR, SOLU-IFO",
+      title: "Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE — Retirement Celebration",
+      start: "2026-05-30T12:00:00",
+      end: "2026-05-30T17:30:00",
+      description: "In Celebration of 35 Years of Meritorious Service. Agbado District Comprehensive High School, Senior, Oke Aro.",
+      location: "AGBADO DISTRICT COMPREHENSIVE HIGH SCHOOL, SENIOR, OKE ARO",
     }
 
     const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start.replace(/[-:]/g, "")}/${event.end.replace(/[-:]/g, "")}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`
