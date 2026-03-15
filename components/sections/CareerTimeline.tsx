@@ -271,8 +271,8 @@ export default function CareerTimeline() {
         {/* Proverb */}
         <div className="mt-14">
           <ProverbCallout
-            yoruba="Ìgbésí ayé ni iṣẹ́ ẹni, ẹni tó bá ṣiṣẹ́ dáadáa, wọ́n á mọ̀ ọ́n."
-            english="A person is known by their work; one who works well is honoured."
+            yoruba="Bí a kò bá ṣiṣẹ́, a kì í jẹun."
+            english="Without work, one cannot eat."
           />
         </div>
       </div>

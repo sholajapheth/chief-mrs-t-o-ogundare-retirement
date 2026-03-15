@@ -99,7 +99,7 @@ function CheckmarkIcon() {
       viewBox="0 0 16 16"
       fill="none"
       aria-hidden="true"
-      className="mt-0.5 flex-shrink-0"
+      className="mt-0.5 shrink-0"
     >
       <path
         d="M3 8.5L6.5 12L13 4"
@@ -398,8 +398,8 @@ export default function Achievements() {
           transition={{ duration: 0.6 }}
         >
           <ProverbCallout
-            yoruba="Bí igi bá ga tó, àgbàdo rẹ̀ máa ń lẹ wá sí ilẹ̀."
-            english="No matter how tall the tree, its fruits return to the earth."
+            yoruba="Igi kan kì í dá igbó ṣe."
+            english="One tree does not make a forest."
           />
         </motion.div>
       </div>

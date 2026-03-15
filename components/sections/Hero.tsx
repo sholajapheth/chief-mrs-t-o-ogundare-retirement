@@ -164,7 +164,7 @@ export default function Hero() {
             className="rounded-full bg-[var(--color-crimson)] px-8 py-3 font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024] no-underline"
             style={{ fontFamily: "var(--font-display), Georgia, serif" }}
           >
-            Celebrate Her Life
+            Celebrate Her
           </a>
           <a
             href="#wishes"

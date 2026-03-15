@@ -6,29 +6,29 @@ import { ProverbCallout } from "@/components/ui/ProverbCallout";
 
 const educationTimeline = [
   {
-    school: "St. Peter's Anglican Primary School, Oke Bola, Ibadan",
-    years: "1970–1976",
+    school: "New Eden Primary School, Ibadan",
+    years: "Primary 1–3",
     type: "Primary Education",
   },
   {
-    school: "Lagelu Grammar School, Ibadan",
-    years: "1976–1981",
+    school: "UAC School, Eleja • Mrs Kuti Primary School, Isabo",
+    years: "Primary 4 • Primary 5–6",
     type: "Secondary Education",
   },
   {
-    school: "Federal College of Education (Special), Oyo",
-    years: "NCE (Economics & Mathematics)",
-    type: "College of Education",
+    school: "Abeokuta Grammar School, Idi Aba",
+    years: "1981–1986",
+    type: "Secondary School",
   },
   {
-    school: "University of Ado-Ekiti (now EKSU)",
-    years: "B.Ed.",
+    school: "Federal College of Education (FCE), Osiele",
+    years: "1987 • Mathematics & English",
+    type: "Teacher Education",
+  },
+  {
+    school: "University of Ado-Ekiti",
+    years: "B.Ed. in English Language",
     type: "University",
-  },
-  {
-    school: "Tai Solarin University of Education, Ijagun",
-    years: "M.Ed.",
-    type: "Postgraduate",
   },
 ];
 
@@ -169,7 +169,7 @@ export default function BioCitation() {
                   color: "#3B1C08",
                 }}
               >
-                From Ibadan to Oke Aro — A Life Shaped by Purpose
+                A Life of Purpose, Discipline, and Service
               </h2>
 
               {/* Bio paragraphs */}
@@ -183,20 +183,21 @@ export default function BioCitation() {
                 }}
               >
                 <p>
-                  Chief (Mrs) Temitope Oluwakemi Ogundare was born to the family
-                  of Pa Joshua Olusola Akinola and the late Mrs Felicia Mojirade
-                  Akinola (née Abimbola) of Oke Ejigbo, Ejigbo, Osun State. She
-                  hails from a lineage rooted in faith, discipline, and service.
+                  Born the third daughter into the family of Pa Olatunji and
+                  Mrs Grace Olaosebikan (of blessed memory), Chief (Mrs)
+                  Temitope Oluwakemi Ogundare is of the distinguished Egba
+                  lineage of Itoko and Ake. From her earliest years, she
+                  displayed discipline, intelligence, and a strong sense of
+                  responsibility.
                 </p>
                 <p>
-                  Her academic journey began at St. Peter&rsquo;s Anglican
-                  Primary School, Oke Bola, Ibadan (1970–1976), and continued at
-                  Lagelu Grammar School, Ibadan (1976–1981). She then attended
-                  the Federal College of Education (Special), Oyo, where she
-                  obtained her NCE in Economics and Mathematics. Her thirst for
-                  knowledge led her to the University of Ado-Ekiti (now EKSU) for
-                  her B.Ed., and later to Tai Solarin University of Education,
-                  Ijagun, for her M.Ed.
+                  She joined the Ogun State Teaching Service Commission on May
+                  29, 1991, and began shaping young minds with passion and
+                  commitment. Across seven schools — from Adenrele High School
+                  to her final post as Principal of Agbado District
+                  Comprehensive High School, Senior, Oke Aro — she served with
+                  distinction, teaching English and Mathematics while mentoring
+                  colleagues and students.
                 </p>
               </div>
             </motion.div>
@@ -304,8 +305,10 @@ export default function BioCitation() {
                   lineHeight: 1.75,
                 }}
               >
-                A devoted member of the Reconciliation Gospel Ministry, Ifo —
-                leading women and children in faith and community service.
+                A pillar of Reconciliation Gospel Ministry, Ifo, she serves as
+                a Minister and actively leads women and children in Christian
+                faith and practice, mentoring many within and beyond her
+                community.
               </p>
             </motion.div>
 
@@ -327,9 +330,9 @@ export default function BioCitation() {
                   lineHeight: 1.75,
                 }}
               >
-                A devoted wife and mother. Married to Mr Ogundare, together
-                raising a family that reflects the same values of discipline,
-                faith, and service she has championed throughout her career.
+                Proudly married to a man of honour, she and her husband are
+                raising a family founded on the same principles of discipline,
+                faith, and service that have defined her career.
               </p>
             </motion.div>
           </div>
@@ -338,8 +341,8 @@ export default function BioCitation() {
         {/* Proverb */}
         <div className="mt-16">
           <ProverbCallout
-            yoruba="Agbado tó bá pọn tán, kò sọ ara rẹ̀ di ẹyẹ."
-            english="A ripe corn does not call itself a bird; its worth speaks for itself."
+            yoruba="Iṣẹ́ ni òògùn ìṣẹ́."
+            english="Work is the antidote to poverty."
           />
         </div>
       </div>

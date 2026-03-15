@@ -259,7 +259,7 @@ export default function Tributes() {
               color: "#D4A017",
             }}
           >
-            Ọwọ́ tí a fọwọ́ kan
+            Àwọn ọwọ́ tí a ti fọwọ́ kan.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}

@@ -33,7 +33,7 @@ export function Footer() {
         </p>
 
         <ProverbCallout
-          yoruba="Ẹni tó bá sọ ọmọ dára, ó sọ orílẹ̀-èdè dára."
+          yoruba="Ẹni tí ó bá tọ́ ọmọ dáadáa, ó ń tọ́ orílẹ̀-èdè dáadáa."
           english="He who raises children well, raises the nation well."
         />
 
