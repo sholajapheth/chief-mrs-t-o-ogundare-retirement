@@ -2,6 +2,7 @@ import Navbar from "@/components/sections/Navbar"
 import Hero from "@/components/sections/Hero"
 import BioCitation from "@/components/sections/BioCitation"
 import CareerTimeline from "@/components/sections/CareerTimeline"
+import { ProgramTimeline } from "@/components/program-timeline"
 import SchoolsServed from "@/components/sections/SchoolsServed"
 import Achievements from "@/components/sections/Achievements"
 import Tributes from "@/components/sections/Tributes"
@@ -19,6 +20,8 @@ export default function Home() {
       <BioCitation />
       <AdireDivider />
       <CareerTimeline />
+      <AdireDivider />
+      <ProgramTimeline />
       <AdireDivider />
       <SchoolsServed />
       <AdireDivider />

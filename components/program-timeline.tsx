@@ -6,176 +6,228 @@ import { Button } from "@/components/ui/button"
 import { Clock, Users, Mic, Music, Cake, MessageSquare, CalendarPlus, BookOpen } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const programItems = [
+type ProgramItem = {
+  section: "Thanksgiving Service & Pen-down Ceremony" | "Reception"
+  title: string
+  description: string
+  icon: typeof Users
+  time?: string
+  duration?: string
+}
+
+const programItems: ProgramItem[] = [
   {
-    time: "12:00 PM",
-    title: "1. Arrival of Principals",
-    description: "Principals arrive and register.",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "1. Arrival of Guests",
+    description: "Guests arrive and are ushered to their seats.",
     duration: "15 mins",
     icon: Users,
   },
   {
-    time: "12:15 PM",
-    title: "2. Arrival of Guests",
-    description: "Welcome guests and sign the guestbook.",
-    duration: "15 mins",
-    icon: Users,
-  },
-  {
-    time: "12:30 PM",
-    title: "3. Arrival of Celebrant, Family and Friends",
-    description: "Grand entrance of Chief (Mrs) Ogundare with her family.",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "2. Entrance of the Celebrant",
+    description: "Processional entrance of the celebrant.",
     duration: "10 mins",
     icon: MessageSquare,
   },
   {
-    time: "12:40 PM",
-    title: "4. Opening Prayer, Praise & Worship/Hymn",
-    description: "Invocation and blessings for the celebration.",
-    hymn: "To God be the glory, great things He hath done",
-    duration: "10 mins",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "3. Opening Prayer",
+    description: "Opening prayer for the thanksgiving service.",
+    duration: "5 mins",
     icon: BookOpen,
   },
   {
-    time: "12:50 PM",
-    title: "5. Anthems - State and ANCOPSS",
-    description: "National and professional anthems performed.",
-    duration: "5 mins",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "4. Praise, Worship & Hymn",
+    description: "Praise and worship session with hymns.",
+    duration: "10 mins",
     icon: Music,
   },
   {
-    time: "12:55 PM",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "5. Welcome Address - Pen-down Chairman",
+    description: "Welcome remarks by the Pen-down Chairman.",
+    duration: "10 mins",
+    icon: Mic,
+  },
+  {
+    section: "Thanksgiving Service & Pen-down Ceremony",
     title: "6. Introduction of Dignitaries",
     description: "Acknowledgment of distinguished guests.",
     duration: "10 mins",
     icon: Mic,
   },
   {
-    time: "1:05 PM",
-    title: "7. Welcome Speech",
-    description: "Master of Ceremony welcomes all guests.",
-    duration: "10 mins",
-    icon: Mic,
-  },
-  {
-    time: "1:15 PM",
-    title: "8. Chairman of the Day's Speech",
-    description: "Remarks from the event's chairperson.",
-    duration: "15 mins",
-    icon: Mic,
-  },
-  {
-    time: "1:30 PM",
-    title: "9. Other Dignitaries Speech",
-    description: "Remarks from other distinguished guests.",
-    duration: "20 mins",
-    icon: Mic,
-  },
-  {
-    time: "1:50 PM",
-    title: "10. Cultural Dance",
-    description: "Traditional cultural performances.",
-    duration: "15 mins",
-    icon: Music,
-  },
-  {
-    time: "2:05 PM",
-    title: "11. Choreography",
-    description: "Special choreographed performance.",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "7. School Choir Ministration",
+    description: "Special ministration by the school choir.",
     duration: "10 mins",
     icon: Music,
   },
   {
-    time: "2:15 PM",
-    title: "12. Short Exhortation",
-    description: "Inspirational message for the celebrant.",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "8. Tribute Session",
+    description:
+      "Tributes from colleagues, students' representatives, family, in-laws, church, and community.",
+    duration: "15 mins",
+    icon: Mic,
+  },
+  {
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "9. Message",
+    description: "Special message to the congregation and celebrant.",
     duration: "10 mins",
     icon: BookOpen,
   },
   {
-    time: "2:25 PM",
-    title: "13. About the Celebrant",
-    description: "Biography and life journey of Chief (Mrs) Ogundare.",
-    duration: "15 mins",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "10. Prayer for the Celebrant",
+    description: "Special prayer for the celebrant and family.",
+    duration: "8 mins",
     icon: BookOpen,
   },
   {
-    time: "2:40 PM",
-    title: "14. Citation of the Celebrant",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "11. Citation of Honour",
     description: "Formal recognition of achievements and service.",
     duration: "10 mins",
     icon: Mic,
   },
   {
-    time: "2:50 PM",
-    title: "15. Recitation of Alma Mater Anthem",
-    description: "Alma mater anthem performance.",
-    duration: "5 mins",
-    icon: Music,
-  },
-  {
-    time: "2:55 PM",
-    title: "16. Teacher's Presentation",
-    description: "Presentation by teaching colleagues.",
-    duration: "15 mins",
-    icon: Mic,
-  },
-  {
-    time: "3:10 PM",
-    title: "17. Prayer Session for the Retiree & Family",
-    description: "Special prayers for the celebrant and family.",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "12. Pen-down Ceremony & Handing Over",
+    description: "Symbolic pen-down and handing-over proceedings.",
     duration: "10 mins",
-    icon: BookOpen,
+    icon: MessageSquare,
   },
   {
-    time: "3:20 PM",
-    title: "18. Pen Down",
-    description: "Symbolic retirement moment.",
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "13. Welcome to the Senior Citizens' Club",
+    description: "Formal welcome into the Senior Citizens' Club.",
+    duration: "8 mins",
+    icon: Users,
+  },
+  {
+    section: "Thanksgiving Service & Pen-down Ceremony",
+    title: "14. Pull-Out",
+    description: "Processional pull-out from the thanksgiving segment.",
     duration: "5 mins",
     icon: MessageSquare,
   },
   {
-    time: "3:25 PM",
-    title: "19. Cutting of Cake & Photography",
-    description: "Cake cutting ceremony and photo sessions.",
-    duration: "20 mins",
-    icon: Cake,
-  },
-  {
-    time: "3:45 PM",
-    title: "20. Presentation of Gifts",
-    description: "Presentation of gifts to the celebrant.",
-    duration: "15 mins",
-    icon: MessageSquare,
-  },
-  {
-    time: "4:00 PM",
-    title: "21. Welcome to the Senior Citizen's Club",
-    description: "Special welcome and induction.",
+    section: "Reception",
+    title: "1. Grand Entrance of the Celebrant",
+    description: "Reception entrance of the celebrant.",
     duration: "10 mins",
     icon: Users,
   },
   {
-    time: "4:10 PM",
-    title: "22. Celebrant's Response & Vote of Thanks",
-    description: "Words of gratitude from Chief (Mrs) Ogundare.",
-    duration: "10 mins",
+    section: "Reception",
+    title: "2. Anthems - State, School & ANCOPSS",
+    description: "Anthem renditions for state, school, and ANCOPSS.",
+    duration: "8 mins",
+    icon: Music,
+  },
+  {
+    section: "Reception",
+    title: "3. Chairman's Welcome Address",
+    description: "Welcome remarks by the Chairman.",
+    duration: "8 mins",
     icon: Mic,
   },
   {
-    time: "4:20 PM",
-    title: "23. Closing Prayer & Hymn",
-    description: "Final blessings and prayers.",
-    hymn: "Guide me, O my great Redeemer",
-    duration: "5 mins",
+    section: "Reception",
+    title: "4. Cultural Dance Presentation",
+    description: "Cultural dance presentation.",
+    duration: "10 mins",
+    icon: Music,
+  },
+  {
+    section: "Reception",
+    title: "5. Through the Eyes of Friends",
+    description: "Stories and memories about the celebrant.",
+    duration: "10 mins",
+    icon: MessageSquare,
+  },
+  {
+    section: "Reception",
+    title: "6. This Is Your Life",
+    description:
+      "Highlights of the celebrant's journey and achievements, including Ewi presentation.",
+    duration: "10 mins",
     icon: BookOpen,
   },
   {
-    time: "4:25 PM",
-    title: "24. Dance! Dance!! Dance!!!",
-    description: "Music, dancing, and celebration.",
-    duration: "1+ hour",
+    section: "Reception",
+    title: "7. Students' Presentation",
+    description: "Presentation by students.",
+    duration: "8 mins",
+    icon: Users,
+  },
+  {
+    section: "Reception",
+    title: "8. Teachers' Presentation",
+    description: "Presentation by teachers and staff.",
+    duration: "8 mins",
+    icon: Users,
+  },
+  {
+    section: "Reception",
+    title: "9. Light Moments with the Celebrant",
+    description:
+      "Humorous imitation of the celebrant's memorable style and habits.",
+    duration: "8 mins",
+    icon: MessageSquare,
+  },
+  {
+    section: "Reception",
+    title: "10. Celebrant's Dance",
+    description: "Special dance moment with the celebrant.",
+    duration: "8 mins",
     icon: Music,
+  },
+  {
+    section: "Reception",
+    title: "11. Cutting of the Cake",
+    description: "Cake cutting ceremony.",
+    duration: "10 mins",
+    icon: Cake,
+  },
+  {
+    section: "Reception",
+    title: "12. Presentation of Gifts",
+    description: "Presentation of gifts to the celebrant.",
+    duration: "12 mins",
+    icon: MessageSquare,
+  },
+  {
+    section: "Reception",
+    title: "13. Order of Photographs",
+    description: "Official photograph sessions.",
+    duration: "10 mins",
+    icon: MessageSquare,
+  },
+  {
+    section: "Reception",
+    title: "14. Toast to the Celebrant",
+    description: "Formal toast in honour of the celebrant.",
+    duration: "6 mins",
+    icon: Mic,
+  },
+  {
+    section: "Reception",
+    title: "15. Celebrant's Response / Vote of Thanks",
+    description: "Response and appreciation by the celebrant.",
+    duration: "8 mins",
+    icon: Mic,
+  },
+  {
+    section: "Reception",
+    title: "16. Closing Prayer",
+    description: "Final closing prayer.",
+    duration: "5 mins",
+    icon: BookOpen,
   },
 ]
 
@@ -271,40 +323,48 @@ export function ProgramTimeline() {
         {/* Timeline */}
         <div className="max-w-3xl mx-auto">
           {programItems.map((item, index) => (
-            <div
-              key={index}
-              className={cn(
-                "relative flex gap-6 pb-8",
-                index !== programItems.length - 1 && "border-l-2 border-primary/30 ml-6",
+            <div key={index}>
+              {(index === 0 || item.section !== programItems[index - 1]?.section) && (
+                <div className="mb-4 mt-8 first:mt-0">
+                  <h3 className="font-serif text-2xl font-bold text-foreground">{item.section}</h3>
+                </div>
               )}
-            >
-              {/* Timeline Dot */}
-              <div className="absolute left-0 -translate-x-1/2 w-12 h-12 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
-                <item.icon className="w-5 h-5 text-primary" />
-              </div>
+              <div
+                className={cn(
+                  "relative flex gap-6 pb-8",
+                  index !== programItems.length - 1 && "border-l-2 border-primary/30 ml-6",
+                )}
+              >
+                {/* Timeline Dot */}
+                <div className="absolute left-0 -translate-x-1/2 w-12 h-12 rounded-full bg-primary/10 border-2 border-primary flex items-center justify-center">
+                  <item.icon className="w-5 h-5 text-primary" />
+                </div>
 
-              {/* Content */}
-              <Card className="ml-12 flex-1 hover:shadow-md transition-shadow">
-                <CardContent className="p-4 md:p-6">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-primary" />
-                      <span className="font-semibold text-primary">{item.time}</span>
-                    </div>
-                    <span className="text-xs bg-muted text-muted-foreground px-3 py-1 rounded-full">
-                      {item.duration}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-lg font-bold text-foreground mb-1">{item.title}</h3>
-                  <p className="text-muted-foreground text-sm">{item.description}</p>
-                  {(item as any).hymn && (
-                    <p className="text-primary text-sm font-medium mt-2 flex items-center gap-2">
-                      <Music className="w-4 h-4" />
-                      {(item as any).hymn}
-                    </p>
-                  )}
-                </CardContent>
-              </Card>
+                {/* Content */}
+                <Card className="ml-12 flex-1 hover:shadow-md transition-shadow">
+                  <CardContent className="p-4 md:p-6">
+                    {(item.time || item.duration) && (
+                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-2">
+                        {item.time ? (
+                          <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-primary" />
+                            <span className="font-semibold text-primary">{item.time}</span>
+                          </div>
+                        ) : (
+                          <div />
+                        )}
+                        {item.duration ? (
+                          <span className="text-xs bg-muted text-muted-foreground px-3 py-1 rounded-full">
+                            {item.duration}
+                          </span>
+                        ) : null}
+                      </div>
+                    )}
+                    <h3 className="font-serif text-lg font-bold text-foreground mb-1">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm">{item.description}</p>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           ))}
         </div>
