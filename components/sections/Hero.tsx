@@ -171,7 +171,7 @@ export default function Hero() {
             className="rounded-full border border-[var(--color-crimson)] px-8 py-3 font-medium text-[var(--color-linen)] transition-colors hover:bg-[var(--color-crimson)]/10 no-underline"
             style={{ fontFamily: "var(--font-display), Georgia, serif" }}
           >
-            Sign the Register
+            Fọwọ́ sí ìforúkọsílẹ̀ · Sign the Register
           </a>
         </motion.div>
 

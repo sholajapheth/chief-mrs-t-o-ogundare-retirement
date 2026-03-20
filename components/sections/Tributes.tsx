@@ -259,7 +259,7 @@ export default function Tributes() {
               color: "#D4A017",
             }}
           >
-            Àwọn ọwọ́ tí a ti fọwọ́ kan.
+            Àwọn ọwọ́ tí a fọwọ́ kàn
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -272,7 +272,7 @@ export default function Tributes() {
               color: "#EDD9BE",
             }}
           >
-            Hands That Were Touched
+            Hands that were touched
           </motion.p>
         </div>
 

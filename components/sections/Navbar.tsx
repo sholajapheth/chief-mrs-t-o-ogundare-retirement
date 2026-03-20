@@ -71,10 +71,12 @@ export default function Navbar() {
           ))}
           <a
             href="/#wishes"
+            title="Sign the Register"
+            aria-label="Fọwọ́ sí ìforúkọsílẹ̀. Sign the Register."
             className="rounded-full bg-[var(--color-crimson)] px-5 py-1.5 text-sm font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024] no-underline"
             style={{ fontFamily: "var(--font-display), Georgia, serif" }}
           >
-            Sign the Register
+            Fọwọ́ sí ìforúkọsílẹ̀
           </a>
         </div>
 
@@ -132,10 +134,12 @@ export default function Navbar() {
               <a
                 href="/#wishes"
                 onClick={() => setMenuOpen(false)}
+                title="Sign the Register"
+                aria-label="Fọwọ́ sí ìforúkọsílẹ̀. Sign the Register."
                 className="mt-2 rounded-full bg-[var(--color-crimson)] px-5 py-2.5 text-center text-sm font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024] no-underline"
                 style={{ fontFamily: "var(--font-display), Georgia, serif" }}
               >
-                Sign the Register
+                Fọwọ́ sí ìforúkọsílẹ̀
               </a>
             </div>
           </motion.div>

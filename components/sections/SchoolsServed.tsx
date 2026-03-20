@@ -82,7 +82,7 @@ export default function SchoolsServed() {
             color: "#D4A017",
           }}
         >
-          Àwọn Ilé-Ẹ̀kọ́ Rẹ̀
+          Àwọn ibi iṣẹ́ rẹ̀
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 10 }}
@@ -95,7 +95,7 @@ export default function SchoolsServed() {
             color: "#3B1C08",
           }}
         >
-          Her Classrooms
+          Her workplaces
         </motion.p>
       </div>
 
@@ -122,7 +122,7 @@ export default function SchoolsServed() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="
-                  relative flex-shrink-0 overflow-hidden rounded-lg
+                  relative shrink-0 overflow-hidden rounded-lg
                   w-full md:w-[320px] md:snap-start
                 "
                 style={{ backgroundColor: cardBg }}

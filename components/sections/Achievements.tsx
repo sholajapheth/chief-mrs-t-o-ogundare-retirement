@@ -116,7 +116,7 @@ function CheckmarkIcon() {
 
 const CATEGORIES = [
   {
-    yorubaTitle: "Ilé & Àyíká",
+    yorubaTitle: "Amáyédẹrùn àti Ààbò.",
     englishTitle: "Infrastructure & Safety",
     icon: <BuildingIcon />,
     tint: "rgba(192, 57, 43, 0.08)",
@@ -129,7 +129,7 @@ const CATEGORIES = [
     ],
   },
   {
-    yorubaTitle: "Ẹ̀kọ́ & Ìdàgbàsókè",
+    yorubaTitle: "Ẹ̀kọ́ àti Ìṣe àfikún ẹ̀kọ́",
     englishTitle: "Academic & Co-curricular",
     icon: <BookIcon />,
     tint: "rgba(45, 74, 30, 0.08)",
@@ -155,7 +155,7 @@ const CATEGORIES = [
     ],
   },
   {
-    yorubaTitle: "Àjọpín Àwùjọ",
+    yorubaTitle: "Àwùjọ àti Àwọn akẹ́kọ̀ọ́ tẹ́lẹ̀",
     englishTitle: "Community & Alumni",
     icon: <HandshakeIcon />,
     tint: "rgba(160, 82, 45, 0.08)",
@@ -171,8 +171,8 @@ const CATEGORIES = [
 
 const AWARDS = [
   {
-    name: "Road Safety Commission Essay Award",
-    detail: "3rd Place, State Level",
+    name: "Road Safety Commission Essay Competition",
+    detail: "Written in secondary school (Form 4, 1984); 3rd place, state level",
     year: "1984",
     featured: false,
   },
@@ -180,6 +180,18 @@ const AWARDS = [
     name: "Exemplary Leadership Award",
     detail: "Adiyan Alausa Area CDC",
     year: "2024",
+    featured: false,
+  },
+  {
+    name: "ANCOPSS, Ifo — Financial Secretary",
+    detail: "Service since 2024",
+    year: "2024",
+    featured: false,
+  },
+  {
+    name: "ANCOPSS, Ifo — General Secretary",
+    detail: "2025 to date",
+    year: "2025",
     featured: false,
   },
   {
@@ -213,7 +225,7 @@ export default function Achievements() {
               color: "#D4A017",
             }}
           >
-            Àṣeyọrí Rẹ̀
+            Àwọn àṣeyọrí rẹ̀
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -226,7 +238,7 @@ export default function Achievements() {
               color: "#3B1C08",
             }}
           >
-            Her Victories
+            Her successes
           </motion.p>
         </div>
 

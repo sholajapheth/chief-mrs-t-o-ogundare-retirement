@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useCallback } from "react"
-import { motion } from "framer-motion"
-import { Heart, Loader2, ArrowRight } from "lucide-react"
-import Link from "next/link"
+import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
+import { Heart, Loader2, ArrowRight } from "lucide-react";
+import Link from "next/link";
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from "@/components/ui/select"
-import { Toaster } from "@/components/ui/toaster"
-import { useToast } from "@/hooks/use-toast"
+} from "@/components/ui/select";
+import { Toaster } from "@/components/ui/toaster";
+import { useToast } from "@/hooks/use-toast";
 
 interface Wish {
-  id: string
-  name: string
-  relationship: string
-  message: string
-  location?: string
-  timestamp: string
-  hearts: number
+  id: string;
+  name: string;
+  relationship: string;
+  message: string;
+  location?: string;
+  timestamp: string;
+  hearts: number;
 }
 
 interface WishesProps {
-  preview?: boolean
+  preview?: boolean;
 }
 
 const RELATIONSHIP_OPTIONS = [
@@ -36,44 +36,44 @@ const RELATIONSHIP_OPTIONS = [
   "Church Member",
   "Community Member",
   "Other",
-]
+];
 
-const MAX_MESSAGE_LENGTH = 999
-const PREVIEW_LIMIT = 10
+const MAX_MESSAGE_LENGTH = 999;
+const PREVIEW_LIMIT = 10;
 
 export default function Wishes({ preview = false }: WishesProps) {
-  const { toast } = useToast()
-  const [wishes, setWishes] = useState<Wish[]>([])
-  const [name, setName] = useState("")
-  const [relationship, setRelationship] = useState("")
-  const [message, setMessage] = useState("")
-  const [submitting, setSubmitting] = useState(false)
+  const { toast } = useToast();
+  const [wishes, setWishes] = useState<Wish[]>([]);
+  const [name, setName] = useState("");
+  const [relationship, setRelationship] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
   const fetchWishes = useCallback(async () => {
     try {
-      const res = await fetch("/api/wishes")
+      const res = await fetch("/api/wishes");
       if (res.ok) {
-        const data: Wish[] = await res.json()
-        setWishes(data)
+        const data: Wish[] = await res.json();
+        setWishes(data);
       }
     } catch {
       /* silently fail on initial load */
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    fetchWishes()
-  }, [fetchWishes])
+    fetchWishes();
+  }, [fetchWishes]);
 
   async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
+    e.preventDefault();
 
     if (!name.trim() || !relationship || !message.trim()) {
-      toast({ title: "Please fill in all fields", variant: "destructive" })
-      return
+      toast({ title: "Please fill in all fields", variant: "destructive" });
+      return;
     }
 
-    setSubmitting(true)
+    setSubmitting(true);
     try {
       const res = await fetch("/api/wishes", {
         method: "POST",
@@ -84,39 +84,46 @@ export default function Wishes({ preview = false }: WishesProps) {
           message: message.trim(),
           location: undefined,
         }),
-      })
+      });
 
-      if (!res.ok) throw new Error("Failed to submit")
+      if (!res.ok) throw new Error("Failed to submit");
 
-      const newWish: Wish = await res.json()
-      setWishes((prev) => [newWish, ...prev])
-      setName("")
-      setRelationship("")
-      setMessage("")
-      toast({ title: "Your wish has been recorded!" })
+      const newWish: Wish = await res.json();
+      setWishes((prev) => [newWish, ...prev]);
+      setName("");
+      setRelationship("");
+      setMessage("");
+      toast({ title: "Your wish has been recorded!" });
     } catch {
-      toast({ title: "Something went wrong. Please try again.", variant: "destructive" })
+      toast({
+        title: "Something went wrong. Please try again.",
+        variant: "destructive",
+      });
     } finally {
-      setSubmitting(false)
+      setSubmitting(false);
     }
   }
 
   async function handleHeart(wishId: string) {
     setWishes((prev) =>
-      prev.map((w) => (w.id === wishId ? { ...w, hearts: w.hearts + 1 } : w))
-    )
+      prev.map((w) => (w.id === wishId ? { ...w, hearts: w.hearts + 1 } : w)),
+    );
 
     try {
-      const res = await fetch(`/api/wishes/${wishId}/heart`, { method: "POST" })
+      const res = await fetch(`/api/wishes/${wishId}/heart`, {
+        method: "POST",
+      });
       if (!res.ok) {
         setWishes((prev) =>
-          prev.map((w) => (w.id === wishId ? { ...w, hearts: w.hearts - 1 } : w))
-        )
+          prev.map((w) =>
+            w.id === wishId ? { ...w, hearts: w.hearts - 1 } : w,
+          ),
+        );
       }
     } catch {
       setWishes((prev) =>
-        prev.map((w) => (w.id === wishId ? { ...w, hearts: w.hearts - 1 } : w))
-      )
+        prev.map((w) => (w.id === wishId ? { ...w, hearts: w.hearts - 1 } : w)),
+      );
     }
   }
 
@@ -125,11 +132,15 @@ export default function Wishes({ preview = false }: WishesProps) {
       day: "numeric",
       month: "short",
       year: "numeric",
-    })
+    });
   }
 
   return (
-    <section id="wishes" className="py-20 px-4" style={{ backgroundColor: "#FAF6EF" }}>
+    <section
+      id="wishes"
+      className="py-20 px-4"
+      style={{ backgroundColor: "#FAF6EF" }}
+    >
       {/* Section heading */}
       <div className="text-center mb-12">
         <h2
@@ -142,7 +153,7 @@ export default function Wishes({ preview = false }: WishesProps) {
           className="text-lg"
           style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
         >
-          Ẹ Fọwọ́ sí Ìwé Àkọsílẹ̀ — Sign the Register
+          Fọwọ́ sí ìforúkọsílẹ̀ — Sign the Register
         </p>
       </div>
 
@@ -180,7 +191,10 @@ export default function Wishes({ preview = false }: WishesProps) {
             className="block mb-1 text-sm"
             style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
           >
-            Orúkọ Rẹ <span className="text-xs" style={{ color: "#C19A6B" }}>(Your Name)</span>
+            Orúkọ Rẹ{" "}
+            <span className="text-xs" style={{ color: "#C19A6B" }}>
+              (Your Name)
+            </span>
           </label>
           <input
             id="wish-name"
@@ -208,7 +222,10 @@ export default function Wishes({ preview = false }: WishesProps) {
             className="block mb-1 text-sm"
             style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
           >
-            Bí O Ṣe Mọ Rẹ̀ <span className="text-xs" style={{ color: "#C19A6B" }}>(How You Know Her)</span>
+            Bí o ṣe mọ̀ ọ́{" "}
+            <span className="text-xs" style={{ color: "#C19A6B" }}>
+              (How you know her)
+            </span>
           </label>
           <Select value={relationship} onValueChange={setRelationship}>
             <SelectTrigger
@@ -249,7 +266,10 @@ export default function Wishes({ preview = false }: WishesProps) {
             className="block mb-1 text-sm"
             style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
           >
-            Ọ̀rọ̀ Rẹ <span className="text-xs" style={{ color: "#C19A6B" }}>(Your Message)</span>
+            Ifiranṣẹ́ rẹ{" "}
+            <span className="text-xs" style={{ color: "#C19A6B" }}>
+              (Your Message)
+            </span>
           </label>
           <textarea
             id="wish-message"
@@ -286,13 +306,13 @@ export default function Wishes({ preview = false }: WishesProps) {
           }}
           onMouseEnter={(e) => {
             if (!submitting) {
-              e.currentTarget.style.backgroundColor = "#D4A017"
-              e.currentTarget.style.color = "#3B1C08"
+              e.currentTarget.style.backgroundColor = "#D4A017";
+              e.currentTarget.style.color = "#3B1C08";
             }
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "#C0392B"
-            e.currentTarget.style.color = "#EDD9BE"
+            e.currentTarget.style.backgroundColor = "#C0392B";
+            e.currentTarget.style.color = "#EDD9BE";
           }}
         >
           {submitting ? (
@@ -310,76 +330,87 @@ export default function Wishes({ preview = false }: WishesProps) {
       {wishes.length > 0 && (
         <div className="mt-16 max-w-4xl mx-auto">
           <div className="columns-1 md:columns-2 gap-6 space-y-6">
-            {(preview ? wishes.slice(0, PREVIEW_LIMIT) : wishes).map((wish, i) => (
-              <motion.div
-                key={wish.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.4, delay: i % 4 * 0.1 }}
-                className="break-inside-avoid rounded-md p-4"
-                style={{
-                  backgroundColor: "#EDD9BE",
-                  boxShadow: "0 2px 8px rgba(160, 82, 45, 0.2)",
-                }}
-              >
-                <p
-                  className="mb-1"
+            {(preview ? wishes.slice(0, PREVIEW_LIMIT) : wishes).map(
+              (wish, i) => (
+                <motion.div
+                  key={wish.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: (i % 4) * 0.1 }}
+                  className="break-inside-avoid rounded-md p-4"
                   style={{
-                    fontFamily: "var(--font-display)",
-                    fontWeight: 700,
-                    color: "#3B1C08",
-                    fontSize: "1rem",
+                    backgroundColor: "#EDD9BE",
+                    boxShadow: "0 2px 8px rgba(160, 82, 45, 0.2)",
                   }}
                 >
-                  {wish.name}
-                </p>
-                <p
-                  className="text-xs mb-2"
-                  style={{ fontFamily: "var(--font-accent)", color: "#5C5040" }}
-                >
-                  {wish.relationship}
-                </p>
-                <p
-                  className="mb-3"
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontStyle: "italic",
-                    color: "#5C5040",
-                    fontSize: "0.9rem",
-                    lineHeight: 1.6,
-                  }}
-                >
-                  {wish.message}
-                </p>
-                <div className="flex items-center justify-between">
-                  <button
-                    type="button"
-                    onClick={() => handleHeart(wish.id)}
-                    className="flex items-center gap-1 transition-colors hover:opacity-80"
-                    aria-label={`Heart this wish (${wish.hearts})`}
+                  <p
+                    className="mb-1"
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fontWeight: 700,
+                      color: "#3B1C08",
+                      fontSize: "1rem",
+                    }}
                   >
-                    <Heart
-                      className="size-4"
-                      style={{ color: "#C0392B" }}
-                      fill="#C0392B"
-                    />
+                    {wish.name}
+                  </p>
+                  <p
+                    className="text-xs mb-2"
+                    style={{
+                      fontFamily: "var(--font-accent)",
+                      color: "#5C5040",
+                    }}
+                  >
+                    {wish.relationship}
+                  </p>
+                  <p
+                    className="mb-3"
+                    style={{
+                      fontFamily: "var(--font-body)",
+                      fontStyle: "italic",
+                      color: "#5C5040",
+                      fontSize: "0.9rem",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {wish.message}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={() => handleHeart(wish.id)}
+                      className="flex items-center gap-1 transition-colors hover:opacity-80"
+                      aria-label={`Heart this wish (${wish.hearts})`}
+                    >
+                      <Heart
+                        className="size-4"
+                        style={{ color: "#C0392B" }}
+                        fill="#C0392B"
+                      />
+                      <span
+                        className="text-xs"
+                        style={{
+                          fontFamily: "var(--font-accent)",
+                          color: "#C0392B",
+                        }}
+                      >
+                        {wish.hearts}
+                      </span>
+                    </button>
                     <span
                       className="text-xs"
-                      style={{ fontFamily: "var(--font-accent)", color: "#C0392B" }}
+                      style={{
+                        fontFamily: "var(--font-accent)",
+                        color: "#D4A017",
+                      }}
                     >
-                      {wish.hearts}
+                      {formatDate(wish.timestamp)}
                     </span>
-                  </button>
-                  <span
-                    className="text-xs"
-                    style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
-                  >
-                    {formatDate(wish.timestamp)}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
+                  </div>
+                </motion.div>
+              ),
+            )}
           </div>
 
           {preview && wishes.length > PREVIEW_LIMIT && (
@@ -403,5 +434,5 @@ export default function Wishes({ preview = false }: WishesProps) {
 
       <Toaster />
     </section>
-  )
+  );
 }
