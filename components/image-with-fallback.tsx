@@ -1,14 +1,18 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState, useCallback, useMemo } from "react"
 import { ImageOff } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { buildDriveImageFallbackUrls } from "@/lib/drive-image-fallbacks"
 
 interface ImageWithFallbackProps {
   src: string
   alt: string
   className?: string
   fallbackUrls?: string[]
+  /** When set, appends Drive thumbnail / lh3 / uc fallbacks after `fallbackUrls`. */
+  drivePhotoId?: string
+  driveSize?: string
   onError?: () => void
 }
 
@@ -17,26 +21,32 @@ export function ImageWithFallback({
   alt,
   className,
   fallbackUrls = [],
+  drivePhotoId,
+  driveSize = "800",
   onError,
 }: ImageWithFallbackProps) {
+  const effectiveFallbacks = useMemo(() => {
+    const list = [...fallbackUrls]
+    if (drivePhotoId) {
+      list.push(...buildDriveImageFallbackUrls(drivePhotoId, driveSize))
+    }
+    return list
+  }, [fallbackUrls, drivePhotoId, driveSize])
+
   const [currentSrc, setCurrentSrc] = useState(src)
   const [errorCount, setErrorCount] = useState(0)
   const [hasError, setHasError] = useState(false)
 
   const handleError = useCallback(() => {
-    if (errorCount < fallbackUrls.length) {
-      // Try next fallback URL
-      const nextUrl = fallbackUrls[errorCount]
+    if (errorCount < effectiveFallbacks.length) {
+      const nextUrl = effectiveFallbacks[errorCount]
       setCurrentSrc(nextUrl)
       setErrorCount((prev) => prev + 1)
     } else {
-      // All fallbacks exhausted, show placeholder
       setHasError(true)
-      if (onError) {
-        onError()
-      }
+      onError?.()
     }
-  }, [errorCount, fallbackUrls, onError, currentSrc, alt])
+  }, [errorCount, effectiveFallbacks, onError])
 
   if (hasError) {
     return (

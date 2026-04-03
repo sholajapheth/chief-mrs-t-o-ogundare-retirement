@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { X, ChevronLeft, ChevronRight, ZoomIn, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { ImageWithFallback } from "@/components/image-with-fallback";
+import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
+import { DriveNextImage } from "@/components/drive-next-image";
+import { VirtualizedPhotoGrid } from "@/components/virtualized-photo-grid";
 
 interface GoogleDrivePhoto {
   id: string;
@@ -15,18 +15,17 @@ interface GoogleDrivePhoto {
   mimeType: string;
 }
 
-const categories = [
-  { id: "all", label: "All Photos" },
-  { id: "childhood", label: "Early Years" },
-  { id: "career", label: "Career Journey" },
-  { id: "family", label: "Family Moments" },
-  { id: "recent", label: "Recent Photos" },
-];
+const VIRTUAL_THRESHOLD = 50;
+
+function PhotoSkeleton() {
+  return (
+    <div className="aspect-square w-full animate-pulse rounded-xl bg-muted" />
+  );
+}
 
 export function PhotoGallery() {
   const [photos, setPhotos] = useState<GoogleDrivePhoto[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentPhotoIndex, setCurrentPhotoIndex] = useState(0);
 
@@ -38,7 +37,7 @@ export function PhotoGallery() {
         const data = await response.json();
         setPhotos(data);
       } catch (error) {
-        console.error("[v0] Error loading photos:", error);
+        console.error("[photo-gallery] Error loading photos:", error);
       } finally {
         setLoading(false);
       }
@@ -70,49 +69,9 @@ export function PhotoGallery() {
     }
   };
 
-  const getPhotoUrl = (
-    photo: GoogleDrivePhoto,
-    isFullSize: boolean = false
-  ): string => {
-    const isHeic =
-      photo.mimeType?.toLowerCase().includes("heic") ||
-      photo.mimeType?.toLowerCase().includes("heif");
-    const isJpeg =
-      photo.mimeType?.toLowerCase().includes("jpeg") ||
-      photo.mimeType?.toLowerCase().includes("jpg");
-    const size = isFullSize ? "1920" : "800";
-
-    // Use API route for ALL images (not just HEIC) to ensure proper authentication
-    // This fixes the issue where thumbnailLink URLs fail due to authentication requirements
-    const url = `/api/photos/${photo.id}?size=${size}`;
-    return url;
-  };
-
-  const getFallbackUrls = (
-    photo: GoogleDrivePhoto,
-    isFullSize: boolean = false
-  ): string[] => {
-    const size = isFullSize ? "1920" : "800";
-    const fallbacks: string[] = [];
-
-    // Try Google Drive thumbnail API
-    fallbacks.push(
-      `https://drive.google.com/thumbnail?id=${photo.id}&sz=w${size}-h${size}`
-    );
-
-    // Try direct view URL
-    fallbacks.push(`https://drive.google.com/uc?export=view&id=${photo.id}`);
-
-    // Try alternative view URL
-    fallbacks.push(`https://drive.google.com/uc?id=${photo.id}`);
-
-    return fallbacks;
-  };
-
   return (
     <section id="gallery" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <span className="text-primary text-sm font-semibold tracking-widest uppercase">
             Memories
@@ -121,59 +80,59 @@ export function PhotoGallery() {
             Photo Gallery
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            A visual journey through 60 years of life, love, and legacy.
+            A visual journey through 35 years of service, love, and legacy.
           </p>
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
         </div>
 
-        {/* Category Tabs */}
-        {/* <div className="flex flex-wrap justify-center gap-2 mb-10">
-          {categories.map((category) => (
-            <Button
-              key={category.id}
-              variant={activeCategory === category.id ? "default" : "outline"}
-              size="sm"
-              onClick={() => setActiveCategory(category.id)}
-              className={cn(
-                "rounded-full px-6",
-                activeCategory === category.id &&
-                  "bg-primary text-primary-foreground"
-              )}
-            >
-              {category.label}
-            </Button>
-          ))}
-        </div> */}
-
-        {/* Photo Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {filteredPhotos.map((photo, index) => (
-            <div
-              key={photo.id}
-              className="group relative aspect-square rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all"
-              onClick={() => openLightbox(index)}
-            >
-              <ImageWithFallback
-                src={getPhotoUrl(photo, false)}
-                alt={photo.name}
-                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                fallbackUrls={getFallbackUrls(photo, false)}
-              />
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity">
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  {/* <p className="text-white text-sm font-medium">{photo.name}</p> */}
+        {loading ? (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {Array.from({ length: 12 }).map((_, i) => (
+              <PhotoSkeleton key={i} />
+            ))}
+          </div>
+        ) : photos.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground">
+              No photos found. Please check your Google Drive folder.
+            </p>
+          </div>
+        ) : filteredPhotos.length > VIRTUAL_THRESHOLD ? (
+          <VirtualizedPhotoGrid
+            photos={filteredPhotos}
+            onPhotoClick={openLightbox}
+          />
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {filteredPhotos.map((photo, index) => (
+              <button
+                key={photo.id}
+                type="button"
+                className="group relative aspect-square cursor-pointer overflow-hidden rounded-xl text-left shadow-md transition-all hover:shadow-xl"
+                onClick={() => openLightbox(index)}
+              >
+                <DriveNextImage
+                  photoId={photo.id}
+                  alt={photo.name}
+                  size="800"
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  priority={index < 4}
+                  loading={index < 4 ? "eager" : "lazy"}
+                  className="transition-transform duration-300 group-hover:scale-110"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100">
+                  <div className="absolute top-4 right-4">
+                    <ZoomIn className="w-6 h-6 text-white" />
+                  </div>
                 </div>
-                <div className="absolute top-4 right-4">
-                  <ZoomIn className="w-6 h-6 text-white" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              </button>
+            ))}
+          </div>
+        )}
 
-        {/* Lightbox */}
-        {lightboxOpen && (
-          <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center">
+        {lightboxOpen && filteredPhotos[currentPhotoIndex] && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/95">
             <Button
               variant="ghost"
               size="icon"
@@ -201,22 +160,20 @@ export function PhotoGallery() {
               <ChevronRight className="w-8 h-8" />
             </Button>
 
-            <div className="max-w-4xl max-h-[80vh] mx-4">
-              <div className="relative w-full">
-                <ImageWithFallback
-                  src={getPhotoUrl(filteredPhotos[currentPhotoIndex], true)}
+            <div className="max-w-4xl max-h-[80vh] mx-4 w-full">
+              <div className="relative mx-auto h-[min(70vh,900px)] w-full">
+                <DriveNextImage
+                  photoId={filteredPhotos[currentPhotoIndex].id}
                   alt={filteredPhotos[currentPhotoIndex].name}
-                  className="max-w-full max-h-[70vh] mx-auto rounded-lg"
-                  fallbackUrls={getFallbackUrls(
-                    filteredPhotos[currentPhotoIndex],
-                    true
-                  )}
+                  size="1920"
+                  fill
+                  sizes="100vw"
+                  objectFit="contain"
+                  className="rounded-lg"
+                  priority
                 />
               </div>
               <div className="text-center mt-4">
-                {/* <p className="text-white font-medium">
-                  {filteredPhotos[currentPhotoIndex].name}
-                </p> */}
                 <p className="text-white/60 text-sm mt-1">
                   {currentPhotoIndex + 1} of {filteredPhotos.length}
                 </p>
@@ -224,18 +181,6 @@ export function PhotoGallery() {
             </div>
           </div>
         )}
-
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <Loader2 className="w-8 h-8 text-primary animate-spin" />
-          </div>
-        ) : photos.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-muted-foreground">
-              No photos found. Please check your Google Drive folder.
-            </p>
-          </div>
-        ) : null}
       </div>
     </section>
   );

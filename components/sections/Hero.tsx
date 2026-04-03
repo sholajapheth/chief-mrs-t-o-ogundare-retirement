@@ -12,8 +12,8 @@ const NAME_LINES = ["Temitope", "Oluwakemi", "Ogundare"] as const;
 const STATS: { end: number; suffix?: string; label: string }[] = [
   { end: 35, label: "Years" },
   { end: 7, label: "Schools" },
-  { end: 1000, suffix: "+", label: "Students" },
-  { end: 1, label: "Legacy" },
+  // { end: 1000, suffix: "+", label: "Students" },
+  // { end: 1, label: "Legacy" },
 ];
 
 export default function Hero() {

@@ -158,7 +158,10 @@ function TributeCard({ tribute, index }: { tribute: Tribute; index: number }) {
       </p>
 
       {/* Attribution */}
-      <div className="mt-4 border-t pt-3" style={{ borderColor: "rgba(59, 28, 8, 0.12)" }}>
+      <div
+        className="mt-4 border-t pt-3"
+        style={{ borderColor: "rgba(59, 28, 8, 0.12)" }}
+      >
         <p
           className="font-bold"
           style={{
@@ -277,7 +280,7 @@ export default function Tributes() {
         </div>
 
         {/* Tribute cards — masonry via CSS columns */}
-        <style>{`
+        {/* <style>{`
           .tributes-masonry { columns: 1; column-gap: 1.5rem; }
           @media (min-width: 640px) {
             .tributes-masonry { columns: 2; }
@@ -290,7 +293,7 @@ export default function Tributes() {
           {TRIBUTES.map((tribute, i) => (
             <TributeCard key={i} tribute={tribute} index={i} />
           ))}
-        </div>
+        </div> */}
 
         {/* Alumni Contributions */}
         <div className="mt-20">

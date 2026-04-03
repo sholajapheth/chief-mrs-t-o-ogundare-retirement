@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { ImageWithFallback } from "@/components/image-with-fallback";
+import { DriveNextImage } from "@/components/drive-next-image";
 
 interface Photo {
   id: string;
@@ -21,11 +21,13 @@ interface GalleryProps {
 
 const PREVIEW_LIMIT = 20;
 
-function buildFallbackUrls(photoId: string): string[] {
-  return [
-    `https://drive.google.com/thumbnail?id=${photoId}&sz=w800-h800`,
-    `https://drive.google.com/uc?export=view&id=${photoId}`,
-  ];
+function PhotoSkeleton() {
+  return (
+    <div
+      className="mb-4 w-full animate-pulse rounded-lg bg-[#5C5040]/40"
+      style={{ aspectRatio: "4/3", breakInside: "avoid" as const }}
+    />
+  );
 }
 
 export default function Gallery({ preview = false }: GalleryProps) {
@@ -83,7 +85,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
       style={{ backgroundColor: "#3B1C08" }}
     >
       <div className="mx-auto max-w-6xl">
-        {/* Heading */}
         <div className="text-center mb-6">
           <motion.h2
             initial={{ opacity: 0, y: 16 }}
@@ -113,7 +114,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
           </motion.p>
         </div>
 
-        {/* Intro */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -128,18 +128,17 @@ export default function Gallery({ preview = false }: GalleryProps) {
           35 years leave a trail of photographs — each one a chapter.
         </motion.p>
 
-        {/* Loading */}
         {loading && (
-          <div className="flex justify-center py-20">
-            <Loader2
-              className="animate-spin"
-              size={40}
-              style={{ color: "#D4A017" }}
-            />
+          <div className="gallery-masonry-skel columns-1 gap-4 sm:columns-2 lg:columns-3">
+            <style>{`
+              .gallery-masonry-skel { column-gap: 1rem; }
+            `}</style>
+            {Array.from({ length: 9 }).map((_, i) => (
+              <PhotoSkeleton key={i} />
+            ))}
           </div>
         )}
 
-        {/* Empty */}
         {!loading && photos.length === 0 && (
           <p
             className="text-center py-20 text-lg"
@@ -152,7 +151,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
           </p>
         )}
 
-        {/* Masonry grid */}
         {!loading && photos.length > 0 && (
           <>
             <style>{`
@@ -189,11 +187,16 @@ export default function Gallery({ preview = false }: GalleryProps) {
                   }}
                   onClick={() => openLightbox(index)}
                 >
-                  <div className="overflow-hidden">
-                    <ImageWithFallback
-                      src={`/api/photos/${photo.id}?size=800`}
+                  <div className="relative w-full overflow-hidden">
+                    <DriveNextImage
+                      photoId={photo.id}
                       alt={photo.name}
-                      fallbackUrls={buildFallbackUrls(photo.id)}
+                      size="800"
+                      width={800}
+                      height={600}
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      priority={index < 4}
+                      loading={index < 4 ? "eager" : "lazy"}
                       className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                   </div>
@@ -221,7 +224,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
         )}
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightboxIndex !== null && photos[lightboxIndex] && (
           <motion.div
@@ -233,7 +235,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
             style={{ backgroundColor: "rgba(59, 28, 8, 0.95)" }}
             onClick={closeLightbox}
           >
-            {/* Close */}
             <button
               onClick={closeLightbox}
               className="absolute top-4 right-4 p-2 rounded-full transition-opacity hover:opacity-70"
@@ -242,7 +243,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
               <X size={28} style={{ color: "#EDD9BE" }} />
             </button>
 
-            {/* Previous */}
             {photos.length > 1 && (
               <button
                 onClick={(e) => {
@@ -256,7 +256,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
               </button>
             )}
 
-            {/* Next */}
             {photos.length > 1 && (
               <button
                 onClick={(e) => {
@@ -270,7 +269,6 @@ export default function Gallery({ preview = false }: GalleryProps) {
               </button>
             )}
 
-            {/* Image */}
             <motion.div
               key={lightboxIndex}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -280,15 +278,20 @@ export default function Gallery({ preview = false }: GalleryProps) {
               className="max-w-4xl w-full px-12 sm:px-16"
               onClick={(e) => e.stopPropagation()}
             >
-              <ImageWithFallback
-                src={`/api/photos/${photos[lightboxIndex].id}?size=1920`}
-                alt={photos[lightboxIndex].name}
-                fallbackUrls={buildFallbackUrls(photos[lightboxIndex].id)}
-                className="w-full max-h-[80vh] object-contain rounded-lg mx-auto block"
-              />
+              <div className="relative mx-auto h-[min(80vh,900px)] w-full">
+                <DriveNextImage
+                  photoId={photos[lightboxIndex].id}
+                  alt={photos[lightboxIndex].name}
+                  size="1920"
+                  fill
+                  sizes="100vw"
+                  objectFit="contain"
+                  className="rounded-lg"
+                  priority
+                />
+              </div>
             </motion.div>
 
-            {/* Counter */}
             <p
               className="mt-4 text-lg"
               style={{

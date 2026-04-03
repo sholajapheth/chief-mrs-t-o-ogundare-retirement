@@ -15,7 +15,7 @@ const timelineData = [
     year: "Primary & Secondary",
     title: "Educational Foundation",
     description:
-      "New Eden Primary School, Ibadan (Primary 1–3) • UAC School, Eleja (Primary 4) • Mrs Kuti Primary School, Isabo (Primary 5–6) • Abeokuta Grammar School, Idi Aba (1981–1986).",
+      "New Eden Primary School, Ibadan (Primary 1–3). UAC School, Eleja (Primary 4). Mrs Kuti Primary School, Isabo (Primary 5–6). Abeokuta Grammar School, Idi Aba (1981–1986).",
     icon: GraduationCap,
   },
   {

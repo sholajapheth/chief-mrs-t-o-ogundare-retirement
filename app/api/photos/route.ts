@@ -1,11 +1,19 @@
+import { NextResponse } from "next/server"
 import { listGoogleDrivePhotos } from "@/lib/google-drive"
 
 export async function GET() {
   try {
     const photos = await listGoogleDrivePhotos()
-    return Response.json(photos)
+    return NextResponse.json(photos, {
+      headers: {
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600",
+      },
+    })
   } catch (error) {
-    console.error("[v0] Error fetching photos:", error)
-    return Response.json({ error: "Failed to fetch photos" }, { status: 500 })
+    console.error("[api/photos] Error fetching photos:", error)
+    return NextResponse.json(
+      { error: "Failed to fetch photos" },
+      { status: 500 }
+    )
   }
 }

@@ -11,9 +11,14 @@ const educationTimeline = [
     type: "Primary Education",
   },
   {
-    school: "UAC School, Eleja • Mrs Kuti Primary School, Isabo",
-    years: "Primary 4 • Primary 5–6",
-    type: "Secondary Education",
+    school: "UAC School, Eleja",
+    years: "Primary 4",
+    type: "Primary Education",
+  },
+  {
+    school: "Mrs Kuti Primary School, Isabo",
+    years: "Primary 5–6",
+    type: "Primary Education",
   },
   {
     school: "Abeokuta Grammar School, Idi Aba",

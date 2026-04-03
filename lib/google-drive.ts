@@ -5,6 +5,30 @@ export interface GoogleDriveFile {
   thumbnailLink?: string
   webContentLink?: string
   mimeType: string
+  size?: string
+}
+
+const MIME_TYPES = [
+  "image/jpeg",
+  "image/jpg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "image/heic",
+  "image/heif",
+  "image/bmp",
+  "image/tiff",
+  "image/svg+xml",
+  "image/avif",
+  "image/x-raw",
+  "image/cr2",
+  "image/dng",
+] as const
+
+function buildMimeQuery(): string {
+  const explicit = MIME_TYPES.map((m) => `mimeType='${m}'`).join(" or ")
+  // Catch-all for other vendor / future image types Google may return
+  return `(${explicit} or mimeType contains 'image')`
 }
 
 function normalizeFolderId(input: string): string {
@@ -31,43 +55,36 @@ export const GOOGLE_DRIVE_FOLDER_ID = normalizeFolderId(rawFolderId)
 export const GOOGLE_DRIVE_API_KEY = process.env.GOOGLE_DRIVE_API_KEY || ""
 
 export function getGoogleDriveImageUrl(
-  fileId: string, 
+  fileId: string,
   mimeType?: string,
-  thumbnailLink?: string, 
+  thumbnailLink?: string,
   webContentLink?: string,
   isFullSize: boolean = false
 ): string {
-  const isHeic = mimeType?.includes('heic') || mimeType?.includes('heif')
-  
-  // For HEIC files, always use thumbnailLink (Google Drive converts them automatically)
+  const isHeic = mimeType?.includes("heic") || mimeType?.includes("heif")
+
   if (isHeic && thumbnailLink) {
     if (isFullSize) {
-      // For full-size HEIC, use larger thumbnail (max 1920px)
       return thumbnailLink.replace(/=s\d+/, "=s1920")
     }
-    // For thumbnails, use 800px
     return thumbnailLink.replace(/=s\d+/, "=s800")
   }
-  
-  // Prefer thumbnailLink for thumbnails (faster, smaller)
+
   if (thumbnailLink) {
     if (isFullSize) {
-      return thumbnailLink.replace(/=s\d+/, "=s1920") // Larger size for full view
+      return thumbnailLink.replace(/=s\d+/, "=s1920")
     }
-    return thumbnailLink.replace(/=s\d+/, "=s800") // Resize to 800px for better quality
+    return thumbnailLink.replace(/=s\d+/, "=s800")
   }
-  
-  // Use webContentLink if available (direct download link)
+
   if (webContentLink && !isHeic) {
     return webContentLink
   }
-  
-  // For HEIC files without thumbnailLink, use Google Drive's viewer (converts to viewable format)
+
   if (isHeic) {
     return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1920-h1080`
   }
-  
-  // Fallback to direct access URL for publicly shared files
+
   return `https://drive.google.com/uc?export=view&id=${fileId}`
 }
 
@@ -82,38 +99,56 @@ export async function listGoogleDrivePhotos(): Promise<GoogleDriveFile[]> {
     return []
   }
 
+  const folderId = GOOGLE_DRIVE_FOLDER_ID
+  const mimeQuery = buildMimeQuery()
+  const q = `'${folderId}' in parents and trashed=false and ${mimeQuery}`
+
+  const allFiles: GoogleDriveFile[] = []
+  let pageToken: string | undefined
+
   try {
-    const folderId = GOOGLE_DRIVE_FOLDER_ID
-    const url = new URL("https://www.googleapis.com/drive/v3/files")
+    do {
+      const params = new URLSearchParams({
+        q,
+        fields:
+          "nextPageToken,files(id,name,mimeType,createdTime,thumbnailLink,webContentLink,size)",
+        orderBy: "createdTime desc",
+        pageSize: "1000",
+        supportsAllDrives: "true",
+        includeItemsFromAllDrives: "true",
+        key: GOOGLE_DRIVE_API_KEY,
+      })
+      if (pageToken) {
+        params.set("pageToken", pageToken)
+      }
 
-    // Query includes all image types including HEIC/HEIF, JPG/JPEG
-    url.searchParams.append("q", `'${folderId}' in parents and trashed=false and (mimeType contains 'image' or mimeType='image/heic' or mimeType='image/heif' or mimeType='image/jpeg' or mimeType='image/jpg')`)
-    url.searchParams.append("fields", "files(id,name,mimeType,createdTime,thumbnailLink,webContentLink)")
-    url.searchParams.append("pageSize", "100")
-    url.searchParams.append("orderBy", "createdTime desc")
-    url.searchParams.append("key", GOOGLE_DRIVE_API_KEY)
-    url.searchParams.append("supportsAllDrives", "true")
-    url.searchParams.append("includeItemsFromAllDrives", "true")
+      const response = await fetch(
+        `https://www.googleapis.com/drive/v3/files?${params.toString()}`
+      )
 
-    const response = await fetch(url.toString())
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        console.error("[google-drive] Google Drive API error:", errorData.error)
+        return allFiles.length ? allFiles : []
+      }
 
-    if (!response.ok) {
-      const errorData = await response.json()
-      console.error("[v0] Google Drive API error:", errorData.error)
-      return []
-    }
-
-    const data = await response.json()
-    return (data.files || []).map((file: any) => ({
-        id: file.id,
-        name: file.name,
+      const data = await response.json()
+      const files = (data.files || []).map((file: Record<string, unknown>) => ({
+        id: file.id as string,
+        name: file.name as string,
         webViewLink: `https://drive.google.com/file/d/${file.id}/view`,
-        thumbnailLink: file.thumbnailLink,
-        webContentLink: file.webContentLink,
-        mimeType: file.mimeType,
+        thumbnailLink: file.thumbnailLink as string | undefined,
+        webContentLink: file.webContentLink as string | undefined,
+        mimeType: file.mimeType as string,
+        size: file.size as string | undefined,
       }))
+      allFiles.push(...files)
+      pageToken = data.nextPageToken as string | undefined
+    } while (pageToken)
+
+    return allFiles
   } catch (error) {
-    console.error("[v0] Error fetching Google Drive photos:", error)
+    console.error("[google-drive] Error fetching Google Drive photos:", error)
     return []
   }
 }
