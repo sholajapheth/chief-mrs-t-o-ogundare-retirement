@@ -116,8 +116,7 @@ function CheckmarkIcon() {
 
 const CATEGORIES = [
   {
-    yorubaTitle: "Amáyédẹrùn àti Ààbò.",
-    englishTitle: "Infrastructure & Safety",
+    title: "Infrastructure & Safety",
     icon: <BuildingIcon />,
     tint: "rgba(192, 57, 43, 0.08)",
     items: [
@@ -129,8 +128,7 @@ const CATEGORIES = [
     ],
   },
   {
-    yorubaTitle: "Ẹ̀kọ́ àti Ìṣe àfikún ẹ̀kọ́",
-    englishTitle: "Academic & Co-curricular",
+    title: "Academic & Co-curricular",
     icon: <BookIcon />,
     tint: "rgba(45, 74, 30, 0.08)",
     items: [
@@ -142,8 +140,7 @@ const CATEGORIES = [
     ],
   },
   {
-    yorubaTitle: "Ìṣàkóso",
-    englishTitle: "Administration",
+    title: "Administration",
     icon: <ScrollIcon />,
     tint: "rgba(212, 160, 23, 0.08)",
     items: [
@@ -155,8 +152,7 @@ const CATEGORIES = [
     ],
   },
   {
-    yorubaTitle: "Àwùjọ àti Àwọn akẹ́kọ̀ọ́ tẹ́lẹ̀",
-    englishTitle: "Community & Alumni",
+    title: "Community & Alumni",
     icon: <HandshakeIcon />,
     tint: "rgba(160, 82, 45, 0.08)",
     items: [
@@ -225,7 +221,7 @@ export default function Achievements() {
               color: "#D4A017",
             }}
           >
-            Àwọn àṣeyọrí rẹ̀
+            Her achievements
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -257,26 +253,15 @@ export default function Achievements() {
               {/* Category header */}
               <div className="flex items-center gap-3 mb-5">
                 {cat.icon}
-                <div>
-                  <h3
-                    className="text-base font-semibold leading-tight"
-                    style={{
-                      fontFamily: "var(--font-display), Georgia, serif",
-                      color: "#3B1C08",
-                    }}
-                  >
-                    {cat.yorubaTitle}
-                  </h3>
-                  <p
-                    className="text-sm"
-                    style={{
-                      fontFamily: "var(--font-body), Georgia, serif",
-                      color: "#5C5040",
-                    }}
-                  >
-                    {cat.englishTitle}
-                  </p>
-                </div>
+                <h3
+                  className="text-base font-semibold leading-tight"
+                  style={{
+                    fontFamily: "var(--font-display), Georgia, serif",
+                    color: "#3B1C08",
+                  }}
+                >
+                  {cat.title}
+                </h3>
               </div>
 
               {/* Items */}
@@ -325,7 +310,7 @@ export default function Achievements() {
               color: "#D4A017",
             }}
           >
-            Àwọn Àmì Ọlá
+            Honours and awards
           </motion.h3>
           <p
             className="text-center text-sm mb-8"
@@ -409,10 +394,7 @@ export default function Achievements() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <ProverbCallout
-            yoruba="Igi kan kì í dá igbó ṣe."
-            english="One tree does not make a forest."
-          />
+          <ProverbCallout quote="One tree does not make a forest." />
         </motion.div>
       </div>
     </section>

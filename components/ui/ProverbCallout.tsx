@@ -1,12 +1,10 @@
 interface ProverbCalloutProps {
-  yoruba: string;
-  english: string;
+  quote: string;
   className?: string;
 }
 
 export function ProverbCallout({
-  yoruba,
-  english,
+  quote,
   className = "",
 }: ProverbCalloutProps) {
   return (
@@ -19,22 +17,13 @@ export function ProverbCallout({
         aria-hidden="true"
       />
       <p
-        className="text-2xl italic leading-relaxed mb-3"
+        className="text-2xl italic leading-relaxed"
         style={{
           fontFamily: "var(--font-accent), cursive",
           color: "#D4A017",
         }}
       >
-        &ldquo;{yoruba}&rdquo;
-      </p>
-      <p
-        className="text-base italic"
-        style={{
-          fontFamily: "var(--font-body), Georgia, serif",
-          color: "#5C5040",
-        }}
-      >
-        — {english}
+        &ldquo;{quote}&rdquo;
       </p>
       <div
         className="mt-6"

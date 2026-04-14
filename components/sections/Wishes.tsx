@@ -138,7 +138,7 @@ export default function Wishes({ preview = false }: WishesProps) {
   return (
     <section
       id="wishes"
-      className="py-20 px-4"
+      className="scroll-mt-24 py-20 px-4"
       style={{ backgroundColor: "#FAF6EF" }}
     >
       {/* Section heading */}
@@ -147,13 +147,13 @@ export default function Wishes({ preview = false }: WishesProps) {
           className="text-display mb-2"
           style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
         >
-          Fi Ìfẹ́ Rẹ Sílẹ̀
+          Leave your message
         </h2>
         <p
           className="text-lg"
           style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
         >
-          Fọwọ́ sí ìforúkọsílẹ̀ — Sign the Register
+          Sign the register
         </p>
       </div>
 
@@ -175,7 +175,7 @@ export default function Wishes({ preview = false }: WishesProps) {
             fontSize: "1.25rem",
           }}
         >
-          Ìwé Àkọsílẹ̀ Alábàápàdé
+          Guest register
         </h3>
         <p
           className="text-center mb-8"
@@ -191,10 +191,7 @@ export default function Wishes({ preview = false }: WishesProps) {
             className="block mb-1 text-sm"
             style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
           >
-            Orúkọ Rẹ{" "}
-            <span className="text-xs" style={{ color: "#C19A6B" }}>
-              (Your Name)
-            </span>
+            Your name
           </label>
           <input
             id="wish-name"
@@ -222,10 +219,7 @@ export default function Wishes({ preview = false }: WishesProps) {
             className="block mb-1 text-sm"
             style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
           >
-            Bí o ṣe mọ̀ ọ́{" "}
-            <span className="text-xs" style={{ color: "#C19A6B" }}>
-              (How you know her)
-            </span>
+            How you know her
           </label>
           <Select value={relationship} onValueChange={setRelationship}>
             <SelectTrigger
@@ -266,10 +260,7 @@ export default function Wishes({ preview = false }: WishesProps) {
             className="block mb-1 text-sm"
             style={{ fontFamily: "var(--font-accent)", color: "#D4A017" }}
           >
-            Ifiranṣẹ́ rẹ{" "}
-            <span className="text-xs" style={{ color: "#C19A6B" }}>
-              (Your Message)
-            </span>
+            Your message
           </label>
           <textarea
             id="wish-message"
@@ -321,7 +312,7 @@ export default function Wishes({ preview = false }: WishesProps) {
               Sending...
             </>
           ) : (
-            "Fi Orúkọ Mi Sílẹ̀"
+            "Sign the register"
           )}
         </button>
       </form>

@@ -52,7 +52,7 @@ export function ImageWithFallback({
     return (
       <div
         className={cn(
-          "flex items-center justify-center bg-muted text-muted-foreground",
+          "flex items-center justify-center bg-[#3B1C08] text-[#C19A6B]",
           className
         )}
       >

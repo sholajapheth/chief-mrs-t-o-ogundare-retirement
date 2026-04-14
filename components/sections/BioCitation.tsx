@@ -72,7 +72,7 @@ export default function BioCitation() {
               color: "#D4A017",
             }}
           >
-            Àkọsílẹ̀ Ìgbésí Ayé
+            Life story
           </h2>
           <p
             className="mt-1 text-sm tracking-wide"
@@ -345,10 +345,7 @@ export default function BioCitation() {
 
         {/* Proverb */}
         <div className="mt-16">
-          <ProverbCallout
-            yoruba="Iṣẹ́ ni òògùn ìṣẹ́."
-            english="Work is the antidote to poverty."
-          />
+          <ProverbCallout quote="Work is the antidote to poverty." />
         </div>
       </div>
     </section>

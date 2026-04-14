@@ -1,7 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { ProverbCallout } from "@/components/ui/ProverbCallout";
+
+function useMediaQueryMdUp() {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setMatches(mq.matches);
+    const onChange = () => setMatches(mq.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+  return matches;
+}
 
 interface School {
   number: number;
@@ -25,7 +38,7 @@ const schools: School[] = [
     name: "Ajuwon High School, Senior",
     role: "Teacher",
     years: "2002–2006",
-    tagline: "A Decade of Growth",
+    tagline: "Half a Decade of Growth",
   },
   {
     number: 3,
@@ -68,19 +81,24 @@ const schools: School[] = [
 function SchoolCard({
   school,
   index,
+  isMdUp,
 }: {
   school: School;
   index: number;
+  isMdUp: boolean;
 }) {
   const isLeft = index % 2 === 0;
+  /* Horizontal x animation overflows narrow viewports; keep it for md+ only. */
+  const slideX = isMdUp ? (isLeft ? -48 : 48) : 0;
+  const slideY = isMdUp ? 0 : 12;
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: isLeft ? -48 : 48 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, x: slideX, y: slideY }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.08 }}
-      className={`relative flex w-full items-start gap-6 md:w-[calc(50%-2rem)] ${
+      className={`relative flex min-w-0 w-full max-w-full items-start gap-6 md:w-[calc(50%-2rem)] ${
         isLeft ? "md:self-start" : "md:self-end"
       }`}
     >
@@ -96,11 +114,11 @@ function SchoolCard({
       >
         {/* Watermark number */}
         <span
-          className="pointer-events-none absolute -top-2 left-3 select-none"
+          className="pointer-events-none absolute -top-2 left-0 select-none sm:left-3"
           style={{
             fontFamily: "var(--font-display)",
             fontWeight: 900,
-            fontSize: school.isCrown ? "5rem" : "4rem",
+            fontSize: school.isCrown ? "clamp(3rem, 18vw, 5rem)" : "clamp(2.75rem, 16vw, 4rem)",
             color: "rgba(212, 160, 23, 0.15)",
             lineHeight: 1,
           }}
@@ -112,7 +130,7 @@ function SchoolCard({
         <div className="relative z-10">
           {/* School name */}
           <h3
-            className="text-lg font-medium md:text-xl"
+            className="wrap-break-word text-lg font-medium md:text-xl"
             style={{
               fontFamily: "var(--font-display)",
               color: "#EDD9BE",
@@ -163,9 +181,15 @@ function SchoolCard({
 }
 
 export default function CareerTimeline() {
+  const isMdUp = useMediaQueryMdUp();
+
   return (
-    <section id="timeline" className="py-20 md:py-28" style={{ backgroundColor: "#3B1C08" }}>
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section
+      id="timeline"
+      className="overflow-x-hidden py-20 md:py-28"
+      style={{ backgroundColor: "#3B1C08" }}
+    >
+      <div className="mx-auto min-w-0 max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section heading */}
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -181,7 +205,7 @@ export default function CareerTimeline() {
               color: "#D4A017",
             }}
           >
-            Ìtàn Iṣẹ́ Rẹ̀
+            Her career
           </h2>
           <p
             className="mt-1 text-sm italic"
@@ -203,7 +227,7 @@ export default function CareerTimeline() {
           className="mb-12 text-center"
         >
           <p
-            className="text-lg"
+            className="mx-auto max-w-full wrap-break-word px-1 text-base sm:text-lg"
             style={{
               fontFamily: "var(--font-accent)",
               color: "#D4A017",
@@ -223,7 +247,7 @@ export default function CareerTimeline() {
         </motion.div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div className="relative min-w-0 max-w-full">
           {/* Vertical center line (desktop) */}
           <div
             className="absolute left-4 top-0 hidden h-full md:left-1/2 md:block"
@@ -246,9 +270,14 @@ export default function CareerTimeline() {
           />
 
           {/* School cards */}
-          <div className="flex flex-col gap-8 pl-10 md:flex-wrap md:items-stretch md:gap-10 md:pl-0">
+          <div className="flex min-w-0 max-w-full flex-col gap-8 pl-10 md:flex-wrap md:items-stretch md:gap-10 md:pl-0">
             {schools.map((school, i) => (
-              <SchoolCard key={school.number} school={school} index={i} />
+              <SchoolCard
+                key={school.number}
+                school={school}
+                index={i}
+                isMdUp={isMdUp}
+              />
             ))}
           </div>
         </div>
@@ -259,7 +288,7 @@ export default function CareerTimeline() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-16 text-center text-lg font-medium md:text-xl"
+          className="mt-16 max-w-full wrap-break-word px-2 text-center text-lg font-medium md:text-xl"
           style={{
             fontFamily: "var(--font-display)",
             color: "#D4A017",
@@ -270,10 +299,7 @@ export default function CareerTimeline() {
 
         {/* Proverb */}
         <div className="mt-14">
-          <ProverbCallout
-            yoruba="Láì ṣiṣẹ́, a kì í jẹun."
-            english="Without work, one cannot eat."
-          />
+          <ProverbCallout quote="Without work, one cannot eat." />
         </div>
       </div>
     </section>

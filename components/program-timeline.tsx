@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Clock, Users, Mic, Music, Cake, MessageSquare, CalendarPlus, BookOpen } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { googleCalendarDateRangeParam } from "@/lib/event"
 
 type ProgramItem = {
   section: "Thanksgiving Service & Pen-down Ceremony" | "Reception"
@@ -231,61 +231,15 @@ const programItems: ProgramItem[] = [
   },
 ]
 
-function CountdownTimer() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
-  })
-
-  useEffect(() => {
-    const eventDate = new Date("2026-05-30T12:00:00")
-
-    const updateTimer = () => {
-      const now = new Date()
-      const diff = eventDate.getTime() - now.getTime()
-
-      if (diff > 0) {
-        setTimeLeft({
-          days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((diff % (1000 * 60)) / 1000),
-        })
-      }
-    }
-
-    updateTimer()
-    const interval = setInterval(updateTimer, 1000)
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <div className="flex justify-center gap-4 md:gap-6">
-      {Object.entries(timeLeft).map(([unit, value]) => (
-        <div key={unit} className="text-center">
-          <div className="bg-secondary text-secondary-foreground w-16 h-16 md:w-20 md:h-20 rounded-xl flex items-center justify-center shadow-lg">
-            <span className="font-serif text-2xl md:text-3xl font-bold">{value}</span>
-          </div>
-          <span className="text-muted-foreground text-sm mt-2 block capitalize">{unit}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
-
 export function ProgramTimeline() {
   const handleAddToCalendar = () => {
     const event = {
       title: "Chief (Mrs) Temitope Oluwakemi Ogundare, FIWAGBOYE — Retirement Celebration",
-      start: "2026-05-30T12:00:00",
-      end: "2026-05-30T17:30:00",
       description: "In Celebration of 35 Years of Meritorious Service. Agbado District Comprehensive High School, Senior, Oke Aro.",
       location: "AGBADO DISTRICT COMPREHENSIVE HIGH SCHOOL, SENIOR, OKE ARO",
     }
 
-    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.start.replace(/[-:]/g, "")}/${event.end.replace(/[-:]/g, "")}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`
+    const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${googleCalendarDateRangeParam()}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`
 
     window.open(googleCalendarUrl, "_blank")
   }
@@ -301,12 +255,6 @@ export function ProgramTimeline() {
             Join us for a day filled with celebration, gratitude, and thanksgiving.
           </p>
           <div className="w-24 h-1 bg-primary mx-auto mt-6" />
-        </div>
-
-        {/* Countdown Timer */}
-        <div className="mb-16">
-          <p className="text-center text-muted-foreground mb-4">Countdown to the Celebration</p>
-          <CountdownTimer />
         </div>
 
         {/* Add to Calendar */}

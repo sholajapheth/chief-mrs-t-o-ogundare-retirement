@@ -82,7 +82,7 @@ export default function SchoolsServed() {
             color: "#D4A017",
           }}
         >
-          Àwọn ibi iṣẹ́ rẹ̀
+          Places she served
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 10 }}

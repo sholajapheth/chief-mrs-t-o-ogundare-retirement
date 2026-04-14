@@ -39,7 +39,6 @@ export default function Hero() {
 
       {/* Main content */}
       <div className="relative z-10 flex flex-1 flex-col items-center justify-center px-4 py-16 text-center">
-        {/* Yoruba motto */}
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,7 +46,7 @@ export default function Hero() {
           className="mb-6 text-sm tracking-[0.2em] text-[var(--color-gold)] sm:text-base"
           style={{ fontFamily: "var(--font-accent), cursive" }}
         >
-          Ìmọ̀ ní Ipò Ọlá &bull; 1991 &ndash; 2026
+          Knowledge in the Place of Honour &bull; 1991 &ndash; 2026
         </motion.p>
 
         {/* Crown */}
@@ -171,7 +170,7 @@ export default function Hero() {
             className="rounded-full border border-[var(--color-crimson)] px-8 py-3 font-medium text-[var(--color-linen)] transition-colors hover:bg-[var(--color-crimson)]/10 no-underline"
             style={{ fontFamily: "var(--font-display), Georgia, serif" }}
           >
-            Fọwọ́ sí ìforúkọsílẹ̀ · Sign the Register
+            Sign the Register
           </a>
         </motion.div>
 
@@ -186,7 +185,7 @@ export default function Hero() {
             className="text-sm text-[var(--color-linen)]/50"
             style={{ fontFamily: "var(--font-accent), cursive" }}
           >
-            Yọ̀ sí ìsàlẹ̀
+            Scroll down
           </span>
           <motion.svg
             animate={{ y: [0, 6, 0] }}

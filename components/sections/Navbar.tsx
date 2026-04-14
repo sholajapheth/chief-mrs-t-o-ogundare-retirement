@@ -1,21 +1,43 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, type MouseEvent } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChieftaincyCrown } from "@/components/ui/ChieftaincyCrown";
 
+const HASH_SCROLL_MS = 120;
+
 const NAV_LINKS = [
   { label: "Home", href: "/#home" },
+  { label: "The Big Day", href: "/#event" },
   { label: "Her Story", href: "/#bio" },
   { label: "The Journey", href: "/#timeline" },
   { label: "Program", href: "/#program" },
   { label: "Achievements", href: "/#achievements" },
+  { label: "Sign the Register", href: "/#wishes" },
   { label: "Gallery", href: "/#gallery" },
 ] as const;
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  function handleHashNavClick(
+    e: MouseEvent<HTMLAnchorElement>,
+    elementId: string,
+  ) {
+    if (pathname !== "/") return;
+    e.preventDefault();
+    setMenuOpen(false);
+    window.setTimeout(() => {
+      document.getElementById(elementId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      window.history.replaceState(null, "", `/#${elementId}`);
+    }, HASH_SCROLL_MS);
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -63,21 +85,23 @@ export default function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-[var(--color-linen)]/70 transition-colors hover:text-[var(--color-linen)] no-underline"
+              onClick={
+                link.href === "/#wishes"
+                  ? (e) => handleHashNavClick(e, "wishes")
+                  : link.href === "/#event"
+                    ? (e) => handleHashNavClick(e, "event")
+                    : undefined
+              }
+              className={`text-sm no-underline transition-colors ${
+                link.href === "/#wishes"
+                  ? "rounded-full bg-[var(--color-crimson)] px-4 py-1.5 font-medium text-[var(--color-linen)] hover:bg-[#a83024]"
+                  : "text-[var(--color-linen)]/70 hover:text-[var(--color-linen)]"
+              }`}
               style={{ fontFamily: "var(--font-body), Georgia, serif" }}
             >
               {link.label}
             </a>
           ))}
-          <a
-            href="/#wishes"
-            title="Sign the Register"
-            aria-label="Fọwọ́ sí ìforúkọsílẹ̀. Sign the Register."
-            className="rounded-full bg-[var(--color-crimson)] px-5 py-1.5 text-sm font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024] no-underline"
-            style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-          >
-            Fọwọ́ sí ìforúkọsílẹ̀
-          </a>
         </div>
 
         {/* Mobile hamburger */}
@@ -121,26 +145,28 @@ export default function Navbar() {
                 <motion.a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => {
+                    if (link.href === "/#wishes") {
+                      handleHashNavClick(e, "wishes");
+                    } else if (link.href === "/#event") {
+                      handleHashNavClick(e, "event");
+                    } else {
+                      setMenuOpen(false);
+                    }
+                  }}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="rounded-lg px-3 py-2.5 text-[var(--color-linen)] transition-colors hover:bg-[var(--color-linen)]/5 no-underline"
+                  className={`no-underline ${
+                    link.href === "/#wishes"
+                      ? "mt-1 rounded-full bg-[var(--color-crimson)] px-5 py-2.5 text-center text-sm font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024]"
+                      : "rounded-lg px-3 py-2.5 text-[var(--color-linen)] transition-colors hover:bg-[var(--color-linen)]/5"
+                  }`}
                   style={{ fontFamily: "var(--font-body), Georgia, serif" }}
                 >
                   {link.label}
                 </motion.a>
               ))}
-              <a
-                href="/#wishes"
-                onClick={() => setMenuOpen(false)}
-                title="Sign the Register"
-                aria-label="Fọwọ́ sí ìforúkọsílẹ̀. Sign the Register."
-                className="mt-2 rounded-full bg-[var(--color-crimson)] px-5 py-2.5 text-center text-sm font-medium text-[var(--color-linen)] transition-colors hover:bg-[#a83024] no-underline"
-                style={{ fontFamily: "var(--font-display), Georgia, serif" }}
-              >
-                Fọwọ́ sí ìforúkọsílẹ̀
-              </a>
             </div>
           </motion.div>
         )}

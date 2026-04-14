@@ -17,9 +17,11 @@ interface Photo {
 
 interface GalleryProps {
   preview?: boolean;
+  /** Max photos when `preview` is true (default 20). Use a lower value on the home page to shorten the section. */
+  previewLimit?: number;
 }
 
-const PREVIEW_LIMIT = 20;
+const DEFAULT_PREVIEW_LIMIT = 20;
 
 function PhotoSkeleton() {
   return (
@@ -30,7 +32,10 @@ function PhotoSkeleton() {
   );
 }
 
-export default function Gallery({ preview = false }: GalleryProps) {
+export default function Gallery({
+  preview = false,
+  previewLimit = DEFAULT_PREVIEW_LIMIT,
+}: GalleryProps) {
   const [allPhotos, setAllPhotos] = useState<Photo[]>([]);
   const [loading, setLoading] = useState(true);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -51,8 +56,10 @@ export default function Gallery({ preview = false }: GalleryProps) {
     fetchPhotos();
   }, []);
 
-  const photos = preview ? allPhotos.slice(0, PREVIEW_LIMIT) : allPhotos;
-  const hasMore = preview && allPhotos.length > PREVIEW_LIMIT;
+  const photos = preview
+    ? allPhotos.slice(0, previewLimit)
+    : allPhotos;
+  const hasMore = preview && allPhotos.length > previewLimit;
 
   const openLightbox = (index: number) => setLightboxIndex(index);
   const closeLightbox = () => setLightboxIndex(null);
@@ -97,7 +104,7 @@ export default function Gallery({ preview = false }: GalleryProps) {
               color: "#D4A017",
             }}
           >
-            Àwọn Àwòrán Rẹ̀
+            Her photos
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -133,7 +140,11 @@ export default function Gallery({ preview = false }: GalleryProps) {
             <style>{`
               .gallery-masonry-skel { column-gap: 1rem; }
             `}</style>
-            {Array.from({ length: 9 }).map((_, i) => (
+            {Array.from({
+              length: preview
+                ? Math.min(previewLimit, 12)
+                : 9,
+            }).map((_, i) => (
               <PhotoSkeleton key={i} />
             ))}
           </div>

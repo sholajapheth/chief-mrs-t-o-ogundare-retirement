@@ -19,7 +19,7 @@ const VIRTUAL_THRESHOLD = 50;
 
 function PhotoSkeleton() {
   return (
-    <div className="aspect-square w-full animate-pulse rounded-xl bg-muted" />
+    <div className="aspect-square w-full animate-pulse rounded-xl bg-[#C19A6B]/35" />
   );
 }
 

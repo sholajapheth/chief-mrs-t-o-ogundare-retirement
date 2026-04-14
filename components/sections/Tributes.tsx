@@ -262,7 +262,7 @@ export default function Tributes() {
               color: "#D4A017",
             }}
           >
-            Àwọn ọwọ́ tí a fọwọ́ kàn
+            Voices of appreciation
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}

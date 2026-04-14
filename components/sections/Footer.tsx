@@ -32,10 +32,7 @@ export function Footer() {
           1991 – 2026 · 35 Years of Meritorious Service
         </p>
 
-        <ProverbCallout
-          yoruba="Ẹni tí ó bá tọ́ ọmọ dáadáa, ó ń tọ́ orílẹ̀-èdè dáadáa."
-          english="He who raises children well, raises the nation well."
-        />
+        <ProverbCallout quote="He who raises children well, raises the nation well." />
 
         <div
           className="mt-12 text-center text-[0.8rem]"

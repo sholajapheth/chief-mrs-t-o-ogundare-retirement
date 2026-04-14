@@ -6,8 +6,8 @@ import { ImageOff } from "lucide-react"
 import { buildDriveImageFallbackUrls } from "@/lib/drive-image-fallbacks"
 import { cn } from "@/lib/utils"
 
-const BLUR_DATA_URL =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6kgAAAABJRU5ErkJggg=="
+/** Warm loading surface (espresso) — matches gallery / celebration UI; avoids cold blue-gray blur. */
+const PLACEHOLDER_BG = "#3B1C08"
 
 type DriveNextImageProps = {
   photoId: string
@@ -50,9 +50,10 @@ export function DriveNextImage({
     return (
       <div
         className={cn(
-          "flex items-center justify-center bg-muted text-muted-foreground",
+          "flex items-center justify-center text-[#C19A6B]",
           className
         )}
+        style={{ backgroundColor: PLACEHOLDER_BG }}
       >
         <div className="text-center p-4">
           <ImageOff className="mx-auto mb-2 size-8 opacity-50" />
@@ -64,6 +65,11 @@ export function DriveNextImage({
 
   const src = candidates[candidateIndex]
 
+  const loadingStyle = {
+    objectFit,
+    backgroundColor: PLACEHOLDER_BG,
+  } as const
+
   if (fill) {
     return (
       <Image
@@ -73,12 +79,11 @@ export function DriveNextImage({
         fill
         sizes={sizes}
         className={className}
-        style={{ objectFit }}
+        style={loadingStyle}
         onError={onError}
         priority={priority}
         loading={priority ? "eager" : loading}
-        placeholder="blur"
-        blurDataURL={BLUR_DATA_URL}
+        placeholder="empty"
         unoptimized
       />
     )
@@ -93,12 +98,11 @@ export function DriveNextImage({
       height={height}
       sizes={sizes}
       className={className}
-      style={{ objectFit }}
+      style={loadingStyle}
       onError={onError}
       priority={priority}
       loading={priority ? "eager" : loading}
-      placeholder="blur"
-      blurDataURL={BLUR_DATA_URL}
+      placeholder="empty"
       unoptimized
     />
   )
