@@ -65,7 +65,7 @@ const ALUMNI_CONTRIBUTIONS: AlumniContribution[] = [
   {
     set: "1998 Set",
     contribution:
-      "Provided customised big notes and annual gifts for the Principal",
+      "Meticulously prepared customised briefing notes for the annual prize-giving ceremony and coordinated the presentation of gifts for the Principal",
   },
   {
     set: "2003 Set",
@@ -85,11 +85,13 @@ const ALUMNI_CONTRIBUTIONS: AlumniContribution[] = [
   },
   {
     set: "Hon. Famous Amos Shadrack Ethama",
-    contribution: "WAEC examination sponsorship for indigent students",
+    contribution:
+      "Facilitated sponsorship for the Head Boy and Laboratory Prefect for the 2026 WAEC examination",
   },
   {
     set: "The Hope Tribe Pavilion",
-    contribution: "Sponsored 10 WAEC examination candidates",
+    contribution:
+      "Facilitated sponsorship for 10 candidates for the 2026 WAEC examination",
   },
 ];
 

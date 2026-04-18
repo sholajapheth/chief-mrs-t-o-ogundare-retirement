@@ -122,7 +122,6 @@ const CATEGORIES = [
     items: [
       "Supervised renovation of dilapidated blocks and school buildings",
       "Provided infrastructure for 10 exam halls and classrooms",
-      "Introduced CCTV surveillance system for school security",
       "Established perimeter fencing and secured school premises",
       "Refurbished science laboratories and ICT facilities",
     ],
@@ -147,7 +146,7 @@ const CATEGORIES = [
       "Maintained discipline and academic standards across all postings",
       "Implemented transparent financial management systems",
       "Established staff welfare programs and professional development",
-      "Built strong relationships with the Teaching Service Commission",
+      "Fostered strong relationships with staff and students",
       "Ensured smooth school transitions during administrative changes",
     ],
   },
@@ -157,9 +156,9 @@ const CATEGORIES = [
     tint: "rgba(160, 82, 45, 0.08)",
     items: [
       "Mobilized alumni sets for school development contributions",
-      "Engaged parents through regular PTA meetings and open days",
+      "Engaged parents through regular Parents’ club  meetings and open days",
       "Partnered with community leaders for school security",
-      "Facilitated WAEC sponsorship for indigent students",
+      "Facilitated WAEC sponsorship for indigent and less privileged learners.",
       "Built lasting bridges between school and community",
     ],
   },
@@ -168,7 +167,8 @@ const CATEGORIES = [
 const AWARDS = [
   {
     name: "Road Safety Commission Essay Competition",
-    detail: "Written in secondary school (Form 4, 1984); 3rd place, state level",
+    detail:
+      "Written in secondary school (Form 4, 1984); 3rd place, state level",
     year: "1984",
     featured: false,
   },
@@ -180,7 +180,7 @@ const AWARDS = [
   },
   {
     name: "ANCOPSS, Ifo — Financial Secretary",
-    detail: "Service since 2024",
+    detail: "",
     year: "2024",
     featured: false,
   },
@@ -191,7 +191,7 @@ const AWARDS = [
     featured: false,
   },
   {
-    name: 'Chieftaincy Title: FIWAGBOYE',
+    name: "Chieftaincy Title: FIWAGBOYE",
     detail: "Egbe Akomolede, Ogun State",
     year: "2025",
     featured: true,
