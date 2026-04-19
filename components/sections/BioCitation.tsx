@@ -6,22 +6,22 @@ import { ProverbCallout } from "@/components/ui/ProverbCallout";
 
 const educationTimeline = [
   {
-    school: "New Eden Primary School, Ibadan",
+    school: "New Eden Primary School, Mokola, Ibadan",
     years: "Primary 1–3",
     type: "Primary Education",
   },
   {
-    school: "UAC School, Eleja",
+    school: "UAC School, (Eleja), Ijemo, Abeokuta",
     years: "Primary 4",
     type: "Primary Education",
   },
   {
-    school: "Mrs Kuti Primary School, Isabo",
+    school: "Mrs Kuti Primary School, Isabo, Abeokuta",
     years: "Primary 5–6",
     type: "Primary Education",
   },
   {
-    school: "Abeokuta Grammar School, Idi Aba",
+    school: "Abeokuta Grammar School, Idi Aba, Abeokuta",
     years: "1981–1986",
     type: "Secondary School",
   },
@@ -37,11 +37,7 @@ const educationTimeline = [
   },
 ];
 
-const statPills = [
-  "35 Years Service",
-  "7 Schools",
-  "Principal Since 2023",
-];
+const statPills = ["35 Years Service", "7 Schools", "Principal Since 2023"];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 32 },
@@ -188,11 +184,11 @@ export default function BioCitation() {
                 }}
               >
                 <p>
-                  Born the third daughter into the family of Pa Olatunji and
-                  Mrs Grace Olaosebikan (of blessed memory), Chief (Mrs)
-                  Temitope Oluwakemi Ogundare is of the distinguished Egba
-                  lineage of Itoko and Ake. From her earliest years, she
-                  displayed discipline, intelligence, and a strong sense of
+                  Born the third daughter into the family of Pa Olatunji and Mrs
+                  Grace Olaosebikan (of blessed memory), Chief (Mrs) Temitope
+                  Oluwakemi Ogundare is of the distinguished Egba lineage of
+                  Itoko and Ake. From her earliest years, she displayed
+                  discipline, intelligence, and a strong sense of
                   responsibility.
                 </p>
                 <p>
@@ -310,8 +306,8 @@ export default function BioCitation() {
                   lineHeight: 1.75,
                 }}
               >
-                A pillar of Reconciliation Gospel Ministry, Ifo, she serves as
-                a Minister and actively leads women and children in Christian
+                A pillar of Reconciliation Gospel Ministry, Ifo, she serves as a
+                Minister and actively leads women and children in Christian
                 faith and practice, mentoring many within and beyond her
                 community.
               </p>
