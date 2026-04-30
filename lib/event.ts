@@ -1,5 +1,5 @@
 /** WAT (Lagos) — retirement celebration */
-export const EVENT_START_ISO = "2026-05-30T12:00:00+01:00";
+export const EVENT_START_ISO = "2026-05-30T10:00:00+01:00";
 export const EVENT_END_ISO = "2026-05-30T17:30:00+01:00";
 
 export function getEventStartDate(): Date {
