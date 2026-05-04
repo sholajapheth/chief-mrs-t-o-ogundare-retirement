@@ -26,8 +26,8 @@ export function WishesPreview() {
         const res = await fetch("/api/wishes")
         if (res.ok) {
           const data = await res.json()
-          // Get top 5 most recent wishes
-          setWishes(data.slice(0, 5))
+          // Five most recent (API returns oldest-first)
+          setWishes(data.slice(-5))
         }
       } catch (error) {
         console.error("Failed to load wishes:", error)

@@ -74,20 +74,20 @@ export async function getAllWishes(): Promise<Wish[]> {
       await ensureSchema()
       const result = await db`
         SELECT * FROM wishes 
-        ORDER BY timestamp DESC
+        ORDER BY timestamp ASC
       `
       return result as Wish[]
     } catch (error) {
       console.error("Error reading from Postgres, falling back to in-memory:", error)
       return [...inMemoryWishes].sort((a, b) => 
-        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+        new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
       )
     }
   }
   
   // In-memory fallback
   return [...inMemoryWishes].sort((a, b) => 
-    new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
   )
 }
 

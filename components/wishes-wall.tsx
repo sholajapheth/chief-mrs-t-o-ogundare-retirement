@@ -117,8 +117,8 @@ export function WishesWall() {
       if (res.ok) {
         const newWish = await res.json();
         setWishes([
-          { ...newWish, timestamp: new Date(newWish.timestamp) },
           ...wishes,
+          { ...newWish, timestamp: new Date(newWish.timestamp) },
         ]);
         setFormData({ name: "", relationship: "", location: "", message: "" });
         setShowConfetti(true);

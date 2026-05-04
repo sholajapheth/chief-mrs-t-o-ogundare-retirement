@@ -89,7 +89,7 @@ export default function Wishes({ preview = false }: WishesProps) {
       if (!res.ok) throw new Error("Failed to submit");
 
       const newWish: Wish = await res.json();
-      setWishes((prev) => [newWish, ...prev]);
+      setWishes((prev) => [...prev, newWish]);
       setName("");
       setRelationship("");
       setMessage("");
@@ -321,7 +321,10 @@ export default function Wishes({ preview = false }: WishesProps) {
       {wishes.length > 0 && (
         <div className="mt-16 max-w-4xl mx-auto">
           <div className="columns-1 md:columns-2 gap-6 space-y-6">
-            {(preview ? wishes.slice(0, PREVIEW_LIMIT) : wishes).map(
+            {(preview
+              ? wishes.slice(-PREVIEW_LIMIT)
+              : wishes
+            ).map(
               (wish, i) => (
                 <motion.div
                   key={wish.id}
