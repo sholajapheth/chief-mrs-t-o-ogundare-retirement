@@ -173,6 +173,13 @@ const AWARDS = [
     featured: false,
   },
   {
+    name: "Alumni — 1986 set",
+    detail:
+      "Presented a printer to the school for its use. Two-term PRO, AGSOBA Club 8186 set. Currently serving as Financial Secretary, AGSOBA Club 8186 set.",
+    year: "1986 set",
+    featured: false,
+  },
+  {
     name: "Exemplary Leadership Award",
     detail: "Adiyan Alausa Area CDC",
     year: "2024",

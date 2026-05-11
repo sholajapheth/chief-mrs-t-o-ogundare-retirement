@@ -157,6 +157,9 @@ export function CitationSection() {
                 <h3 className="font-serif text-xl font-bold text-foreground mt-8">Awards and Recognition</h3>
                 <ul className="list-disc pl-6 space-y-1">
                   <li>Participated in the Road Safety Commission Essay Competition in secondary school (Form 4, 1984) and emerged third at state level</li>
+                  <li>
+                    Alumni — 1986 set: presented a printer to the school for its use; two-term PRO, AGSOBA Club 8186 set; currently serving as Financial Secretary, AGSOBA Club 8186 set
+                  </li>
                   <li>Exemplary Leadership Award, Adiyan Alausa Area CDC (2024)</li>
                   <li>Chieftaincy Title: FIWAGBOYE, Ogun State Chapter of Egbe Akomolede (2025)</li>
                   <li>Service to ANCOPSS, Ifo — Financial Secretary (2024)</li>
