@@ -58,6 +58,10 @@ const TRIBUTES: Tribute[] = [
 
 const ALUMNI_CONTRIBUTIONS: AlumniContribution[] = [
   {
+    set: "1986 Set",
+    contribution: "Presented a printer to the school for its use",
+  },
+  {
     set: "1990 Set",
     contribution:
       "Donated fencing, main gate construction, and WAEC examination sponsorship",
